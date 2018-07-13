@@ -27,4 +27,4 @@ package-lock.json
 .idea
 
 # Configuration
-config.json
+config.js

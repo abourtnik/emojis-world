@@ -9,9 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3",
-    "mysql": "^2.15.0",
-    "mysql2": "^1.5.3",
-    "sequelize": "^4.37.10"
+    "elasticsearch": "^15.0.0",
+    "express": "^4.16.3"
   }
 }

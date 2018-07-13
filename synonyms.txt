@@ -1,0 +1,27 @@
+smiling, smile, grinning, happy, beaming, joy
+kiss, kissing, heart, love
+tears, sad, unhappy, bad, persevering, crying
+think, thinking
+expressionless, neutral
+health, doctor
+student, study, learn, school, teacher
+squinting, grimace
+hugging, hug
+thinking, think
+surprise, open
+sleeping , sleep
+nauseated, vomiting, sick, ill
+poo, caca, shit
+farmer, farm
+cook, cooking, eat, cooked
+work, office, working
+technologist, computer
+pilot, plane
+massage, relax
+speaking, speak
+dog, poodle
+football, soccer
+volume, speaker
+phone, iphone, Iphone, mobile
+
+
