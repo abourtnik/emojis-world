@@ -1,4 +1,4 @@
-smiling, smile, grinning, happy, beaming, joy
+smiling, smile, grinning, happy, beaming, joy, positive
 kiss, kissing, heart, love
 tears, sad, unhappy, bad, persevering, crying
 think, thinking
@@ -9,7 +9,7 @@ squinting, grimace
 hugging, hug
 thinking, think
 surprise, open
-sleeping , sleep
+sleeping , sleep, bed
 nauseated, vomiting, sick, ill
 poo, caca, shit
 farmer, farm
@@ -23,5 +23,23 @@ dog, poodle
 football, soccer
 volume, speaker
 phone, iphone, Iphone, mobile
-
-
+sunglasses, sun, holidays
+money, dollar
+skull, pirate
+male, men
+femelle, woman
+exploding, explosion
+zombie, horror
+mage, magic, elf, genie, fantasy
+blood, vampire
+lotus, yoga
+golfing, golf
+surfing, surf
+biking, bike, cycling
+motorcycle, motorbike, scooter
+biceps, strong
+middle finger, fuck
+clapping, bravo
+clothing, cloth
+asian, asia, china, chinese
+smoke, cigarette

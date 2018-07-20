@@ -4,12 +4,31 @@ const express = require('express');
 var elasticsearch = require('elasticsearch');
 
 var elasticsearch_client = new elasticsearch.Client({
-    host: config.elasticsearch.host + ':' + config.elasticsearch.port,
-    log: 'trace'
+    host: config.elasticsearch.host + ':' + config.elasticsearch.port
 });
 
 var app = express();
 var router = express.Router();
+
+
+app.use(function (req, res, next) {
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://emojis.local');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
+
 
 // ------------------ ENDPOINTS -------------------------------
 
@@ -33,8 +52,10 @@ router.route('/search').get(function(req,res) {
         body: {
             size: ( (limit && limit <= 49 ) ? req.query.limit : 50 ),
             query: {
-                match: {
-                    name: query
+                multi_match: {
+                    query : query,
+                    fields: ['name' , 'category.name' , 'sub_category.name'],
+                    fuzziness: "AUTO",
                 }
             }
         }
@@ -42,9 +63,11 @@ router.route('/search').get(function(req,res) {
 
         var results = [];
 
-        resp.hits.hits.forEach(function(element) {
-            results.push(element._source);
-        });
+        if (resp.hits.hits)  {
+            resp.hits.hits.forEach(function(element) {
+                results.push(element._source);
+            });
+        }
 
         res.json({'totals' : resp.hits.total  , 'results' : results});
 
