@@ -1,14 +1,71 @@
 const config = require('./config');
 const express = require('express');
+const elasticsearch = require('elasticsearch');
+const mongoose = require('mongoose');
+const responseTime = require('response-time');
 
-var elasticsearch = require('elasticsearch');
+// Elastic Search
 
 var elasticsearch_client = new elasticsearch.Client({
     host: config.elasticsearch.host + ':' + config.elasticsearch.port
 });
 
+// Mongo DB
+
+var options_monogdb = {
+    keepAlive: 300000,
+    connectTimeoutMS: 30000
+};
+
+var url_mongodb = config.mongodb.type + '://' + ( (config.mongodb.username) ? (config.mongodb.username + ':' + config.mongodb.password + '@' ) : '' ) + config.mongodb.host + ':' + config.mongodb.port + '/' + config.mongodb.database;
+console.log(url_mongodb);
+
+mongoose.connect(url_mongodb, options_monogdb);
+
+var monogdb = mongoose.connection;
+monogdb.on('error', console.error.bind(console, 'Erreur lors de la connexion a Mongodb'));
+monogdb.once('open', function (){console.log("Connexion a Mongodb OK");});
+
 var app = express();
+app.use(responseTime(function(req, res, time) {
+    res.header('X-Response-Time', time);
+}));
 var router = express.Router();
+
+
+var conectionSchema = mongoose.Schema({
+    ip: String,
+    date: Date,
+    request: String,
+    duration: Number
+});
+
+var Connection = mongoose.model('Connection', conectionSchema);
+
+
+function store_user_data (req, res, next) {
+
+    if (req.method === 'GET') {
+
+        // keep executing the router middleware
+        next();
+
+        var connection = new Connection();
+
+        connection.ip = req.client.remoteAddress;
+        connection.date = Date.now();
+        connection.request = req.url;
+        connection.duration =  res.getHeaders()['x-response-time'];
+
+        connection.save(function(err){
+            if(err){
+                console.error(err);
+            }
+            console.log('Save');
+        })
+    }
+}
+
 
 
 app.use(function (req, res, next) {
@@ -28,6 +85,8 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+app.use(store_user_data);
 
 
 // ------------------ ENDPOINTS -------------------------------
