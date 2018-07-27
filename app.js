@@ -58,11 +58,8 @@ function store_user_data (req, res, next) {
         connection.duration =  res.getHeaders()['x-response-time'];
 
         connection.save(function(err){
-            if(err){
-                console.error(err);
-            }
-            console.log('Save');
-        })
+            if(err) console.error(err);
+        });
     }
 }
 
@@ -70,7 +67,7 @@ function store_user_data (req, res, next) {
 
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://emojis.local');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -100,21 +97,20 @@ router.route('/search').get(function(req,res) {
     if (!query)
         res.json("Error : query is not defined");
 
-    if (limit)
-        if (!Number.isInteger(limit))
-            res.json({'error' : 'Error : limit is not valid int'});
+    // Limit is not int
+    if (limit && !Number.isInteger(parseInt(limit)))
+        res.json({'error' : 'Error : limit is not valid int'});
 
     elasticsearch_client.search({
         index: 'emojis-world',
         type: 'emojis',
         filter_path: 'hits.hits._source,hits.total',
         body: {
-            size: ( (limit && limit <= 49 ) ? req.query.limit : 50 ),
+            size: ( (limit && parseInt(limit) <= 50 ) ? parseInt(req.query.limit) : 50 ),
             query: {
                 multi_match: {
                     query : query,
-                    fields: ['name' , 'category.name' , 'sub_category.name'],
-                    fuzziness: "AUTO",
+                    fields: ['name^2' , 'category.name' , 'sub_category.name'],
                 }
             }
         }
@@ -128,7 +124,7 @@ router.route('/search').get(function(req,res) {
             });
         }
 
-        res.json({'totals' : resp.hits.total  , 'results' : results});
+        res.json({'totals' : results.length  , 'results' : results});
 
     }, function (err) {
         console.trace(err.message);
@@ -137,52 +133,173 @@ router.route('/search').get(function(req,res) {
 });
 
 // TRENDING (tendance)
-router.route('/trending')
+router.route('/trending').get(function(req,res){
 
-    .get(function(req,res){
+});
 
+// RANDOM EMOJIS
+router.route('/random').get(function(req,res){
 
+    var limit = req.query.limit;
+
+    // Limit is not int
+    if (limit && !Number.isInteger(parseInt(limit)))
+        res.json({'error' : 'Error : limit is not valid int'});
+
+    elasticsearch_client.search({
+        index: 'emojis-world',
+        type: 'emojis',
+        filter_path: 'hits.hits._source,hits.total',
+        body: {
+            size: ( (limit && parseInt(limit) <= 50 ) ? parseInt(req.query.limit) : 50 ),
+            query: {
+                function_score: {
+                    functions : [{
+                        random_score : {
+                            seed: + new Date()
+                        }
+                    }]
+
+                }
+            }
+        }
+    }).then(function (resp) {
+
+        var results = [];
+
+        if (resp.hits.hits)  {
+            resp.hits.hits.forEach(function(element) {
+                results.push(element._source);
+            });
+        }
+
+        res.json({'totals' : results.length , 'results' : results});
+
+    }, function (err) {
+        console.trace(err.message);
     });
 
-// RANDOM
-router.route('/random')
-
-    .get(function(req,res){
-
-
-    });
+});
 
 // ALL CATEGORIES AND SUB_CATEGORIES
-router.route('/categories')
+router.route('/categories').get(function(req,res){
 
-    .get(function(req,res){
-        //res.json({message : "Liste toutes les emojis", methode : req.method});
+    elasticsearch_client.search({
+        index: 'emojis-world',
+        type: 'emojis',
+        filter_path: 'aggregations.category.buckets',
+        body: {
+           aggs : {
+               category : {
+                   terms : {
+                       field : "category.name.keyword"
+                   }
+               }
+           }
 
-
+        }
+    }).then(function (resp) {
+        res.json({'totals' : resp.aggregations.category.buckets.length  , 'results' : resp.aggregations.category.buckets});
+    }, function (err) {
+        console.trace(err.message);
     });
+
+});
 
 // SEARCH SUGGESTION
-router.route('/search_suggestion')
+router.route('/search_suggestion').get(function(req,res){
 
-    .get(function(req,res){
-        //res.json({message : "Liste toutes les emojis", methode : req.method});
+    var limit = req.query.limit;
+    var query = req.query.q;
 
+    if (!query)
+        res.json("Error : query is not defined");
 
+    // Limit is not int
+    if (limit && !Number.isInteger(parseInt(limit)))
+        res.json({'error' : 'Error : limit is not valid int'});
+
+    elasticsearch_client.search({
+        index: 'emojis-world',
+        type: 'emojis',
+        filter_path: 'hits.hits._source,hits.total',
+        body: {
+            size: ( (limit && parseInt(limit) <= 50 ) ? parseInt(req.query.limit) : 50 ),
+            query: {
+                multi_match: {
+                    query : query,
+                    fields: ['name^2' , 'category.name' , 'sub_category.name'],
+                }
+            }
+        }
+    }).then(function (resp) {
+
+        var results = [];
+
+        if (resp.hits.hits)  {
+            resp.hits.hits.forEach(function(element) {
+                results.push(element._source);
+            });
+        }
+
+        res.json({'totals' : results.length  , 'results' : results});
+
+    }, function (err) {
+        console.trace(err.message);
     });
 
-// GET GIF BY ID
-router.route('/gif')
+});
 
-    .get(function(req,res){
-        //res.json({message : "Liste toutes les emojis", methode : req.method});
+// GET Emoji by Id
+router.route('/emoji/:id').get(function(req,res){
 
+    var id = req.params.id;
+
+    // Limit is not int
+    if (id && !Number.isInteger(parseInt(id)))
+        res.json({'error' : 'Error : id is not valid int'});
+
+    elasticsearch_client.search({
+        index: 'emojis-world',
+        type: 'emojis',
+        filter_path: 'hits.hits._source,hits.total',
+        body: {
+            size: 1,
+            query: {
+                constant_score: {
+                    filter: {
+                        term: {
+                            id : id
+                        }
+                    }
+                }
+            }
+        }
+    }).then(function (resp) {
+
+        var results = [];
+
+        if (resp.hits.hits)  {
+            resp.hits.hits.forEach(function(element) {
+                results.push(element._source);
+            });
+        }
+
+        res.json({'totals' : results.length  , 'results' : results});
+
+    }, function (err) {
+        console.trace(err.message);
     });
 
-router.route('/')
+});
 
-    .all(function(req,res){
-        res.json({message : "Bienvenue sur l'API Emoji ", methode : req.method});
-    });
+router.route('/') .all(function(req,res){
+    res.json({message : "Bienvenue sur l'API Emojis World !!"});
+});
+
+router.route('*').get(function(req, res){
+    res.json({'error' : 'No result'});
+});
 
 app.use(router);
 

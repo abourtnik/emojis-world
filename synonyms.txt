@@ -43,3 +43,5 @@ clapping, bravo
 clothing, cloth
 asian, asia, china, chinese
 smoke, cigarette
+animal, animals
+automobile, car, vehicule
