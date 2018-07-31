@@ -30,6 +30,7 @@ var app = express();
 app.use(responseTime(function(req, res, time) {
     res.header('X-Response-Time', time);
 }));
+
 var router = express.Router();
 
 
@@ -298,10 +299,11 @@ router.route('/') .all(function(req,res){
 });
 
 router.route('*').get(function(req, res){
+    console.log(req.url);
     res.json({'error' : 'No result'});
 });
 
-app.use(router);
+app.use('/v1' , router);
 
 app.listen(config.server.port, config.server.host, function(){
     console.log("Mon serveur fonctionne sur http://"+ config.server.host +":"+config.server.port);

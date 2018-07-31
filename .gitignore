@@ -28,3 +28,6 @@ package-lock.json
 
 # Configuration
 config.js
+
+# Data
+emojis-world.json

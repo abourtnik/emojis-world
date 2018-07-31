@@ -2,7 +2,7 @@ module.exports = {
 
     'server' : {
 
-        'host' : 'api.emojis-world.local',
+        'host' : 'localhost',
         'port' : '3001'
     },
 
