@@ -14,11 +14,11 @@ var elasticsearch_client = new elasticsearch.Client({
 
 var options_monogdb = {
     keepAlive: 300000,
-    connectTimeoutMS: 30000
+    connectTimeoutMS: 30000,
+    useNewUrlParser: true
 };
 
 var url_mongodb = config.mongodb.type + '://' + ( (config.mongodb.username) ? (config.mongodb.username + ':' + config.mongodb.password + '@' ) : '' ) + config.mongodb.host + ':' + config.mongodb.port + '/' + config.mongodb.database;
-console.log(url_mongodb);
 
 mongoose.connect(url_mongodb, options_monogdb);
 
@@ -94,13 +94,21 @@ router.route('/search').get(function(req,res) {
 
     var limit = req.query.limit;
     var query = req.query.q;
+    var category_id = req.query.category;
+    var sub_category_id = req.query.sub_category;
     
     if (!query)
-        res.json("Error : query is not defined");
+        res.json({'error' : 'Error : query is not defined'});
 
     // Limit is not int
     if (limit && !Number.isInteger(parseInt(limit)))
         res.json({'error' : 'Error : limit is not valid int'});
+
+    if (category_id && !Number.isInteger(parseInt(category_id)) )
+        res.json({'error' : 'Error : category is not valid int'});
+
+    if (sub_category_id && !Number.isInteger(parseInt(sub_category_id)) )
+        res.json({'error' : 'Error : sub_category is not valid int'});
 
     elasticsearch_client.search({
         index: 'emojis-world',
@@ -109,9 +117,17 @@ router.route('/search').get(function(req,res) {
         body: {
             size: ( (limit && parseInt(limit) <= 50 ) ? parseInt(req.query.limit) : 50 ),
             query: {
-                multi_match: {
-                    query : query,
-                    fields: ['name^2' , 'category.name' , 'sub_category.name'],
+                bool : {
+                    must : [
+                        (category_id) ? {term : { "category.id" : category_id }} : '',
+                        (sub_category_id) ? {term : { "sub_category.id" : sub_category_id }} : '',
+                        {
+                            multi_match: {
+                                query : query,
+                                fields: ['name^2' , 'category.name' , 'sub_category.name'],
+                            }
+                        }
+                    ]
                 }
             }
         }
@@ -133,19 +149,22 @@ router.route('/search').get(function(req,res) {
 
 });
 
-// TRENDING (tendance)
-router.route('/trending').get(function(req,res){
-
-});
-
 // RANDOM EMOJIS
 router.route('/random').get(function(req,res){
 
     var limit = req.query.limit;
+    var category_id = req.query.category;
+    var sub_category_id = req.query.sub_category;
 
     // Limit is not int
     if (limit && !Number.isInteger(parseInt(limit)))
         res.json({'error' : 'Error : limit is not valid int'});
+
+    if (category_id && !Number.isInteger(parseInt(category_id)) )
+        res.json({'error' : 'Error : category is not valid int'});
+
+    if (sub_category_id && !Number.isInteger(parseInt(sub_category_id)) )
+        res.json({'error' : 'Error : sub_category is not valid int'});
 
     elasticsearch_client.search({
         index: 'emojis-world',
@@ -190,61 +209,44 @@ router.route('/categories').get(function(req,res){
         type: 'emojis',
         filter_path: 'aggregations.category.buckets',
         body: {
+           size: 0,
            aggs : {
                category : {
                    terms : {
                        field : "category.name.keyword"
+                   },
+                   aggs : {
+                       sub_category : {
+                           terms: {
+                               field: "sub_category.name.keyword"
+                           }
+                       }
                    }
                }
            }
-
-        }
-    }).then(function (resp) {
-        res.json({'totals' : resp.aggregations.category.buckets.length  , 'results' : resp.aggregations.category.buckets});
-    }, function (err) {
-        console.trace(err.message);
-    });
-
-});
-
-// SEARCH SUGGESTION
-router.route('/search_suggestion').get(function(req,res){
-
-    var limit = req.query.limit;
-    var query = req.query.q;
-
-    if (!query)
-        res.json("Error : query is not defined");
-
-    // Limit is not int
-    if (limit && !Number.isInteger(parseInt(limit)))
-        res.json({'error' : 'Error : limit is not valid int'});
-
-    elasticsearch_client.search({
-        index: 'emojis-world',
-        type: 'emojis',
-        filter_path: 'hits.hits._source,hits.total',
-        body: {
-            size: ( (limit && parseInt(limit) <= 50 ) ? parseInt(req.query.limit) : 50 ),
-            query: {
-                multi_match: {
-                    query : query,
-                    fields: ['name^2' , 'category.name' , 'sub_category.name'],
-                }
-            }
         }
     }).then(function (resp) {
 
         var results = [];
 
-        if (resp.hits.hits)  {
-            resp.hits.hits.forEach(function(element) {
-                results.push(element._source);
+        if (resp.aggregations.category.buckets)  {
+            resp.aggregations.category.buckets.forEach(function(category) {
+
+                var sub_categories = [];
+
+                category.sub_category.buckets.forEach(function (sub_category) {
+                    sub_categories.push({'name' : sub_category.key , 'emojis_count' : sub_category.doc_count});
+                });
+
+                results.push({'name' : category.key , 'emojis_count' : category.doc_count , 'sub_categories' : sub_categories });
+
             });
-        }
+        };
 
         res.json({'totals' : results.length  , 'results' : results});
 
+
+        //res.json({'totals' : resp.aggregations.category.buckets.length  , 'results' : resp.aggregations.category.buckets});
     }, function (err) {
         console.trace(err.message);
     });
@@ -299,7 +301,6 @@ router.route('/') .all(function(req,res){
 });
 
 router.route('*').get(function(req, res){
-    console.log(req.url);
     res.json({'error' : 'No result'});
 });
 
