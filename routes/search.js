@@ -35,8 +35,7 @@ module.exports = (router) => {
                 query: {
                     bool : {
                         must : [
-                            (category_id) ? {term : { "category.id" : category_id }} : '',
-                            (sub_category_id) ? {term : { "sub_category.id" : sub_category_id }} : '',
+                            (!category_id && !sub_category_id) ? '' : ( (category_id) && {term : { "category.id" : category_id }} , (sub_category_id) && {term : { "sub_category.id" : sub_category_id }} ),
                             {
                                 multi_match: {
                                     query : query,

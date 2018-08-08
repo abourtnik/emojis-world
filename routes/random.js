@@ -29,13 +29,20 @@ module.exports = (router) => {
             body: {
                 size: ( (limit && parseInt(limit) <= 50 ) ? parseInt(req.query.limit) : 50 ),
                 query: {
-                    function_score: {
-                        functions : [{
-                            random_score : {
-                                seed: + new Date()
-                            }
-                        }]
+                    bool: {
+                        must: [
+                            (!category_id && !sub_category_id) ? '' : ( (category_id) && {term : { "category.id" : category_id }} , (sub_category_id) && {term : { "sub_category.id" : sub_category_id }} ),
 
+                            {
+                                function_score: {
+                                    functions : [{
+                                        random_score : {
+                                            seed: + new Date()
+                                        }
+                                 }]
+                                }
+                            }
+                        ]
                     }
                 }
             }

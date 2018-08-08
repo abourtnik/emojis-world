@@ -18,7 +18,7 @@ work, office, working
 technologist, computer
 pilot, plane
 massage, relax
-speaking, speak
+speaking, speak, speech
 dog, poodle
 football, soccer
 volume, speaker
@@ -26,8 +26,8 @@ phone, iphone, Iphone, mobile
 sunglasses, sun, holidays
 money, dollar
 skull, pirate
-male, men
-femelle, woman
+male, men, men's
+femelle, woman, women’s
 exploding, explosion
 zombie, horror
 mage, magic, elf, genie, fantasy
@@ -45,3 +45,22 @@ asian, asia, china, chinese
 smoke, cigarette
 animal, animals
 automobile, car, vehicule
+snowboard, snowboarder
+row, rowing
+swimming, swim, swimming-pool
+eye, look
+boat, ship
+airplane, plane
+time, watch, clock
+lantern, halloween
+japan, japanese
+music, musical
+book, books, notebook
+write, writing
+graphic, chart
+rule, ruler
+padlock, lock
+gun, pistol
+toilet, wc
+coffin, dead, funeral
+russia, urss
