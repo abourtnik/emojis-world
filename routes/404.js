@@ -1,6 +1,6 @@
 module.exports = (router) => {
 
     router.route('*').get(function(req, res){
-        res.json({'error' : 'No result'});
+        res.status(404).json({'error' : 'Not found'});
     });
 };

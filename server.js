@@ -11,8 +11,8 @@ var elasticsearch_client = new elasticsearch.Client({
 });
 
 elasticsearch_client.ping({requestTimeout: 1000}, function (error) {
-    if (error) console.trace('Failed to connect to ElasticSearch !');
-     else console.log('Connect to ElasticSearch successfully');
+    if (error) console.error('Failed to connect to ElasticSearch !');
+     else console.info('Connect to ElasticSearch successfully');
 });
 
 // MongoDB
@@ -29,7 +29,7 @@ mongoose.connect(url_mongodb, options_monogdb);
 
 var monogdb = mongoose.connection;
 monogdb.on('error', console.error.bind(console, 'Failed to connect to MonogDB !'));
-monogdb.once('open', function (){console.log("Connect to MonogDB successfully");});
+monogdb.once('open', function (){console.info("Connect to MonogDB successfully");});
 
 var Connection = require('./models/connection.js');
 
@@ -85,6 +85,12 @@ require('./routes/random')(router);
 // ALL CATEGORIES AND SUB_CATEGORIES
 require('./routes/categories')(router);
 
+// EMOJI BY Category ID
+require('./routes/category')(router);
+
+// EMOJI BY Sub Category ID
+require('./routes/sub_category')(router);
+
 // EMOJI BY ID
 require('./routes/emoji')(router);
 
@@ -97,5 +103,5 @@ require('./routes/404')(router);
 app.use('/v1' , router);
 
 app.listen(config.server.port, config.server.host, function(){
-    console.log("Server listen on http://"+ config.server.host +":"+config.server.port);
+    console.info("Server listen on http://"+ config.server.host +":"+config.server.port);
 });
