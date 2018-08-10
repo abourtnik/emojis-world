@@ -27,7 +27,4 @@ package-lock.json
 .idea
 
 # Configuration
-config.js
-
-# Data
-emojis-world.json
+./config.js

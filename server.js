@@ -100,7 +100,7 @@ require('./routes/index')(router);
 // 404
 require('./routes/404')(router);
 
-app.use('/v1' , router);
+app.use('/v' + config.application.version , router);
 
 app.listen(config.server.port, config.server.host, function(){
     console.info("Server listen on http://"+ config.server.host +":"+config.server.port);
