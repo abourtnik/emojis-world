@@ -1,0 +1,30 @@
+{
+    "settings": {
+        "index" : {
+            "analysis" : {
+                "filter" : {
+                    "synonym_filter" : {
+                        "type" : "synonym",
+                        "synonyms_path" : "analysis/synonyms.txt"
+                    }
+                },
+                "analyzer" : {
+                    "synonym_analyzer" : {
+                        "tokenizer" : "standard",
+                        "filter" : ["lowercase", "synonym_filter"] 
+                    }
+                }
+            }
+        }
+    },
+    "mappings": {
+        "emojis": {
+            "properties": {
+              "name": { 
+                "type": "text",
+                "analyzer": "synonym_analyzer"
+              }
+            }
+        }
+    }
+}

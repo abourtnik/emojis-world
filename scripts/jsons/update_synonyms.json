@@ -1,0 +1,5 @@
+{
+    "index" : {
+        "analysis.filter.synonym_filter.synonyms_path" : "analysis/synonyms.txt"
+    }
+}
