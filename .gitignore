@@ -27,6 +27,6 @@ package-lock.json
 .idea
 
 # Configuration
-./config.js
+config.js
 
-# scripts/jsons/import.json
+scripts/jsons/import.json
