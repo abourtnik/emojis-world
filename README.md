@@ -24,8 +24,8 @@
   <a href="#search-emojis">Search emojis </a> •
   <a href="#random-emojis">Random emojis </a> •
   <a href="#all-categories-and-sub-categories">Categories</a> •
-  <a href="#all-emojis-by-specific-category-id"> Search by category id </a>  •
-  <a href="#all-emojis-by-specific-sub-category-id">Search by sub category id</a>  •
+  <a href="#search-by-category-id"> Search by category id </a>  •
+  <a href="#search-by-sub-category-id ">Search by sub category id</a>  •
   <a href="#emoji-by-specific-id ">Search by id</a>
 </p>
 
@@ -41,7 +41,7 @@ GET https://api.emojisworld.io/v1
 }
 ```
 
-### Search emoji
+### Search emojis
 ```http
 GET https://api.emojisworld.io/v1/search
 ```
@@ -105,7 +105,7 @@ GET https://api.emojisworld.io/v1/search?q=happy&category=1&subcategory=1&limit=
 }
 ```
 
-### Random emoji
+### Random emojis
 ```http
 GET https://api.emojisworld.io/v1/random
 ```
