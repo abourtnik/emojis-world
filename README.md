@@ -14,19 +14,19 @@
   <a href="#http-response-codes">HTTP Response Codes</a> •
   <a href="#contributing">Contributing</a> •
   <a href="#license">License</a> •
-  <a href="#credits">Credits</a> •
+  <a href="#credits">Credits</a>
 </p>
 
 ## Endpoints
 
 <p align="center">
   <a href="#api-index">Index</a> •
-  <a href="#how-to-use">Search emojis </a> •
-  <a href="#http-response-codes">Random emojis </a> •
-  <a href="#contributing">Categories</a> •
-  <a href="#license"> By category id </a>
-  <a href="#credits">By sub_category id</a>
-  <a href="#credits">By id</a>
+  <a href="#search-emojis">Search emojis </a> •
+  <a href="#random-emojis">Random emojis </a> •
+  <a href="#all-categories-and-sub-categories">Categories</a> •
+  <a href="#all-emojis-by-specific-category-id"> Search by category id </a>  •
+  <a href="#all-emojis-by-specific-sub-category-id">Search by sub category id</a>  •
+  <a href="#emoji-by-specific-id ">Search by id</a>
 </p>
 
 ### API index
@@ -51,13 +51,13 @@ GET https://api.emojisworld.io/v1/search
 | Query Strings | Type | Description | Example |
 | ------------- | ----- | ------------- | ------------- |
 | q | String | A search word (only in english)  | `q=happy` |
-| limit | Integer | Fetch up to a specified number of results (max: 50).  | `limit=25` |
-| category | Integer |  Filter the response by category_id.  | `category=1` |
-| sub_category | Integer |  Filter the response by sub_category_id.  | `sub_category=1` |
+| limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
+| category | Integer |  Filter the response by category_id  | `category=1` |
+| sub_category | Integer |  Filter the response by sub_category_id  | `sub_category=1` |
 
 #### Example
 ```http
-GET https://api.emojisworld.io/v1/search?q=happy&category=1&subcategory=1&limit=25
+GET https://api.emojisworld.io/v1/search?q=happy&category=1&subcategory=1&limit=2
 ```
 
 #### Sample Response
@@ -100,9 +100,7 @@ GET https://api.emojisworld.io/v1/search?q=happy&category=1&subcategory=1&limit=
          "childrens":[  
 
          ]
-      },
-      
-      ...
+      }
    ]
 }
 ```
@@ -114,7 +112,7 @@ GET https://api.emojisworld.io/v1/random
 
 #### Example
 ```http
-GET https://api.emojisworld.io/v1/random?category=1&subcategory=1&limit=25
+GET https://api.emojisworld.io/v1/random?category=1&subcategory=1&limit=2
 ```
 
 #### Sample Response
@@ -166,9 +164,9 @@ GET https://api.emojisworld.io/v1/random?category=1&subcategory=1&limit=25
 
 | Query Strings | Type | Description | Example |
 | ------------- | ----- | ------------- | ------------- |
-| limit | Integer | Fetch up to a specified number of results (max: 50).  | `limit=25` |
-| category | Integer |  Filter the response by category_id.  | `category=1` |
-| sub_category | Integer |  Filter the response by sub_category_id.  | `sub_category=1` |
+| limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
+| category | Integer |  Filter the response by category_id  | `category=1` |
+| sub_category | Integer |  Filter the response by sub_category_id  | `sub_category=1` |
 
 
 ### All categories and sub categories 
@@ -233,16 +231,16 @@ GET https://api.emojisworld.io/v1/categories
 }
 ```
 
-### All emojis by specific category_id 
+### Search by category id
 ```http
-GET https://api.emojisworld.io/v1/category/{id}
+GET https://api.emojisworld.io/v1/category/id
 ```
 
 #### Query String Options
 
 | Query Strings | Type | Description | Example |
 | ------------- | ----- | ------------- | ------------- |
-| limit | Integer | Fetch up to a specified number of results (max: 50).  | `limit=25` |
+| limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
 
 #### Sample Response
 ```json
@@ -289,16 +287,16 @@ GET https://api.emojisworld.io/v1/category/{id}
 }
 ```
 
-### All emojis by specific sub_category_id 
+### Search by sub category id 
 ```http
-GET https://api.emojisworld.io/v1/sub_category/{id}
+GET https://api.emojisworld.io/v1/sub_category/id
 ```
 
 #### Query String Options
 
 | Query Strings | Type | Description | Example |
 | ------------- | ----- | ------------- | ------------- |
-| limit | Integer | Fetch up to a specified number of results (max: 50).  | `limit=25` |
+| limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
 
 #### Sample Response
 ```json
@@ -446,7 +444,7 @@ GET https://api.emojisworld.io/v1/emoji/{id}
 
 ## Contributing
 
-We encourage you to contribute to Emojis World! Please check out the [Contributing to Emojis World guide](https://github.com/abourtnik/emojis-world/contributing.md) for guidelines about how to proceed. Join us!
+We encourage you to contribute to Emojis World! Please check out the [Contributing to Emojis World guide](https://github.com/abourtnik/emojis-world/blob/master/contributing.md) for guidelines about how to proceed. Join us!
 
 Trying to report a possible security vulnerability in Emojis World ? Send an email to 
 **contact@emojisworld.io** with clear description of security vulnerability.
