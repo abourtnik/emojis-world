@@ -3,6 +3,8 @@ const express = require('express');
 const elasticsearch = require('elasticsearch');
 const mongoose = require('mongoose');
 const responseTime = require('response-time');
+const favicon = require('serve-favicon');
+const path = require('path');
 
 // Elastic Search
 
@@ -37,6 +39,8 @@ var app = express();
 app.use(responseTime(function(req, res, time) {
     res.header('X-Response-Time', time);
 }));
+
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 var router = express.Router();
 
