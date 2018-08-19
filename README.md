@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="https://api.emojisworld.io/v1">
+  <a href="https://emojisworld.io">
     <img src="https://www.emojisworld.io/img/logo.png" alt="Emoji World logo" height="300">
   </a>
   <br>
@@ -7,9 +7,27 @@
   <br>
 </h1>
 
-<h4 align="center">Open Source REST API for emojis </h4>
+<h3 align="center">Open Source REST API for emojis </h3>
+
+<p align="center">
+  <a href="#endpoints">Endpoints</a> •
+  <a href="#http-response-codes">HTTP Response Codes</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#license">License</a> •
+  <a href="#credits">Credits</a> •
+</p>
 
 ## Endpoints
+
+<p align="center">
+  <a href="#api-index">Index</a> •
+  <a href="#how-to-use">Search emojis </a> •
+  <a href="#http-response-codes">Random emojis </a> •
+  <a href="#contributing">Categories</a> •
+  <a href="#license"> By category id </a>
+  <a href="#credits">By sub_category id</a>
+  <a href="#credits">By id</a>
+</p>
 
 ### API index
 ```http
