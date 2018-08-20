@@ -401,7 +401,7 @@ GET https://api.emojisworld.io/v1/sub_category/id
 
 ### Emoji by specific id 
 ```http
-GET https://api.emojisworld.io/v1/emoji/{id}
+GET https://api.emojisworld.io/v1/emoji/id
 ```
 #### Sample Response
 ```json
@@ -439,7 +439,7 @@ GET https://api.emojisworld.io/v1/emoji/{id}
 ## Tecnhical detail
 
 * API is using Node.js with the Express.js framework
-* All emojis data are stored in a Elastic Search database
+* All emojis data are stored in a Elasticsearch database
 * Request data are stored in MongoDB database
 
 ## Contributing
