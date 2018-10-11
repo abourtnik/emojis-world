@@ -54,7 +54,7 @@ function store_user_data (req, res, next) {
 
         var connection = new Connection();
 
-        connection.ip = req.client.remoteAddress;
+        connection.ip = req.headers['x-real-ip'];
         connection.date = Date.now();
         connection.request = req.url;
         connection.duration =  res.getHeaders()['x-response-time'];
