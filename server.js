@@ -2,7 +2,6 @@ const config = require('./config');
 const express = require('express');
 const elasticsearch = require('elasticsearch');
 const mongoose = require('mongoose');
-const responseTime = require('response-time');
 const favicon = require('serve-favicon');
 const path = require('path');
 
@@ -36,14 +35,12 @@ monogdb.once('open', function (){console.info("Connect to MonogDB successfully")
 var Connection = require('./models/connection.js');
 
 var app = express();
-app.use(responseTime(function(req, res, time) {
-    res.header('X-Response-Time', time);
-}));
+
+// Favicon
 
 app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 var router = express.Router();
-
 
 function store_user_data (req, res, next) {
 
@@ -55,9 +52,8 @@ function store_user_data (req, res, next) {
         var connection = new Connection();
 
         connection.ip = req.headers['x-real-ip'];
-        connection.date = Date.now();
-        connection.request = req.url;
-        connection.duration =  res.getHeaders()['x-response-time'];
+        connection.date = new Date() + ' UTC',
+        connection.request = req.originalUrl;
 
         connection.save(function(err){
             if(err) console.error(err);
