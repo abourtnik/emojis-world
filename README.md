@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://emojisworld.io">
-    <img src="https://www.emojisworld.io/img/logo.png" alt="Emoji World logo" height="300">
+    <img src="https://www.emojisworld.io/img/logo.png" alt="Emoji World logo" height="200">
   </a>
   <br>
   Emojis World REST API
