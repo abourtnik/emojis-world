@@ -1,23 +1,36 @@
-const config = require('./config');
-const express = require('express');
+const config        = require('./config');
+const express       = require('express');
+const bodyParser    = require('body-parser');
 const elasticsearch = require('elasticsearch');
-const mongoose = require('mongoose');
-const favicon = require('serve-favicon');
-const path = require('path');
+const mongoose      = require('mongoose');
+const favicon       = require('serve-favicon');
+const path          = require('path');
+const apiRouter     = require('./apiRouter').router;
+const morgan        = require('morgan');
+const fs            = require('fs');
 
-// Elastic Search
+// Inititate server
+var app = express();
 
+// Morgan Log Configuration
+var connectionLogStream = fs.createWriteStream(path.join(__dirname, 'connections.log'), { flags: 'a' });
+app.use(morgan(':method :url :status :response-time ms :date :remote-addr :user-agent' , { stream: connectionLogStream }));
+
+// Body Parser configuration
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Elastic Search configuration
 var elasticsearch_client = new elasticsearch.Client({
     host: config.elasticsearch.host + ':' + config.elasticsearch.port
 });
 
 elasticsearch_client.ping({requestTimeout: 1000}, function (error) {
     if (error) console.error('Failed to connect to ElasticSearch !');
-     else console.info('Connect to ElasticSearch successfully');
+    else console.info('Connect to ElasticSearch successfully');
 });
 
-// MongoDB
-
+// MongoDB configuration
 var options_monogdb = {
     keepAlive: 300000,
     connectTimeoutMS: 30000,
@@ -32,76 +45,13 @@ var monogdb = mongoose.connection;
 monogdb.on('error', console.error.bind(console, 'Failed to connect to MonogDB !'));
 monogdb.once('open', function (){console.info("Connect to MonogDB successfully");});
 
-var Connection = require('./models/connection.js');
-
-var app = express();
-
 // Favicon
-
 app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
-var router = express.Router();
+// Router
+app.use('/v' + config.application.version + '/' , apiRouter);
 
-function store_user_data (req, res, next) {
-
-    if (req.method === 'GET') {
-
-        // keep executing the router middleware
-        next();
-
-        var connection = new Connection();
-
-        connection.ip = req.headers['x-real-ip'];
-        connection.date = new Date() + ' UTC',
-        connection.request = req.originalUrl;
-
-        connection.save(function(err){
-            if(err) console.error(err);
-        });
-    }
-}
-
-app.use(function (req, res, next) {
-
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    next();
-});
-
-app.use(store_user_data);
-
-
-// ------------------ ENDPOINTS -------------------------------
-
-// SEARCH
-require('./routes/search')(router);
-
-// RANDOM EMOJIS
-require('./routes/random')(router);
-
-// ALL CATEGORIES AND SUB_CATEGORIES
-require('./routes/categories')(router);
-
-// EMOJI BY Category ID
-require('./routes/category')(router);
-
-// EMOJI BY Sub Category ID
-require('./routes/sub_category')(router);
-
-// EMOJI BY ID
-require('./routes/emoji')(router);
-
-// INDEX
-require('./routes/index')(router);
-
-// 404
-require('./routes/404')(router);
-
-app.use('/v' + config.application.version , router);
-
+// Launch server
 app.listen(config.server.port, config.server.host, function(){
     console.info("Server listen on http://"+ config.server.host +":"+config.server.port);
 });

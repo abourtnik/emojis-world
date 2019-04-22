@@ -26,5 +26,9 @@ module.exports = {
         'username' : null,
         'password' : null,
         'port' : 27017,
+    },
+
+    'jwt' : {
+        'secret' : ''
     }
 };

@@ -57,7 +57,7 @@ GET https://api.emojisworld.io/v1/search
 
 #### Example
 ```http
-GET https://api.emojisworld.io/v1/search?q=happy&category=1&subcategory=1&limit=2
+GET https://api.emojisworld.io/v1/search?q=happy&category=1&sub_category=1&limit=2
 ```
 
 #### Sample Response
@@ -110,9 +110,17 @@ GET https://api.emojisworld.io/v1/search?q=happy&category=1&subcategory=1&limit=
 GET https://api.emojisworld.io/v1/random
 ```
 
+#### Query String Options
+
+| Query Strings | Type | Description | Example |
+| ------------- | ----- | ------------- | ------------- |
+| limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
+| category | Integer |  Filter the response by category_id  | `category=1` |
+| sub_category | Integer |  Filter the response by sub_category_id  | `sub_category=1` |
+
 #### Example
 ```http
-GET https://api.emojisworld.io/v1/random?category=1&subcategory=1&limit=2
+GET https://api.emojisworld.io/v1/random?category=1&sub_category=1&limit=2
 ```
 
 #### Sample Response
@@ -159,14 +167,6 @@ GET https://api.emojisworld.io/v1/random?category=1&subcategory=1&limit=2
    ]
 }
 ```
-
-#### Query String Options
-
-| Query Strings | Type | Description | Example |
-| ------------- | ----- | ------------- | ------------- |
-| limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
-| category | Integer |  Filter the response by category_id  | `category=1` |
-| sub_category | Integer |  Filter the response by sub_category_id  | `sub_category=1` |
 
 
 ### All categories and sub categories 
@@ -433,14 +433,18 @@ GET https://api.emojisworld.io/v1/emoji/id
 ## HTTP Response Codes
 | Code  | Description |
 | ------------- | ------------- |
-| 200  | Returns all emojis by default |
+| 200  | Success |
+| 400  | Bad Request |
+| 401  | Unauthorized |
+| 403  | Bad Request |
 | 404  | Returns  `Not Found` |
+| 500  | Internal Server Error	 |
 
 ## Tecnhical detail
 
 * API is using Node.js with the Express.js framework
 * All emojis data are stored in a Elasticsearch database
-* Request data are stored in MongoDB database
+* User data are stored in MongoDB database
 
 ## Contributing
 

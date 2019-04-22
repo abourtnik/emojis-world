@@ -30,3 +30,6 @@ package-lock.json
 config.js
 
 scripts/jsons/import.json
+
+// Connections logs
+connections.log
