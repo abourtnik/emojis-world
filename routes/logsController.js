@@ -8,8 +8,8 @@ module.exports = {
 
     get: function (req, res) {
 
-        var headerAuth = req.headers['authorization'];
-        var user_id = jwtUtils.getUserId(headerAuth);
+        let headerAuth = req.headers['authorization'];
+        let user_id = jwtUtils.getUserId(headerAuth);
 
         if (user_id < 0)
             return res.status(400).json({'error' : 'invalid token'});

@@ -5,7 +5,7 @@ const logsController      = require('./routes/logsController');
 
 // Router
 exports.router = (function () {
-    var apiRouter = express.Router();
+    let apiRouter = express.Router();
     
     // All routes
 
@@ -28,13 +28,10 @@ exports.router = (function () {
 
     // Emojis routes
     apiRouter.route('/').get(emojisController.index);
-    apiRouter.route('/all').get(emojisController.all);
     apiRouter.route('/search').get(emojisController.search);
     apiRouter.route('/random').get(emojisController.random);
     apiRouter.route('/categories').get(emojisController.categories);
-    apiRouter.route('/category/:id').get(emojisController.category);
-    apiRouter.route('/sub_category/:id').get(emojisController.subCategory);
-    apiRouter.route('/emoji/:id').get(emojisController.emoji);
+    apiRouter.route('/emojis/:id').get(emojisController.emojis);
 
     // View Logs routes
     apiRouter.route('/logs').get(logsController.get);

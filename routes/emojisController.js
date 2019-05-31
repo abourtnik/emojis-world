@@ -12,56 +12,30 @@ module.exports = {
         return res.status(200).json({message : "Welcome on Emojis World API (version " + config.application.version  + ") !!"});
     },
 
-    all:function (req, res) {
-
-        elasticsearch_client.search({
-            index: 'emojis-world',
-            type: 'emojis',
-            filter_path: 'hits.hits._source,hits.total',
-            body: {
-                query: {
-                    match_all : {
-
-                    }
-                }
-            }
-        }).then(function (resp) {
-
-            var results = [];
-
-            if (resp.hits.hits)  {
-                resp.hits.hits.forEach(function(element) {
-                    results.push(element._source);
-                });
-            }
-
-            return res.status(200).json({'totals' : results.length  , 'results' : results});
-
-        }, function (error) {
-            return res.status(500).json({'error' : error.message});
-        });
-    },
-
     search:function (req, res) {
 
-        var limit = req.query.limit;
-        var query = req.query.q;
-        var category_id = req.query.category;
-        var sub_category_id = req.query.sub_category;
+        // Required
+        let query = req.query.q;
+
+        // Optional
+        let limit = req.query.limit;
+        let category_id = req.query.category;
+        let sub_category_id = req.query.sub_category;
 
         if (!query)
             return res.status(400).json({'error' : 'Query is not defined'});
 
-        // Limit is not int
+        // limit is not int
         if (limit && !Number.isInteger(parseInt(limit)))
             return res.status(400).json({'error' : 'Limit is not valid int'});
 
+        // category_id is not int
         if (category_id && !Number.isInteger(parseInt(category_id)) )
             return res.status(400).json({'error' : 'Category is not valid int'});
 
+        // sub_category_id is not int
         if (sub_category_id && !Number.isInteger(parseInt(sub_category_id)) )
             return res.status(400).json({'error' : 'Sub_category is not valid int'});
-
 
         // Filter by Categorie OR sub categories
         filters = [];
@@ -90,7 +64,7 @@ module.exports = {
             }
         }).then(function (resp) {
 
-            var results = [];
+            let results = [];
 
             if (resp.hits.hits)  {
                 resp.hits.hits.forEach(function(element) {
@@ -107,9 +81,9 @@ module.exports = {
 
     random:function (req, res) {
 
-        var limit = req.query.limit;
-        var category_id = req.query.category;
-        var sub_category_id = req.query.sub_category;
+        let limit = req.query.limit;
+        let category_id = req.query.category;
+        let sub_category_id = req.query.sub_category;
 
         // Limit is not int
         if (limit && !Number.isInteger(parseInt(limit)))
@@ -151,7 +125,7 @@ module.exports = {
             }
         }).then(function (resp) {
 
-            var results = [];
+            let results = [];
 
             if (resp.hits.hits)  {
                 resp.hits.hits.forEach(function(element) {
@@ -167,9 +141,9 @@ module.exports = {
 
     },
 
-    emoji:function (req, res) {
+    emojis:function (req, res) {
 
-        var id = req.params.id;
+        let id = req.params.id;
 
         // Limit is not int
         if (id && !Number.isInteger(parseInt(id)))
@@ -193,7 +167,7 @@ module.exports = {
             }
         }).then(function (resp) {
 
-            var results = [];
+            let results = [];
 
             if (resp.hits.hits)  {
                 resp.hits.hits.forEach(function(element) {
@@ -249,12 +223,12 @@ module.exports = {
             }
         }).then(function (resp) {
 
-            var results = [];
+            let results = [];
 
             if (resp.aggregations.category.buckets)  {
                 resp.aggregations.category.buckets.forEach(function(category) {
 
-                    var sub_categories = [];
+                    let sub_categories = [];
 
                     category.sub_category.buckets.forEach(function (sub_category) {
                         sub_categories.push({ 'id' : sub_category.first_sub_category_emoji.hits.hits[0]._source.sub_category.id , 'name' : sub_category.key , 'emojis_count' : sub_category.doc_count , 'first_emoji' : sub_category.first_sub_category_emoji.hits.hits[0]._source});
@@ -272,94 +246,6 @@ module.exports = {
             results.sort(function(a,b) {return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);} );
 
             return res.status(200).json({'totals' : results.length  , 'results' : results});
-
-        }, function (error) {
-            return res.status(500).json({'error' : error.message});
-        });
-
-    },
-
-    category:function (req, res) {
-
-        var id = req.params.id;
-        var limit = req.query.limit;
-
-        // ID is not int
-        if (id && !Number.isInteger(parseInt(id)))
-            return res.status(400).json({'error' : 'Id is not a valid int'});
-
-        // Limit is not int
-        if (limit && !Number.isInteger(parseInt(limit)))
-            return res.status(400).json({'error' : 'Limit is not valid int'});
-
-        elasticsearch_client.search({
-            index: 'emojis-world',
-            type: 'emojis',
-            filter_path: 'hits.hits._source,hits.total',
-            body: {
-                size : (limit) ? parseInt(req.query.limit) : 6000,
-                query: {
-                    term : { "category.id" : id }
-                },
-                sort : [
-                    {id : {order : "asc"}}
-                ]
-            }
-        }).then(function (resp) {
-
-            var results = [];
-
-            if (resp.hits.hits)  {
-                resp.hits.hits.forEach(function(element) {
-                    results.push(element._source);
-                });
-            }
-
-            return res.status(200).json({'totals' : results.length  , 'results' : results});
-
-        }, function (error) {
-            return res.status(500).json({'error' : error.message});
-        });
-
-    },
-
-    subCategory:function (req, res) {
-
-        var id = req.params.id;
-        var limit = req.query.limit;
-
-        // Limit is not int
-        if (id && !Number.isInteger(parseInt(id)))
-            res.status(400).json({'error' : 'Id is not valid int'});
-
-        // Limit is not int
-        if (limit && !Number.isInteger(parseInt(limit)))
-            res.status(400).json({'error' : 'Limit is not valid int'});
-
-        elasticsearch_client.search({
-            index: 'emojis-world',
-            type: 'emojis',
-            filter_path: 'hits.hits._source,hits.total',
-            body: {
-                size : (limit) ? parseInt(req.query.limit) : 6000,
-                query: {
-                    term : { "sub_category.id" : id }
-                },
-                sort : [
-                    {id : {order : "asc"}}
-                ]
-            }
-        }).then(function (resp) {
-
-            var results = [];
-
-            if (resp.hits.hits)  {
-                resp.hits.hits.forEach(function(element) {
-                    results.push(element._source);
-                });
-            }
-
-            res.status(200).json({'totals' : results.length  , 'results' : results});
 
         }, function (error) {
             return res.status(500).json({'error' : error.message});
