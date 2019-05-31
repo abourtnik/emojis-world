@@ -294,7 +294,7 @@ GET https://api.emojisworld.io/v1/emojis/id
 
 ## Contributing
 
-We encourage you to contribute to Emojis World! Please check out the [Contributing to Emojis World guide](https://github.com/abourtnik/emojis-world/blob/master/contributing.md) for guidelines about how to proceed. Join us!
+We encourage you to contribute to Emojis World !! Please check out the [Contributing to Emojis World guide](https://github.com/abourtnik/emojis-world/blob/master/contributing.md) for guidelines about how to proceed. Join us!
 
 Trying to report a possible security vulnerability in Emojis World ? Send an email to 
 **contact@emojisworld.io** with clear description of security vulnerability.
