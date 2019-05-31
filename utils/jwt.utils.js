@@ -19,12 +19,12 @@ module.exports = {
         return (authorization != null) ? authorization.replace('Bearer ' , '') : null;
     },
     getUserId: function (authorization) {
-        var user_id = - 1;
-        var token = module.exports.parseAuthorization(authorization);
+        let user_id = - 1;
+        let token = module.exports.parseAuthorization(authorization);
 
         if (token != null) {
             try {
-                var jwtToken = jwt.verify(token , config.jwt.secret);
+                let jwtToken = jwt.verify(token , config.jwt.secret);
 
                 if (jwtToken != null)
                     user_id = jwtToken.userId;

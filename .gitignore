@@ -33,3 +33,6 @@ scripts/jsons/import.json
 
 // Connections logs
 connections.log
+
+// Process
+process.json

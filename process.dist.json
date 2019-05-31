@@ -1,0 +1,9 @@
+{
+  "script": "server.js",
+  "watch": true,
+  "ignore_watch": ["connections.log"],
+  "watch_options": {
+    "followSymlinks": false
+  },
+  "name": "Your application name"
+}

@@ -10,12 +10,28 @@
 <h3 align="center">Open Source REST API for emojis </h3>
 
 <p align="center">
+  <a href="#categories">Categories</a> •
   <a href="#endpoints">Endpoints</a> •
   <a href="#http-response-codes">HTTP Response Codes</a> •
+  <a href="#technical-detail">Tecnhical detail</a> •
   <a href="#contributing">Contributing</a> •
   <a href="#license">License</a> •
   <a href="#credits">Credits</a>
 </p>
+
+## Categories
+
+| ID | Name | Emojis Count
+| ------------- | ----- | ------------- |
+| 1 | Smileys & People |  408 |
+| 2 | Animals & Nature |  113 |
+| 3 | Food & Drink |  101 |
+| 4 | Travel & Places |  199 |
+| 5 | Activities |  67 |
+| 6 | Objects |  166 |
+| 7 | Symbols |  206 |
+| 8 | Flags |  265 |
+
 
 ## Endpoints
 
@@ -24,8 +40,6 @@
   <a href="#search-emojis">Search emojis </a> •
   <a href="#random-emojis">Random emojis </a> •
   <a href="#all-categories-and-sub-categories">Categories</a> •
-  <a href="#search-by-category-id"> Search by category id </a>  •
-  <a href="#search-by-sub-category-id ">Search by sub category id</a>  •
   <a href="#emoji-by-specific-id ">Search by id</a>
 </p>
 
@@ -231,177 +245,9 @@ GET https://api.emojisworld.io/v1/categories
 }
 ```
 
-### Search by category id
-```http
-GET https://api.emojisworld.io/v1/category/id
-```
-
-#### Query String Options
-
-| Query Strings | Type | Description | Example |
-| ------------- | ----- | ------------- | ------------- |
-| limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
-
-#### Sample Response
-```json
-{  
-   "totals":408,
-   "results":[  
-      {  
-         "id":1,
-         "name":"grinning face",
-         "emoji":"😀",
-         "unicode":"1F600",
-         "score":0,
-         "category":{  
-            "id":1,
-            "name":"Smileys & People"
-         },
-         "sub_category":{  
-            "id":1,
-            "name":"face-positive"
-         },
-         "childrens":[  
-
-         ]
-      },
-      {  
-         "id":2,
-         "name":"beaming face with smiling eyes",
-         "emoji":"😁",
-         "unicode":"1F601",
-         "score":1,
-         "category":{  
-            "id":1,
-            "name":"Smileys & People"
-         },
-         "sub_category":{  
-            "id":1,
-            "name":"face-positive"
-         },
-         "childrens":[  
-
-         ]
-      }
-   ]
-}
-```
-
-### Search by sub category id 
-```http
-GET https://api.emojisworld.io/v1/sub_category/id
-```
-
-#### Query String Options
-
-| Query Strings | Type | Description | Example |
-| ------------- | ----- | ------------- | ------------- |
-| limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
-
-#### Sample Response
-```json
-{  
-   "totals":10,
-   "results":[  
-      {  
-         "id":113,
-         "name":"baby",
-         "emoji":"👶",
-         "unicode":"1F476",
-         "score":0,
-         "category":{  
-            "id":1,
-            "name":"Smileys & People"
-         },
-         "sub_category":{  
-            "id":10,
-            "name":"person"
-         },
-         "childrens":[  
-            {  
-               "id":114,
-               "name":"baby: light skin tone",
-               "emoji":"👶🏻",
-               "unicode":"1F476 1F3FB",
-               "score":0,
-               "category":{  
-                  "id":1,
-                  "name":"Smileys & People"
-               },
-               "sub_category":{  
-                  "id":10,
-                  "name":"person"
-               }
-            },
-            {  
-               "id":115,
-               "name":"baby: medium-light skin tone",
-               "emoji":"👶🏼",
-               "unicode":"1F476 1F3FC",
-               "score":0,
-               "category":{  
-                  "id":1,
-                  "name":"Smileys & People"
-               },
-               "sub_category":{  
-                  "id":10,
-                  "name":"person"
-               }
-            },
-            {  
-               "id":116,
-               "name":"baby: medium skin tone",
-               "emoji":"👶🏽",
-               "unicode":"1F476 1F3FD",
-               "score":0,
-               "category":{  
-                  "id":1,
-                  "name":"Smileys & People"
-               },
-               "sub_category":{  
-                  "id":10,
-                  "name":"person"
-               }
-            },
-            {  
-               "id":117,
-               "name":"baby: medium-dark skin tone",
-               "emoji":"👶🏾",
-               "unicode":"1F476 1F3FE",
-               "score":0,
-               "category":{  
-                  "id":1,
-                  "name":"Smileys & People"
-               },
-               "sub_category":{  
-                  "id":10,
-                  "name":"person"
-               }
-            },
-            {  
-               "id":118,
-               "name":"baby: dark skin tone",
-               "emoji":"👶🏿",
-               "unicode":"1F476 1F3FF",
-               "score":0,
-               "category":{  
-                  "id":1,
-                  "name":"Smileys & People"
-               },
-               "sub_category":{  
-                  "id":10,
-                  "name":"person"
-               }
-            }
-         ]
-      }
-   ]
-}
-```
-
 ### Emoji by specific id 
 ```http
-GET https://api.emojisworld.io/v1/emoji/id
+GET https://api.emojisworld.io/v1/emojis/id
 ```
 #### Sample Response
 ```json

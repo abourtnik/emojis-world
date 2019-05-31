@@ -9,8 +9,8 @@ module.exports = {
     login:function (req, res) {
 
         // Params
-        var email = req.body.email;
-        var password = req.body.password;
+        let email = req.body.email;
+        let password = req.body.password;
 
         if (email == null || password == null)
             return res.status(400).json({'error' : 'missing parameters'});
@@ -36,8 +36,8 @@ module.exports = {
 
     getAll: function (req, res) {
 
-        var headerAuth = req.headers['authorization'];
-        var user_id = jwtUtils.getUserId(headerAuth);
+        let headerAuth = req.headers['authorization'];
+        let user_id = jwtUtils.getUserId(headerAuth);
 
         if (user_id < 0)
             return res.status(400).json({'error' : 'invalid token'});
