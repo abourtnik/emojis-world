@@ -1,6 +1,7 @@
-smiling, smile, grinning, happy, beaming, joy, positive
+smiling, smile, grinning, happy, beaming, joy, positive, laugh, lol, cool, fun, xd, XD, :D, :d, :), :-), :P, :p
+winking, wink, ;)
 kiss, kissing, heart, love
-tears, sad, unhappy, bad, persevering, crying
+sad, unhappy, bad, persevering, crying, cry, :(, :\, :/
 think, thinking
 expressionless, neutral
 health, doctor
@@ -22,7 +23,7 @@ speaking, speak, speech
 dog, poodle
 football, soccer
 volume, speaker
-phone, iphone, Iphone, mobile
+phone, iphone, Iphone, mobile, i-phone
 sunglasses, sun, holidays
 money, dollar
 skull, pirate
@@ -64,3 +65,6 @@ gun, pistol
 toilet, wc
 coffin, dead, funeral
 russia, urss
+rabbit, bunny
+coco, coconut
+tea, teacup
