@@ -10,7 +10,7 @@
                 },
                 "analyzer" : {
                     "synonym_analyzer" : {
-                        "tokenizer" : "standard",
+                        "tokenizer" : "whitespace",
                         "filter" : ["lowercase", "synonym_filter"] 
                     }
                 }
