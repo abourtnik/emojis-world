@@ -1,4 +1,4 @@
-smiling, smile, grinning, happy, beaming, joy, positive, laugh, lol, cool, fun, xd, XD, :D, :d, :), :-), :P, :p
+smiling, smile, grinning, happy, beaming, joy, positive, laugh, lol, cool, fun, xd, XD, :D, :d, :), :-), :P, :p, mdr, MDR
 winking, wink, ;)
 kiss, kissing, heart, love
 sad, unhappy, bad, persevering, crying, cry, :(, :\, :/
@@ -68,3 +68,5 @@ russia, urss
 rabbit, bunny
 coco, coconut
 tea, teacup
+thumbs, thumb, super
+popping, champagnes
