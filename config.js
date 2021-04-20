@@ -18,7 +18,7 @@ module.exports = {
             supportBigNumbers: true,
             bigNumberStrings: true
         },
-        log : true
+        log : false
     },
     typesense : {
         host : 'localhost',

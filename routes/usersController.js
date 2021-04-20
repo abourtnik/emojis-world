@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwtUtils = require('../utils/jwt.utils');
-const user = require('../models/user');
+const user = require('../models/Emoji');
 
 // Routes
 

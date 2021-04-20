@@ -84,7 +84,6 @@ GET https://api.emojisworld.io/v1/search?q=happy&category=1&sub_category=1&limit
          "name":"grinning cat face with smiling eyes",
          "emoji":"😸",
          "unicode":"1F638",
-         "score":0,
          "category":{  
             "id":1,
             "name":"Smileys & People"
@@ -93,16 +92,13 @@ GET https://api.emojisworld.io/v1/search?q=happy&category=1&sub_category=1&limit
             "id":7,
             "name":"cat-face"
          },
-         "childrens":[  
-
-         ]
+         "children":[]
       },
       {  
          "id":2,
          "name":"beaming face with smiling eyes",
          "emoji":"😁",
          "unicode":"1F601",
-         "score":1,
          "category":{  
             "id":1,
             "name":"Smileys & People"
@@ -111,9 +107,7 @@ GET https://api.emojisworld.io/v1/search?q=happy&category=1&sub_category=1&limit
             "id":1,
             "name":"face-positive"
          },
-         "childrens":[  
-
-         ]
+         "children":[]
       }
    ]
 }
@@ -147,7 +141,6 @@ GET https://api.emojisworld.io/v1/random?category=1&sub_category=1&limit=2
          "name":"green heart",
          "emoji":"💚",
          "unicode":"1F49A",
-         "score":0,
          "category":{  
             "id":1,
             "name":"Smileys & People"
@@ -156,16 +149,13 @@ GET https://api.emojisworld.io/v1/random?category=1&sub_category=1&limit=2
             "id":18,
             "name":"emotion"
          },
-         "childrens":[  
-
-         ]
+         "children":[]
       },
       {  
          "id":1317,
          "name":"koala",
          "emoji":"🐨",
          "unicode":"1F428",
-         "score":0,
          "category":{  
             "id":2,
             "name":"Animals & Nature"
@@ -174,9 +164,7 @@ GET https://api.emojisworld.io/v1/random?category=1&sub_category=1&limit=2
             "id":20,
             "name":"animal-mammal"
          },
-         "childrens":[  
-
-         ]
+         "children":[]
       }
    ]
 }
@@ -196,48 +184,12 @@ GET https://api.emojisworld.io/v1/categories
       {  
          "id":1,
          "name":"Smileys & People",
-         "emojis_count":408,
-         "first_emoji":{  
-            "id":1,
-            "name":"grinning face",
-            "emoji":"😀",
-            "unicode":"1F600",
-            "score":0,
-            "category":{  
-               "id":1,
-               "name":"Smileys & People"
-            },
-            "sub_category":{  
-               "id":1,
-               "name":"face-positive"
-            },
-            "childrens":[  
-
-            ]
-         },
+         "emojis_count":1277,
          "sub_categories":[  
             {  
                "id":1,
                "name":"face-positive",
-               "emojis_count":21,
-               "first_emoji":{  
-                  "id":1,
-                  "name":"grinning face",
-                  "emoji":"😀",
-                  "unicode":"1F600",
-                  "score":0,
-                  "category":{  
-                     "id":1,
-                     "name":"Smileys & People"
-                  },
-                  "sub_category":{  
-                     "id":1,
-                     "name":"face-positive"
-                  },
-                  "childrens":[  
-
-                  ]
-               }
+               "emojis_count":21
             }
          ]
       }
@@ -251,28 +203,20 @@ GET https://api.emojisworld.io/v1/emojis/id
 ```
 #### Sample Response
 ```json
-{  
-   "totals":1,
-   "results":[  
-      {  
-         "id":3,
-         "name":"face with tears of joy",
-         "emoji":"😂",
-         "unicode":"1F602",
-         "score":0,
-         "category":{  
-            "id":1,
-            "name":"Smileys & People"
-         },
-         "sub_category":{  
-            "id":1,
-            "name":"face-positive"
-         },
-         "childrens":[  
-
-         ]
-      }
-   ]
+{
+     "id":3,
+     "name":"face with tears of joy",
+     "emoji":"😂",
+     "unicode":"1F602",
+     "category":{  
+        "id":1,
+        "name":"Smileys & People"
+     },
+     "sub_category":{  
+        "id":1,
+        "name":"face-positive"
+     },
+     "children":[]
 }
 ```
 
@@ -283,7 +227,7 @@ GET https://api.emojisworld.io/v1/emojis/id
 | 400  | Bad Request |
 | 401  | Unauthorized |
 | 403  | Bad Request |
-| 404  | Returns  `Not Found` |
+| 404  | Not Found |
 | 500  | Internal Server Error	 |
 
 ## Tecnhical detail
