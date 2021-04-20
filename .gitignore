@@ -21,7 +21,6 @@ venv
 node_modules
 .sass-cache
 npm-debug.log
-package-lock.json
 
 # PhpStorm
 .idea
@@ -29,10 +28,10 @@ package-lock.json
 # Configuration
 config.js
 
-scripts/jsons/import.json
+scripts/jsons/emojis.json
 
-// Connections logs
-connections.log
-
-// Process
+# Process
 process.json
+
+# Typesense local data
+data

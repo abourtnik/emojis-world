@@ -1,34 +1,31 @@
 module.exports = {
-
-    'application' : {
-
-        'name' : 'API Emojis World',
-        'version' : '1'
+    application : {
+        name : 'API Emojis World',
+        version : 1
     },
-
-    'server' : {
-
-        'host' : 'localhost',
-        'port' : '3000'
+    server : {
+        host : 'localhost',
+        port : 3001
     },
-
-    'elasticsearch' : {
-
-        'host' : 'localhost',
-        'port' : '9200'
+    mysql : {
+        host : 'localhost',
+        username : 'root',
+        password : 'root',
+        port : 3306,
+        database : 'emojis_world',
+        options : {
+            socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
+            supportBigNumbers: true,
+            bigNumberStrings: true
+        },
+        log : true
     },
-
-    'mongodb' : {
-
-        'type' : 'mongodb',
-        'host' : 'localhost',
-        'database' : 'emojis-world',
-        'username' : null,
-        'password' : null,
-        'port' : 27017,
+    typesense : {
+        host : 'localhost',
+        port : 8108,
+        api_key: '',
     },
-
-    'jwt' : {
-        'secret' : ''
+    jwt : {
+        secret : ''
     }
 };

@@ -1,7 +1,6 @@
 const express               = require('express');
 const usersController       = require('./routes/usersController');
 const emojisController      = require('./routes/emojisController');
-const logsController      = require('./routes/logsController');
 
 // Router
 exports.router = (function () {
@@ -18,7 +17,6 @@ exports.router = (function () {
 
         next();
     });
-    
 
     // Users routes
     apiRouter.route('/login/').post(usersController.login);
@@ -30,9 +28,6 @@ exports.router = (function () {
     apiRouter.route('/random').get(emojisController.random);
     apiRouter.route('/categories').get(emojisController.categories);
     apiRouter.route('/emojis/:id').get(emojisController.emojis);
-
-    // View Logs routes
-    apiRouter.route('/logs').get(logsController.get);
 
     // 404
     apiRouter.route('*').get(function(req, res){
