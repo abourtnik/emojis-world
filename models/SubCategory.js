@@ -17,6 +17,10 @@ const SubCategory = sequelize.define('sub_categories', {
         unique: true,
         allowNull: false
     },
+    count : {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     created_at : {
         type: DataTypes.DATE,
         allowNull: false,

@@ -1,6 +1,7 @@
 const config = require('../config');
 const axios = require('axios');
 const fs = require('fs');
+const cliProgress = require('cli-progress');
 
 const Emoji = require('../models/Emoji');
 const Category = require('../models/Category');
@@ -11,16 +12,47 @@ const typesense = axios.create({
     timeout: 1000,
 });
 
+category_count = (array, category_id) => {
+
+    let index = array.findIndex(category => category.id === category_id)
+
+    if (index !== -1){
+        array[index]['count'] ++;
+    }
+
+    else {
+        array.push({
+            id : category_id,
+            count : 1,
+        })
+    }
+}
+
+update_count = async (array, model) => {
+    for (let k = 0; k < array.length ; k ++) {
+        await model.update({count: array[k]['count']}, {
+            where: {
+                id: array[k]['id']
+            }
+        });
+    }
+}
+
 (async function(){
 
     let data = fs.readFileSync('./jsons/emojis.json');
     let emojis = JSON.parse(data);
 
+    let categories_count = [];
+    let sub_categories_count = [];
+
+    const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+
+    bar.start(emojis.length, 0);
+
     for (let i = 0 ; i < emojis.length ; i ++) {
 
         let emoji = emojis[i];
-
-        console.log(i);
 
         let category = await Category.findOrCreate({
             where : {
@@ -58,6 +90,9 @@ const typesense = axios.create({
             raw: true
         });
 
+        category_count(categories_count, category[0]['id']);
+        category_count(sub_categories_count, sub_category[0]['id']);
+
         if (emoji['childrens'].length) {
 
             for (let j = 0; j < emoji['childrens'].length; j++) {
@@ -78,9 +113,22 @@ const typesense = axios.create({
                     },
                     raw: true
                 });
+
+                category_count(categories_count, category[0]['id']);
+                category_count(sub_categories_count, sub_category[0]['id']);
             }
         }
+
+        bar.increment();
     }
+
+    bar.stop();
+
+    // Update category count
+    await update_count(categories_count, Category)
+
+    // Update sub_category count
+    await update_count(sub_categories_count, SubCategory)
 
     process.exit();
 

@@ -76,49 +76,13 @@ module.exports = {
 
         catch (e) {
             console.error(e.message)
-            return res.status(500).json({'error' : 'internal server error'});
+            return res.status(500).json({'error' : 'Internal server error'});
         }
 
-        // Filter by Categorie OR sub categories
-        filters = [];
-        (category_id) ? filters.push({ "term":  { "category.id": category_id }}) : null;
-        (sub_category_id) ? filters.push({ "term":  { "sub_category.id": sub_category_id }}) : null;
-
-        elasticsearch_client.search({
-            index: 'emojis-world',
-            type: 'emojis',
-            filter_path: 'hits.hits._source,hits.total',
-            body: {
-                size: ( (limit && parseInt(limit) <= 50 ) ? parseInt(req.query.limit) : 50 ),
-                query: {
-                    bool : {
-                        must : [
-                            {
-                                multi_match: {
-                                    query : query,
-                                    fields: ['name^2' , 'category.name' , 'sub_category.name'],
-                                }
-                            }
-                        ],
-                        filter: filters
-                    }
-                }
-            }
-        }).then(function (resp) {
-
-            let results = [];
-
-            if (resp.hits.hits)  {
-                resp.hits.hits.forEach(function(element) {
-                    results.push(element._source);
-                });
-            }
-
-            return res.status(200).json({'totals' : results.length  , 'results' : results});
-
-        }, function (error) {
-            return res.status(500).json({'error' : error.message});
-        });
+        // Filter by category OR sub_category
+        let filters = {};
+        (category_id) ? filters.category_id = category_id : null;
+        (sub_category_id) ? filters.sub_category_id = sub_category_id : null;
     },
 
     random: async function (req, res) {
@@ -173,7 +137,7 @@ module.exports = {
 
         catch (e) {
             console.error(e.message)
-            return res.status(500).json({'error' : 'internal server error'});
+            return res.status(500).json({'error' : 'Internal server error'});
         }
     },
 
@@ -183,7 +147,7 @@ module.exports = {
 
         // Limit is not int
         if (id && !Number.isInteger(parseInt(id)))
-            return res.status(400).json({'error' : 'Id is not a valid int'});
+            return res.status(400).json({'error' : 'id is not a valid int'});
 
         try {
             let emoji = await Emoji.findOne({
@@ -220,7 +184,7 @@ module.exports = {
 
         catch (e) {
             console.error(e.message)
-            return res.status(500).json({'error' : 'internal server error'});
+            return res.status(500).json({'error' : 'Internal server error'});
         }
     },
 
@@ -228,43 +192,24 @@ module.exports = {
 
         try {
             let categories = await Category.findAll({
-                attributes: ['id', 'name'],
+                attributes: ['id', 'name', ['count' , 'emojis_count']],
                 include: [
                     {
-                        model: Emoji,
-                        attributes:['id'],
-                    },
-                    {
                         model: SubCategory,
-                        attributes:['id', 'name'],
-                        include: [
-                            {
-                                model: Emoji,
-                                attributes:['id'],
-                            }
-                        ]
+                        attributes:['id', 'name', ['count' , 'emojis_count']]
                     }
                 ]
             });
 
             return res.status(200).json({
                 totals : categories.length,
-                results : categories.map(category => ({
-                    id : category.id,
-                    name : category.name,
-                    emojis_count : category.emojis.length,
-                    sub_categories : category.sub_categories.map(sub_category => ({
-                        id : sub_category.id,
-                        name : sub_category.name,
-                        emojis_count : sub_category.emojis.length,
-                    }))
-                }))
+                results : categories
             });
         }
 
         catch (e) {
             console.error(e.message)
-            return res.status(500).json({'error' : 'internal server error'});
+            return res.status(500).json({'error' : 'Internal server error'});
         }
     }
 };

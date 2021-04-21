@@ -1,4 +1,4 @@
-const { DataTypes} = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 
 const sequelize = require('../databases/mysql');
 
@@ -28,8 +28,8 @@ module.exports = sequelize.define('logs', {
     },
     date : {
         type: DataTypes.DATE,
-        defaultValue: Date.now(),
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.NOW
     },
     ip : {
         type: DataTypes.STRING,

@@ -11,6 +11,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
+    "cli-progress": "^3.9.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.4.0",
     "mysql2": "^2.2.5",
