@@ -177,7 +177,7 @@ module.exports = {
 
         // Limit is not int
         if (id && !Number.isInteger(parseInt(id)))
-            return res.status(400).json({'error' : 'id is not a valid int'});
+            return res.status(400).json({'error' : 'id is not a valid integer'});
 
         try {
             let emoji = await Emoji.findOne({
@@ -209,7 +209,12 @@ module.exports = {
 
             // Add parent
 
-            return res.status(200).json(emoji);
+            if (emoji) {
+                return res.status(200).json(emoji);
+            }
+            else {
+                return res.status(404).json({'error' : 'Emoji id not found'});
+            }
         }
 
         catch (e) {
