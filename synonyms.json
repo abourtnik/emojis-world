@@ -1,7 +1,7 @@
 [
   {
     "name" : "smile",
-    "synonyms" : ["smiling", "smile", "grinning", "happy", "beaming", "joy", "positive", "laugh", "lol", "cool", "fun", "xd", "XD", ":D", ":d", ":)", ":-)", ":P", ":p", "mdr", "MDR"]
+    "synonyms" : ["smiling", "smile", "grinning", "happy", "beaming", "joy", "positive", "laugh", "lol", "cool", "fun", "xd", ":D", ":d", ":)", ":-)", ":P", ":p", "mdr"]
   },
   {
     "name" : "kiss",
@@ -49,7 +49,7 @@
   },
   {
     "name" : "work",
-    "synonyms" : ["work", "office", "working"]
+    "synonyms" : ["work", "office"]
   },
   {
     "name" : "technologist",
@@ -101,7 +101,7 @@
   },
   {
     "name" : "woman",
-    "synonyms" : ["femelle", "woman", "woman's"]
+    "synonyms" : ["female", "woman", "woman's"]
   },
   {
     "name" : "explosion",
@@ -153,7 +153,7 @@
   },
   {
     "name" : "car",
-    "synonyms" : ["car", "vehicule", "automobile"]
+    "synonyms" : ["car", "vehicle", "automobile"]
   },
   {
     "name" : "eye",
