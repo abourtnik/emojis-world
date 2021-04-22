@@ -60,7 +60,7 @@ module.exports = {
                     per_page : parseInt(limit) || 50,
                     include_fields : 'id',
                     num_typos: 2,
-                    drop_tokens_threshold: 0,
+                    drop_tokens_threshold: 0
                 }
             });
 
@@ -121,7 +121,7 @@ module.exports = {
         if (sub_categories && !sub_categories.split(',').every(id => Number.isInteger(parseInt(id))))
             return res.status(400).json({'error' : 'sub_categories is not valid'});
 
-        // Filter by category OR sub_category
+        // Filter by category OR/AND sub_category
         let filters = {};
 
         if (categories) {
