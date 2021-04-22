@@ -44,11 +44,11 @@ module.exports = {
             return res.status(400).json({'error' : 'sub_categories is not valid'});
 
         // Filter by category OR/AND sub_category
-        let filters = null;
-        let and = (categories) ? ' &&' : null;
+        let filters = '';
+        let and = (categories) ? ' &&' : '';
 
-        (categories) ? filters = 'category:=[' + categories + ']' : null;
-        (sub_categories) ? filters += and + 'sub_category:=[' + sub_categories + ']' : null;
+        (categories) ? filters = 'category:=[' + categories + ']' : '';
+        (sub_categories) ? filters += and + 'sub_category:=[' + sub_categories + ']' : '';
 
         try {
 
@@ -57,7 +57,7 @@ module.exports = {
                     q : query,
                     query_by : 'name',
                     filter_by : filters,
-                    par_page : parseInt(limit) || 50,
+                    per_page : parseInt(limit) || 50,
                     include_fields : 'id',
                     num_typos: 2,
                     drop_tokens_threshold: 0,
@@ -122,22 +122,18 @@ module.exports = {
             return res.status(400).json({'error' : 'sub_categories is not valid'});
 
         // Filter by category OR sub_category
-        let filters = [];
+        let filters = {};
 
         if (categories) {
-            filters.push({
-                category_id : {
-                    [Op.in]: categories.split(',').map(id => parseInt(id))
-                }
-            })
+            filters.category_id = {
+                [Op.in]: categories.split(',')
+            }
         }
 
         if (sub_categories) {
-            filters.push({
-                sub_category_id : {
-                    [Op.in]: sub_categories.split(',').map(id => parseInt(id))
-                }
-            })
+            filters.sub_category_id = {
+                [Op.in]: sub_categories.split(',').map(id => parseInt(id))
+            }
         }
 
         try {
