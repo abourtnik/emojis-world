@@ -1,0 +1,206 @@
+[
+  {
+    "name" : "smile",
+    "synonyms" : ["smiling", "smile", "grinning", "happy", "beaming", "joy", "positive", "laugh", "lol", "cool", "fun", "xd", "XD", ":D", ":d", ":)", ":-)", ":P", ":p", "mdr", "MDR"]
+  },
+  {
+    "name" : "kiss",
+    "synonyms" : ["kiss", "heart", "love"]
+  },
+  {
+    "name" : "sad",
+    "synonyms" : ["sad", "unhappy", "bad", "persevering", "crying", "cry", ":("]
+  },
+  {
+    "name" : "neutral",
+    "synonyms" : ["expressionless", "neutral"]
+  },
+  {
+    "name" : "health",
+    "synonyms" : ["health", "doctor"]
+  },
+  {
+    "name" : "student",
+    "synonyms" : ["student", "student", "learn", "school", "teacher"]
+  },
+  {
+    "name" : "grimace",
+    "synonyms" : ["grimace", "squinting"]
+  },
+  {
+    "name" : "surprise",
+    "synonyms" : ["surprise", "open"]
+  },
+  {
+    "name" : "sleep",
+    "synonyms" : ["sleep", "sleeping", "bed"]
+  },
+  {
+    "name" : "sick",
+    "synonyms" : ["sick", "ill", "nauseated", "vomiting"]
+  },
+  {
+    "name" : "poo",
+    "synonyms" : ["poo", "caca", "shit"]
+  },
+  {
+    "name" : "cook",
+    "synonyms" : ["cook", "eat", "cooked"]
+  },
+  {
+    "name" : "work",
+    "synonyms" : ["work", "office", "working"]
+  },
+  {
+    "name" : "technologist",
+    "synonyms" : ["technologist", "computer"]
+  },
+  {
+    "name" : "pilot",
+    "synonyms" : ["pilot", "plane", "airplane"]
+  },
+  {
+    "name" : "relax",
+    "synonyms" : ["relax", "massage"]
+  },
+  {
+    "name" : "speaking",
+    "synonyms" : ["speaking", "speak", "speech"]
+  },
+  {
+    "name" : "dog",
+    "synonyms" : ["dog", "poodle"]
+  },
+  {
+    "name" : "football",
+    "synonyms" : ["football", "soccer"]
+  },
+  {
+    "name" : "volume",
+    "synonyms" : ["volume", "speaker"]
+  },
+  {
+    "name" : "phone",
+    "synonyms" : ["phone", "iphone", "Iphone", "mobile", "i-phone"]
+  },
+  {
+    "name" : "sun",
+    "synonyms" : ["sunglasses", "sun", "holidays"]
+  },
+  {
+    "name" : "money",
+    "synonyms" : ["money", "dollar"]
+  },
+  {
+    "name" : "pirate",
+    "synonyms" : ["pirate", "skull"]
+  },
+  {
+    "name" : "men",
+    "synonyms" : ["male", "men", "men's"]
+  },
+  {
+    "name" : "woman",
+    "synonyms" : ["femelle", "woman", "woman's"]
+  },
+  {
+    "name" : "explosion",
+    "synonyms" : ["explosion", "exploding"]
+  },
+  {
+    "name" : "zombie",
+    "synonyms" : ["zombie", "horror"]
+  },
+  {
+    "name" : "magic",
+    "synonyms" : ["magic", "mage", "elf", "genie", "fantasy"]
+  },
+  {
+    "name" : "blood",
+    "synonyms" : ["blood", "vampire"]
+  },
+  {
+    "name" : "lotus",
+    "synonyms" : ["lotus", "yoga"]
+  },
+  {
+    "name" : "bike",
+    "synonyms" : ["bike", "cycle"]
+  },
+  {
+    "name" : "scooter",
+    "synonyms" : ["motorcycle", "scooter", "motorbike"]
+  },
+  {
+    "name" : "strong",
+    "synonyms" : ["biceps", "strong"]
+  },
+  {
+    "name" : "fuck",
+    "synonyms" : ["middle finger", "fuck"]
+  },
+  {
+    "name" : "bravo",
+    "synonyms" : ["bravo", "clapping"]
+  },
+  {
+    "name" : "asia",
+    "synonyms" : ["asia", "asian", "china", "chinese"]
+  },
+  {
+    "name" : "smoke",
+    "synonyms" : ["smoke", "cigarette"]
+  },
+  {
+    "name" : "car",
+    "synonyms" : ["car", "vehicule", "automobile"]
+  },
+  {
+    "name" : "eye",
+    "synonyms" : ["eye", "look"]
+  },
+  {
+    "name" : "boat",
+    "synonyms" : ["boat", "ship"]
+  },
+  {
+    "name" : "time",
+    "synonyms" : ["time", "watch", "clock"]
+  },
+  {
+    "name" : "lantern",
+    "synonyms" : ["lantern", "halloween"]
+  },
+  {
+    "name" : "graphic",
+    "synonyms" : ["graphic", "chart"]
+  },
+  {
+    "name" : "gun",
+    "synonyms" : ["gun", "pistol"]
+  },
+  {
+    "name" : "toilet",
+    "synonyms" : ["toilet", "wc"]
+  },
+  {
+    "name" : "dead",
+    "synonyms" : ["coffin", "dead", "funeral"]
+  },
+  {
+    "name" : "russia",
+    "synonyms" : ["russia", "urss"]
+  },
+  {
+    "name" : "rabbit",
+    "synonyms" : ["rabbit", "bunny"]
+  },
+  {
+    "name" : "champagnes",
+    "synonyms" : ["champagnes", "popping"]
+  },
+  {
+    "name" : "thumb",
+    "synonyms" : ["thumb", "super"]
+  }
+]

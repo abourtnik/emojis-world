@@ -28,7 +28,7 @@ npm-debug.log
 # Configuration
 config.js
 
-scripts/jsons/emojis.json
+scripts/emojis.json
 
 # Process
 process.json

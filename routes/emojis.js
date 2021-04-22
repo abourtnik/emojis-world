@@ -8,6 +8,8 @@ const SubCategory = require('../models/SubCategory');
 
 const { Op } = require("sequelize");
 
+const typesense = require('../databases/typesense');
+
 // Routes
 
 module.exports = {
@@ -23,8 +25,8 @@ module.exports = {
 
         // Optional
         let limit = req.query.limit;
-        let category_id = req.query.category;
-        let sub_category_id = req.query.sub_category;
+        let categories = req.query.categories;
+        let sub_categories = req.query.sub_categories;
 
         if (!query)
             return res.status(400).json({'error' : 'query is not defined'});
@@ -33,24 +35,45 @@ module.exports = {
         if (limit && !Number.isInteger(parseInt(limit)))
             return res.status(400).json({'error' : 'limit must be a valid integer'});
 
-        // category_id is not int
-        if (category_id && !Number.isInteger(parseInt(category_id)) )
-            return res.status(400).json({'error' : 'category must be a valid integer'});
+        // categories not valid
+        if (categories && !categories.split(',').every(id => Number.isInteger(parseInt(id))))
+            return res.status(400).json({'error' : 'categories is not valid'});
 
-        // sub_category_id is not int
-        if (sub_category_id && !Number.isInteger(parseInt(sub_category_id)) )
-            return res.status(400).json({'error' : 'sub_category must be a valid integer'});
+        // sub_categories not valid
+        if (sub_categories && !sub_categories.split(',').every(id => Number.isInteger(parseInt(id))))
+            return res.status(400).json({'error' : 'sub_categories is not valid'});
+
+        // Filter by category OR/AND sub_category
+        let filters = null;
+        let and = (categories) ? ' &&' : null;
+
+        (categories) ? filters = 'category:=[' + categories + ']' : null;
+        (sub_categories) ? filters += and + 'sub_category:=[' + sub_categories + ']' : null;
 
         try {
+
+            let results = await typesense.get('collections/emojis/documents/search', {
+                params: {
+                    q : query,
+                    query_by : 'name',
+                    filter_by : filters,
+                    par_page : parseInt(limit) || 50,
+                    include_fields : 'id',
+                    num_typos: 2,
+                    drop_tokens_threshold: 0,
+                }
+            });
+
+            let ids = results.data.hits.map(hit => hit.document.id);
+
             let emojis = await Emoji.findAll({
                 attributes: ['id', 'name', 'emoji', 'unicode'],
                 where : {
-                    name : {
-                        [Op.like]: '%' + query + '%',
+                    id : {
+                        [Op.in]: ids,
                     },
                     parent_id : null
                 },
-                limit : parseInt(limit) || 50,
                 include: [
                     {
                         model: Category,
@@ -78,33 +101,44 @@ module.exports = {
             console.error(e.message)
             return res.status(500).json({'error' : 'Internal server error'});
         }
-
-        // Filter by category OR sub_category
-        let filters = {};
-        (category_id) ? filters.category_id = category_id : null;
-        (sub_category_id) ? filters.sub_category_id = sub_category_id : null;
     },
 
     random: async function (req, res) {
 
         let limit = req.query.limit;
-        let category_id = req.query.category;
-        let sub_category_id = req.query.sub_category;
+        let categories = req.query.categories;
+        let sub_categories = req.query.sub_categories;
 
         // Limit is not int
         if (limit && !Number.isInteger(parseInt(limit)))
             return res.status(400).json({'error' : 'Limit is not valid int'});
 
-        if (category_id && !Number.isInteger(parseInt(category_id)) )
-            return res.status(400).json({'error' : 'Category is not valid int'});
+        // categories not valid
+        if (categories && !categories.split(',').every(id => Number.isInteger(parseInt(id))))
+            return res.status(400).json({'error' : 'categories is not valid'});
 
-        if (sub_category_id && !Number.isInteger(parseInt(sub_category_id)) )
-            return res.status(400).json({'error' : 'Sub_category is not valid int'});
+        // sub_categories not valid
+        if (sub_categories && !sub_categories.split(',').every(id => Number.isInteger(parseInt(id))))
+            return res.status(400).json({'error' : 'sub_categories is not valid'});
 
         // Filter by category OR sub_category
-        let filters = {};
-        (category_id) ? filters.category_id = category_id : null;
-        (sub_category_id) ? filters.sub_category_id = sub_category_id : null;
+        let filters = [];
+
+        if (categories) {
+            filters.push({
+                category_id : {
+                    [Op.in]: categories.split(',').map(id => parseInt(id))
+                }
+            })
+        }
+
+        if (sub_categories) {
+            filters.push({
+                sub_category_id : {
+                    [Op.in]: sub_categories.split(',').map(id => parseInt(id))
+                }
+            })
+        }
 
         try {
             let emojis = await Emoji.findAll({
