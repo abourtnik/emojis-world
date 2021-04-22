@@ -1,5 +1,3 @@
-const config = require('../config');
-const axios = require('axios');
 const fs = require('fs');
 const cliProgress = require('cli-progress');
 
@@ -7,10 +5,7 @@ const Emoji = require('../models/Emoji');
 const Category = require('../models/Category');
 const SubCategory = require('../models/SubCategory');
 
-const typesense = axios.create({
-    baseURL: 'http://' + config.typesense.host + ':' + config.typesense.port,
-    timeout: 1000,
-});
+const typesense = require('../databases/typesense');
 
 category_count = (array, category_id) => {
 
@@ -40,11 +35,25 @@ update_count = async (array, model) => {
 
 (async function(){
 
-    let data = fs.readFileSync('./jsons/emojis.json');
+    let data = fs.readFileSync('./emojis.json');
     let emojis = JSON.parse(data);
 
     let categories_count = [];
     let sub_categories_count = [];
+
+    // Create Typesense emojis Collection
+    await typesense.post('collections' , {
+        'name': 'emojis',
+        'fields': [
+            {'name': 'id', 'type': 'string' },
+            {'name': 'name', 'type': 'string' },
+            {'name': 'emoji', 'type': 'string' },
+            {'name': 'unicode', 'type': 'string'},
+            {'name': 'category', 'type': 'int32'},
+            {'name': 'sub_category', 'type': 'int32'}
+        ],
+        'default_sorting_field': 'category'
+    }).catch(e => console.log(e.response.data.message || e.response.code));
 
     const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
@@ -90,6 +99,17 @@ update_count = async (array, model) => {
             raw: true
         });
 
+        // Create Typesense document emoji
+
+        await typesense.post('collections/emojis/documents' , {
+            id: emoji_parent[0]['id'].toString(),
+            name: emoji_parent[0]['name'],
+            emoji :  emoji_parent[0]['emoji'],
+            unicode :  emoji_parent[0]['unicode'],
+            category: category[0]['id'],
+            sub_category: sub_category[0]['id']
+        }).catch(e => console.log(e.response.data.message || e.response.code));
+
         category_count(categories_count, category[0]['id']);
         category_count(sub_categories_count, sub_category[0]['id']);
 
@@ -131,8 +151,6 @@ update_count = async (array, model) => {
     await update_count(sub_categories_count, SubCategory)
 
     process.exit();
-
-    //const response = await typesense.get('/').catch(e => console.error(e.response.data));
 
 })();
 

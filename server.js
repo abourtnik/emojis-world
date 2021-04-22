@@ -24,6 +24,13 @@ app.use(log);
 // Router
 app.use('/v' + config.application.version + '/' , router);
 
+// Catch Error
+app.use(function(err, req, res, next) {
+    if (err instanceof SyntaxError && err.status === 400) {
+        return res.status(400).json({'error': err.message});
+    }
+});
+
 // Launch server
 app.listen(config.server.port, config.server.host, function(){
     console.info('Server listen on http://' + config.server.host + ':' + config.server.port);

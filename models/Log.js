@@ -29,7 +29,7 @@ module.exports = sequelize.define('logs', {
     date : {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     },
     ip : {
         type: DataTypes.STRING,

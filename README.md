@@ -23,7 +23,7 @@
 
 | ID | Name | Emojis Count
 | ------------- | ----- | ------------- |
-| 1 | Smileys & People |  408 |
+| 1 | Smileys & People |  1277 |
 | 2 | Animals & Nature |  113 |
 | 3 | Food & Drink |  101 |
 | 4 | Travel & Places |  199 |
@@ -66,12 +66,12 @@ GET https://api.emojisworld.io/v1/search
 | ------------- | ----- | ------------- | ------------- |
 | q | String | A search word (only in english)  | `q=happy` |
 | limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
-| category | Integer |  Filter the response by category_id  | `category=1` |
-| sub_category | Integer |  Filter the response by sub_category_id  | `sub_category=1` |
+| categories | Integer |  Filter the response by categories ids  | `categories=1,2,3` |
+| sub_categories | Integer |  Filter the response by sub categories ids  | `sub_categories=1,2,3` |
 
 #### Example
 ```http
-GET https://api.emojisworld.io/v1/search?q=happy&category=1&sub_category=1&limit=2
+GET https://api.emojisworld.io/v1/search?q=happy&categories=1,2,3&sub_categories=1,2,3&limit=2
 ```
 
 #### Sample Response
@@ -123,12 +123,12 @@ GET https://api.emojisworld.io/v1/random
 | Query Strings | Type | Description | Example |
 | ------------- | ----- | ------------- | ------------- |
 | limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
-| category | Integer |  Filter the response by category_id  | `category=1` |
-| sub_category | Integer |  Filter the response by sub_category_id  | `sub_category=1` |
+| categories | Integer |  Filter the response by categories ids  | `categories=1,2,3` |
+| sub_categories | Integer |  Filter the response by sub categories ids  | `sub_categories=1,2,3` |
 
 #### Example
 ```http
-GET https://api.emojisworld.io/v1/random?category=1&sub_category=1&limit=2
+GET https://api.emojisworld.io/v1/random?&categories=1,2,3&sub_categories=1,2,3&limit=2
 ```
 
 #### Sample Response
@@ -233,15 +233,14 @@ GET https://api.emojisworld.io/v1/emojis/id
 ## Tecnhical detail
 
 * API is using Node.js with the Express.js framework
-* All emojis data are stored in a Elasticsearch database
-* User data are stored in MongoDB database
+* All emojis data are stored in a MySQL and Typesense databases
 
 ## Contributing
 
 We encourage you to contribute to Emojis World !! Please check out the [Contributing to Emojis World guide](https://github.com/abourtnik/emojis-world/blob/master/contributing.md) for guidelines about how to proceed. Join us!
 
 Trying to report a possible security vulnerability in Emojis World ? Send an email to 
-**contact@emojisworld.io** with clear description of security vulnerability.
+**contact@antonbourtnik.fr** with clear description of security vulnerability.
 
 ## License
 Emojis World is made available under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
