@@ -7,5 +7,6 @@ module.exports = new Sequelize(config.mysql.database, config.mysql.username, con
     dialect: 'mysql',
     logging: config.mysql.log,
     port: config.mysql.port,
-    dialectOptions: config.mysql.options,
+    timezone: config.mysql.timezone,
+    dialectOptions: config.mysql.options
 });
