@@ -2,7 +2,6 @@ const { DataTypes} = require('sequelize');
 
 const sequelize = require('../databases/mysql');
 
-const Emoji = require('./Emoji');
 const SubCategory = require('./SubCategory');
 
 const Category = sequelize.define('categories', {
@@ -21,11 +20,6 @@ const Category = sequelize.define('categories', {
     count : {
         type: DataTypes.INTEGER,
         allowNull: false
-    },
-    created_at : {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Date.now()
     }
 }, {
     timestamps: false

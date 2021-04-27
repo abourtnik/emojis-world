@@ -16,9 +16,11 @@ module.exports = {
         options : {
             socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
             supportBigNumbers: true,
-            bigNumberStrings: true
+            bigNumberStrings: true,
+            timezone : 'local'
         },
-        log : true
+        log : true,
+        timezone: 'Europe/Paris'
     },
     typesense : {
         host : 'localhost',

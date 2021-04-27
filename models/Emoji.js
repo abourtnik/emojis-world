@@ -43,11 +43,6 @@ const Emoji = sequelize.define('emojis', {
             model: SubCategory,
             key: "sub_category_id"
         }
-    },
-    created_at : {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Date.now()
     }
 }, {
     timestamps: false
