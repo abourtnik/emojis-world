@@ -1,6 +1,8 @@
 const config = require('./config');
 const jwt = require('jsonwebtoken');
+
 const Log = require('./models/Log');
+const Ip = require('./models/Ip');
 
 module.exports = {
     log : async function (req, res, next) {
@@ -43,5 +45,19 @@ module.exports = {
         else {
             return res.status(401).json({ error: 'Token not provided' })
         }
+    },
+
+    ip : async function (req, res, next) {
+
+        let ip = req.headers['x-real-ip'] || req.ip;
+
+        const find = await Ip.findOne({
+            where : {
+                ip : ip,
+                enabled : true
+            }
+        });
+
+        return (find) ? res.status(403).end() : next()
     }
 }

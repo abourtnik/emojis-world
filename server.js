@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors')
 
 const router = require('./router');
-const { log } = require('./middlewares');
+const { log , ip } = require('./middlewares');
 
 // Init server
 let app = express();
@@ -17,6 +17,9 @@ app.use(cors())
 
 // Body Parser configuration
 app.use(express.json());
+
+// Ip block
+app.use(ip);
 
 // Log
 app.use(log);
