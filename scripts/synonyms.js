@@ -27,7 +27,7 @@ const typesense = require('../databases/typesense');
 
     bar.stop();
 
-    process.exit();
+    process.exit(0);
 
 })();
 

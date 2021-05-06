@@ -55,46 +55,59 @@ module.exports = {
             let results = await typesense.get('collections/emojis/documents/search', {
                 params: {
                     q : query,
-                    query_by : 'name',
+                    query_by : 'name,sub_category_name,category_name',
+                    query_by_weights : '600,1,1',
                     filter_by : filters,
                     per_page : parseInt(limit) || 50,
                     include_fields : 'id',
                     num_typos: 2,
-                    drop_tokens_threshold: 0
+                    drop_tokens_threshold: 0,
+                    typo_tokens_threshold: 1,
+                    prefix: true
                 }
             });
 
             let ids = results.data.hits.map(hit => hit.document.id);
 
-            let emojis = await Emoji.findAll({
-                attributes: ['id', 'name', 'emoji', 'unicode'],
-                where : {
-                    id : {
-                        [Op.in]: ids,
+            if (ids.length) {
+                let emojis = await Emoji.findAll({
+                    attributes: ['id', 'name', 'emoji', 'unicode'],
+                    where : {
+                        id : {
+                            [Op.in]: ids,
+                        },
+                        parent_id : null
                     },
-                    parent_id : null
-                },
-                include: [
-                    {
-                        model: Category,
-                        attributes:['id', 'name']
-                    },
-                    {
-                        model: SubCategory,
-                        attributes:['id', 'name']
-                    },
-                    {
-                        model: Emoji,
-                        as: 'children',
-                        attributes:['id', 'name', 'emoji', 'unicode']
-                    }
-                ],
-            });
+                    include: [
+                        {
+                            model: Category,
+                            attributes:['id', 'name']
+                        },
+                        {
+                            model: SubCategory,
+                            attributes:['id', 'name']
+                        },
+                        {
+                            model: Emoji,
+                            as: 'children',
+                            attributes:['id', 'name', 'emoji', 'unicode']
+                        }
+                    ],
+                    order: Sequelize.literal('FIELD(emojis.id,' + ids.join(',') + ')')
+                });
 
-            return res.status(200).json({
-                totals : emojis.length,
-                results : emojis
-            })
+                return res.status(200).json({
+                    totals : emojis.length,
+                    results : emojis
+                });
+            }
+
+            else {
+                return res.status(404).json({
+                    totals : 0,
+                    results : []
+                });
+            }
         }
 
         catch (e) {
