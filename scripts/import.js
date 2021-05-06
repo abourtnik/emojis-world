@@ -50,7 +50,9 @@ update_count = async (array, model) => {
             {'name': 'emoji', 'type': 'string' },
             {'name': 'unicode', 'type': 'string'},
             {'name': 'category', 'type': 'int32'},
-            {'name': 'sub_category', 'type': 'int32'}
+            {'name': 'sub_category', 'type': 'int32'},
+            {'name': 'category_name', 'type': 'string'},
+            {'name': 'sub_category_name', 'type': 'string'},
         ],
         'default_sorting_field': 'category'
     }).catch(e => console.log(e.response.data.message || e.response.code));
@@ -107,8 +109,10 @@ update_count = async (array, model) => {
             emoji :  emoji_parent[0]['emoji'],
             unicode :  emoji_parent[0]['unicode'],
             category: category[0]['id'],
-            sub_category: sub_category[0]['id']
-        }).catch(e => console.log(e.response.data.message || e.response.code));
+            sub_category: sub_category[0]['id'],
+            category_name: category[0]['name'],
+            sub_category_name: sub_category[0]['name']
+        }).catch(e => console.error(e.message));
 
         category_count(categories_count, category[0]['id']);
         category_count(sub_categories_count, sub_category[0]['id']);
@@ -150,7 +154,7 @@ update_count = async (array, model) => {
     // Update sub_category count
     await update_count(sub_categories_count, SubCategory)
 
-    process.exit();
+    process.exit(0);
 
 })();
 

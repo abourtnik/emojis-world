@@ -1,7 +1,7 @@
 [
   {
     "name" : "smile",
-    "synonyms" : ["smiling", "smile", "grinning", "happy", "beaming", "joy", "positive", "laugh", "lol", "cool", "fun", "xd", ":D", ":d", ":)", ":-)", ":P", ":p", "mdr"]
+    "synonyms" : ["smiling", "smile", "grinning", "happy", "beaming", "joy", "positive", "laugh", "lol", "cool", "fun", "xd", "mdr"]
   },
   {
     "name" : "kiss",
@@ -9,7 +9,7 @@
   },
   {
     "name" : "sad",
-    "synonyms" : ["sad", "unhappy", "bad", "persevering", "crying", "cry", ":("]
+    "synonyms" : ["sad", "unhappy", "bad", "persevering", "crying", "cry"]
   },
   {
     "name" : "neutral",
@@ -201,6 +201,10 @@
   },
   {
     "name" : "thumb",
-    "synonyms" : ["thumb", "super"]
+    "synonyms" : ["thumb up", "super"]
+  },
+  {
+    "name" : "tv",
+    "synonyms" : ["tv", "television"]
   }
 ]
