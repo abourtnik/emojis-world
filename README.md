@@ -199,7 +199,7 @@ GET https://api.emojisworld.io/v1/categories
 
 ### Emoji by specific id 
 ```http
-GET https://api.emojisworld.io/v1/emojis/id
+GET https://api.emojisworld.io/v1/emojis/{id}
 ```
 #### Sample Response
 ```json
