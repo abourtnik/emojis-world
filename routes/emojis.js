@@ -103,7 +103,7 @@ module.exports = {
             }
 
             else {
-                return res.status(404).json({
+                return res.status(200).json({
                     totals : 0,
                     results : []
                 });
