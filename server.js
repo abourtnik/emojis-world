@@ -24,6 +24,11 @@ app.use(ip);
 // Log
 app.use(log);
 
+// robots.txt
+app.use('/robots.txt', function (req, res) {
+    res.sendFile(__dirname + '/robots.txt');
+});
+
 // Router
 app.use('/v' + config.application.version + '/' , router);
 
