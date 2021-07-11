@@ -25,7 +25,7 @@ module.exports = {
     typesense : {
         host : 'localhost',
         port : 8108,
-        api_key: '',
+        api_key: 'typeseseapikey',
     },
     jwt : {
         secret : ''

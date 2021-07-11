@@ -2,6 +2,7 @@ version : '3.1'
 services:
   typesense:
     image: typesense/typesense:0.19.0
+    container_name: typesense_container
     environment:
       TYPESENSE_DATA_DIR : /data
       TYPESENSE_API_KEY : typeseseapikey
