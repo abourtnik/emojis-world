@@ -7,6 +7,33 @@ services:
       TYPESENSE_DATA_DIR : /data
       TYPESENSE_API_KEY : typeseseapikey
     volumes:
-      - ./data:/data
+      - ./typesense_data:/data
     ports:
     - 8108:8108
+  mysql:
+    image: mysql:5.7.33
+    container_name: mysql_container
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - application
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_container
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      PMA_USER: root
+    links:
+      - mysql
+    ports:
+      - 8091:80
+    networks:
+      - application
+networks:
+  application:
+    driver: bridge
