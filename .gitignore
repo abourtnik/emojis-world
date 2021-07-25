@@ -33,5 +33,6 @@ scripts/emojis.json
 # Process
 process.json
 
-# Typesense local data
-data
+# Local data
+typesense_data
+mysql_data

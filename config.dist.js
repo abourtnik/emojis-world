@@ -10,11 +10,10 @@ module.exports = {
     mysql : {
         host : 'localhost',
         username : 'root',
-        password : 'root',
+        password : '',
         port : 3306,
         database : 'emojis_world',
         options : {
-            socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
             supportBigNumbers: true,
             bigNumberStrings: true,
             timezone : 'local'
