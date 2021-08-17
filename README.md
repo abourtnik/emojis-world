@@ -13,7 +13,7 @@
   <a href="#categories">Categories</a> •
   <a href="#endpoints">Endpoints</a> •
   <a href="#http-response-codes">HTTP Response Codes</a> •
-  <a href="#technical-detail">Tecnhical detail</a> •
+  <a href="#technical-detail">Technical detail and API Rate Limiting</a> •
   <a href="#contributing">Contributing</a> •
   <a href="#license">License</a> •
   <a href="#credits">Credits</a>
@@ -226,11 +226,20 @@ GET https://api.emojisworld.io/v1/emojis/{id}
 | 200  | Success |
 | 400  | Bad Request |
 | 401  | Unauthorized |
-| 403  | Bad Request |
+| 403  | Access Forbidden |
 | 404  | Not Found |
+| 429  | Too Many Requests |
 | 500  | Internal Server Error	 |
 
-## Tecnhical detail
+## Technical detail
+
+API Rate Limiting : **500 REQUESTS / DAY / IP**.
+
+| Header | Description | Example |
+| ------------- | ------------- | ------------- |
+| X-Rate-Limit-Limit  | The maximum number of request you-re permitted to make per period of 1 day | 500 |
+| X-Rate-Limit-Remaining | Your current number of request | 100 |
+| X-Rate-Limit-Reset  | The time at which the rate limit resets | Tue Aug 17 2021 17:43:28 GMT+0200 |
 
 * API is using Node.js with the Express.js framework
 * All emojis data are stored in a MySQL and Typesense databases
@@ -239,7 +248,7 @@ GET https://api.emojisworld.io/v1/emojis/{id}
 
 We encourage you to contribute to Emojis World !! Please check out the [Contributing to Emojis World guide](https://github.com/abourtnik/emojis-world/blob/master/contributing.md) for guidelines about how to proceed. Join us!
 
-Trying to report a possible security vulnerability in Emojis World ? Send an email to 
+Trying to report a possible security vulnerability in Emojis World ? Consider using email : 
 **contact@antonbourtnik.fr** with clear description of security vulnerability.
 
 ## License

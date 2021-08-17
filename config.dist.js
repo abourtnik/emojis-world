@@ -1,7 +1,11 @@
 module.exports = {
     application : {
         name : 'API Emojis World',
-        version : 1
+        version : 1,
+        limit : {
+            value : 5,
+            unity : 'minutes'
+        }
     },
     server : {
         host : 'localhost',

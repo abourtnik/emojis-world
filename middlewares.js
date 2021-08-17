@@ -4,6 +4,10 @@ const jwt = require('jsonwebtoken');
 const Log = require('./models/Log');
 const Ip = require('./models/Ip');
 
+const { Op } = require('sequelize');
+
+const moment = require('moment');
+
 module.exports = {
     log : async function (req, res, next) {
 
@@ -44,6 +48,36 @@ module.exports = {
 
         else {
             return res.status(401).json({ error: 'Token not provided' })
+        }
+    },
+
+    limit : async function (req, res, next) {
+
+        let ip = req.headers['x-real-ip'] || req.ip;
+
+        const count = await Log.findAll({
+            where : {
+                ip : ip,
+                date : {
+                    [Op.gte]: moment().subtract(1, config.application.limit.unity),
+                    [Op.lte]: moment()
+                }
+            },
+            limit: config.application.limit.value,
+            order: [['date', 'DESC']],
+            raw: true
+        });
+
+        res.set('X-Rate-Limit-Limit', config.application.limit);
+        res.set('X-Rate-Limit-Remaining', count.length);
+
+        if (count.length >= config.application.limit) {
+            res.set('X-Rate-Limit-Reset', moment(count[config.application.limit - 1].date).add(1, config.application.limit.unity));
+            return res.status(429).end();
+        }
+
+        else {
+            return next();
         }
     },
 

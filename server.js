@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors')
 
 const router = require('./router');
-const { log , ip } = require('./middlewares');
+const { log, ip, limit } = require('./middlewares');
 
 // Init server
 let app = express();
@@ -20,6 +20,9 @@ app.use(express.json());
 
 // Ip block
 app.use(ip);
+
+// Limit block
+app.use(limit);
 
 // Log
 app.use(log);
