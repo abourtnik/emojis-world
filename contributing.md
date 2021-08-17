@@ -20,7 +20,7 @@ This changes will generally be accepted.
 
 ### **Do you have questions about the source code ?**
 
-* Ask any question about how to use Emojis World to send email at **contact@emojisworld.io**.
+* Ask any question about how to use Emojis World to send email at **contact@antonbourtnik.fr**.
 
 Emojis World is volunteer effort. We encourage you to pitch in and join our team !
 

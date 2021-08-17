@@ -1,6 +1,6 @@
 <h1 align="center">
-  <a href="https://www.emojisworld.io">
-    <img src="https://www.emojisworld.io/img/logo.png" alt="Emoji World logo" height="200">
+  <a href="https://www.emojisworld.fr">
+    <img src="https://www.emojisworld.fr/img/logo.png" alt="Emoji World logo" height="200">
   </a>
   <br>
   Emojis World REST API
@@ -45,7 +45,7 @@
 
 ### API index
 ```http
-GET https://api.emojisworld.io/v1
+GET https://api.emojisworld.fr/v1
 ```
 
 #### Sample Response
@@ -57,7 +57,7 @@ GET https://api.emojisworld.io/v1
 
 ### Search emojis
 ```http
-GET https://api.emojisworld.io/v1/search
+GET https://api.emojisworld.fr/v1/search
 ```
 
 #### Query String Options
@@ -71,7 +71,7 @@ GET https://api.emojisworld.io/v1/search
 
 #### Example
 ```http
-GET https://api.emojisworld.io/v1/search?q=happy&categories=1,2,3&sub_categories=1,2,3&limit=2
+GET https://api.emojisworld.fr/v1/search?q=happy&categories=1,2,3&sub_categories=1,2,3&limit=2
 ```
 
 #### Sample Response
@@ -115,7 +115,7 @@ GET https://api.emojisworld.io/v1/search?q=happy&categories=1,2,3&sub_categories
 
 ### Random emojis
 ```http
-GET https://api.emojisworld.io/v1/random
+GET https://api.emojisworld.fr/v1/random
 ```
 
 #### Query String Options
@@ -128,7 +128,7 @@ GET https://api.emojisworld.io/v1/random
 
 #### Example
 ```http
-GET https://api.emojisworld.io/v1/random?&categories=1,2,3&sub_categories=1,2,3&limit=2
+GET https://api.emojisworld.fr/v1/random?&categories=1,2,3&sub_categories=1,2,3&limit=2
 ```
 
 #### Sample Response
@@ -173,7 +173,7 @@ GET https://api.emojisworld.io/v1/random?&categories=1,2,3&sub_categories=1,2,3&
 
 ### All categories and sub categories 
 ```http
-GET https://api.emojisworld.io/v1/categories
+GET https://api.emojisworld.fr/v1/categories
 ```
 
 #### Sample Response
@@ -199,7 +199,7 @@ GET https://api.emojisworld.io/v1/categories
 
 ### Emoji by specific id 
 ```http
-GET https://api.emojisworld.io/v1/emojis/{id}
+GET https://api.emojisworld.fr/v1/emojis/{id}
 ```
 #### Sample Response
 ```json
