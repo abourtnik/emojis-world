@@ -68,11 +68,11 @@ module.exports = {
             raw: true
         });
 
-        res.set('X-Rate-Limit-Limit', config.application.limit);
+        res.set('X-Rate-Limit-Limit', config.application.limit.value);
         res.set('X-Rate-Limit-Remaining', count.length);
 
-        if (count.length >= config.application.limit) {
-            res.set('X-Rate-Limit-Reset', moment(count[config.application.limit - 1].date).add(1, config.application.limit.unity));
+        if (count.length >= config.application.limit.value) {
+            res.set('X-Rate-Limit-Reset', moment(count[config.application.limit.value - 1].date).add(1, config.application.limit.unity));
             return res.status(429).end();
         }
 
