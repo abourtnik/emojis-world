@@ -64,50 +64,81 @@ GET https://api.emojisworld.fr/v1/search
 
 | Query Strings | Type | Description | Example |
 | ------------- | ----- | ------------- | ------------- |
-| q | String | A search word (only in english)  | `q=happy` |
+| q | String - Required | A search word (only in english)  | `q=happy` |
 | limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
-| categories | Integer |  Filter the response by categories ids  | `categories=1,2,3` |
-| sub_categories | Integer |  Filter the response by sub categories ids  | `sub_categories=1,2,3` |
+| categories | List of Integers |  Filter the response by categories ids  | `categories=1,2,3` |
+| sub_categories | List of Integers |  Filter the response by sub categories ids  | `sub_categories=1,2,3` |
 
 #### Example
 ```http
-GET https://api.emojisworld.fr/v1/search?q=happy&categories=1,2,3&sub_categories=1,2,3&limit=2
+https://api.emojisworld.fr/v1/search?q=baby&categories=1,2,3&sub_categories=10,33&limit=10
 ```
 
 #### Sample Response
 ```json
 {  
-   "totals":20,
-   "results":[  
+   "totals": 2,
+   "results": [  
       {  
-         "id":97,
-         "name":"grinning cat face with smiling eyes",
-         "emoji":"😸",
-         "unicode":"1F638",
-         "category":{  
-            "id":1,
-            "name":"Smileys & People"
+         "id": 1467,
+         "name": "baby bottle",
+         "emoji": "🍼",
+         "unicode": "1F37C",
+         "category": {  
+            "id": 3,
+            "name": "Food & Drink"
          },
-         "sub_category":{  
-            "id":7,
-            "name":"cat-face"
+         "sub_category" : {  
+            "id": 33,
+            "name": "drink"
          },
-         "children":[]
+         "children": []
       },
       {  
-         "id":2,
-         "name":"beaming face with smiling eyes",
-         "emoji":"😁",
-         "unicode":"1F601",
-         "category":{  
-            "id":1,
-            "name":"Smileys & People"
+         "id": 113,
+         "name": "baby",
+         "emoji": "👶",
+         "unicode": "1F476",
+         "category": {  
+            "id" : 1,
+            "name": "Smileys & People"
          },
          "sub_category":{  
-            "id":1,
-            "name":"face-positive"
+            "id": 10,
+            "name": "person"
          },
-         "children":[]
+         "children":[
+           {
+            "id": 114,
+            "name": "baby: light skin tone",
+            "emoji": "👶🏻",
+            "unicode": "1F476 1F3FB"
+           },
+           {
+             "id": 115,
+             "name": "baby: medium-light skin tone",
+             "emoji": "👶🏼",
+             "unicode": "1F476 1F3FC"
+           },
+           {
+             "id": 116,
+             "name": "baby: medium skin tone",
+             "emoji": "👶🏽",
+             "unicode": "1F476 1F3FD"
+           },
+           {
+             "id": 117,
+             "name": "baby: medium-dark skin tone",
+             "emoji": "👶🏾",
+             "unicode": "1F476 1F3FE"
+           },
+           {
+             "id": 118,
+             "name": "baby: dark skin tone",
+             "emoji": "👶🏿",
+             "unicode": "1F476 1F3FF"
+           }
+         ]
       }
    ]
 }
@@ -133,40 +164,40 @@ GET https://api.emojisworld.fr/v1/random?&categories=1,2,3&sub_categories=1,2,3&
 
 #### Sample Response
 ```json
-{  
-   "totals":50,
-   "results":[  
-      {  
-         "id":1217,
-         "name":"green heart",
-         "emoji":"💚",
-         "unicode":"1F49A",
-         "category":{  
-            "id":1,
-            "name":"Smileys & People"
-         },
-         "sub_category":{  
-            "id":18,
-            "name":"emotion"
-         },
-         "children":[]
+{
+  "totals": 2,
+  "results": [
+    {
+      "id": 8,
+      "name": "grinning squinting face",
+      "emoji": "😆",
+      "unicode": "1F606",
+      "category": {
+        "id": 1,
+        "name": "Smileys & People"
       },
-      {  
-         "id":1317,
-         "name":"koala",
-         "emoji":"🐨",
-         "unicode":"1F428",
-         "category":{  
-            "id":2,
-            "name":"Animals & Nature"
-         },
-         "sub_category":{  
-            "id":20,
-            "name":"animal-mammal"
-         },
-         "children":[]
-      }
-   ]
+      "sub_category": {
+        "id": 1,
+        "name": "face-positive"
+      },
+      "children": []
+    },
+    {
+      "id": 25,
+      "name": "expressionless face",
+      "emoji": "😑",
+      "unicode": "1F611",
+      "category": {
+        "id": 1,
+        "name": "Smileys & People"
+      },
+      "sub_category": {
+        "id": 2,
+        "name": "face-neutral"
+      },
+      "children": []
+    }
+  ]
 }
 ```
 
@@ -204,19 +235,22 @@ GET https://api.emojisworld.fr/v1/emojis/{id}
 #### Sample Response
 ```json
 {
-     "id":3,
-     "name":"face with tears of joy",
-     "emoji":"😂",
-     "unicode":"1F602",
-     "category":{  
-        "id":1,
-        "name":"Smileys & People"
-     },
-     "sub_category":{  
-        "id":1,
-        "name":"face-positive"
-     },
-     "children":[]
+  "id": 3,
+  "name": "face with tears of joy",
+  "emoji": "😂",
+  "unicode": "1F602",
+  "category": {
+    "id": 1,
+    "name": "Smileys & People"
+  },
+  "sub_category": {
+    "id": 1,
+    "name": "face-positive"
+  },
+  "children": [
+
+  ],
+  "parent": null
 }
 ```
 
