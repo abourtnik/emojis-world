@@ -62,12 +62,12 @@ GET https://api.emojisworld.fr/v1/search
 
 #### Query String Options
 
-| Query Strings | Type | Description | Example |
-| ------------- | ----- | ------------- | ------------- |
-| q | String - Required | A search word (only in english)  | `q=happy` |
-| limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
-| categories | List of Integers |  Filter the response by categories ids  | `categories=1,2,3` |
-| sub_categories | List of Integers |  Filter the response by sub categories ids  | `sub_categories=1,2,3` |
+| Query Strings  	| Type              	| Description                                         	| Example                	|
+|----------------	|-------------------	|-----------------------------------------------------	|------------------------	|
+| q              	| String - Required 	| A search word (only in english)                     	| `q=happy`              	|
+| limit          	| Integer           	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
+| categories     	| List of Integers  	| Filter the response by categories ids               	| `categories=1,2,3`     	|
+| sub_categories 	| List of Integers  	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` 	|
 
 #### Example
 ```http
@@ -151,11 +151,11 @@ GET https://api.emojisworld.fr/v1/random
 
 #### Query String Options
 
-| Query Strings | Type | Description | Example |
-| ------------- | ----- | ------------- | ------------- |
-| limit | Integer | Fetch up to a specified number of results (max: 50)  | `limit=25` |
-| categories | Integer |  Filter the response by categories ids  | `categories=1,2,3` |
-| sub_categories | Integer |  Filter the response by sub categories ids  | `sub_categories=1,2,3` |
+| Query Strings  	| Type             	| Description                                         	| Example                	|
+|----------------	|------------------	|-----------------------------------------------------	|------------------------	|
+| limit          	| Integer          	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
+| categories     	| List of Integers 	| Filter the response by categories ids               	| `categories=1,2,3`     	|
+| sub_categories 	| List of Integers 	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` 	|
 
 #### Example
 ```http
