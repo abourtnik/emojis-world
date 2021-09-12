@@ -9,7 +9,7 @@
   "author": "Anton Bourtnik",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bcrypt": "^5.0.0",
     "cli-progress": "^3.9.0",
     "cors": "^2.8.5",
