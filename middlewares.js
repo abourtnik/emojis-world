@@ -93,5 +93,27 @@ module.exports = {
         });
 
         return (find) ? res.status(403).end() : next()
+    },
+
+    filter : async function (req, res, next) {
+
+        // Optional
+        let limit = req.query.limit;
+        let categories = req.query.categories;
+        let sub_categories = req.query.sub_categories;
+
+        // limit is not int
+        if (limit && !Number.isInteger(parseInt(limit)))
+            return res.status(400).json({'error' : 'limit must be a valid integer'});
+
+        // categories not valid
+        if (categories && !categories.split(',').every(id => Number.isInteger(parseInt(id))))
+            return res.status(400).json({'error' : 'categories is not valid'});
+
+        // sub_categories not valid
+        if (sub_categories && !sub_categories.split(',').every(id => Number.isInteger(parseInt(id))))
+            return res.status(400).json({'error' : 'sub_categories is not valid'});
+
+        return next();
     }
 }

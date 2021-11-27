@@ -1,4 +1,4 @@
-const config  = require('../config');
+const config = require('../config');
 
 const { Sequelize } = require('sequelize');
 
@@ -24,28 +24,16 @@ module.exports = {
         let query = req.query.q;
 
         // Optional
-        let limit = req.query.limit;
         let categories = req.query.categories;
         let sub_categories = req.query.sub_categories;
+        let limit = req.query.limit;
 
         if (!query)
             return res.status(400).json({'error' : 'query is not defined'});
 
-        // limit is not int
-        if (limit && !Number.isInteger(parseInt(limit)))
-            return res.status(400).json({'error' : 'limit must be a valid integer'});
-
-        // categories not valid
-        if (categories && !categories.split(',').every(id => Number.isInteger(parseInt(id))))
-            return res.status(400).json({'error' : 'categories is not valid'});
-
-        // sub_categories not valid
-        if (sub_categories && !sub_categories.split(',').every(id => Number.isInteger(parseInt(id))))
-            return res.status(400).json({'error' : 'sub_categories is not valid'});
-
         // Filter by category OR/AND sub_category
         let filters = '';
-        let and = (categories) ? ' &&' : '';
+        let and = (categories) ? ' && ' : '';
 
         (categories) ? filters = 'category:=[' + categories + ']' : '';
         (sub_categories) ? filters += and + 'sub_category:=[' + sub_categories + ']' : '';
@@ -96,6 +84,16 @@ module.exports = {
                     order: Sequelize.literal('FIELD(emojis.id,' + ids.join(',') + ')')
                 });
 
+                // Increment count
+
+                await Emoji.increment('count', {
+                    where: {
+                        id : {
+                            [Op.in]: ids,
+                        }
+                    }
+                });
+
                 return res.status(200).json({
                     totals : emojis.length,
                     results : emojis
@@ -118,21 +116,9 @@ module.exports = {
 
     random: async function (req, res) {
 
-        let limit = req.query.limit;
         let categories = req.query.categories;
         let sub_categories = req.query.sub_categories;
-
-        // Limit is not int
-        if (limit && !Number.isInteger(parseInt(limit)))
-            return res.status(400).json({'error' : 'Limit is not valid int'});
-
-        // categories not valid
-        if (categories && !categories.split(',').every(id => Number.isInteger(parseInt(id))))
-            return res.status(400).json({'error' : 'categories is not valid'});
-
-        // sub_categories not valid
-        if (sub_categories && !sub_categories.split(',').every(id => Number.isInteger(parseInt(id))))
-            return res.status(400).json({'error' : 'sub_categories is not valid'});
+        let limit = req.query.limit;
 
         // Filter by category OR/AND sub_category
         let filters = {};
@@ -188,7 +174,7 @@ module.exports = {
 
         let id = req.params.id;
 
-        // Limit is not int
+        // id is not int
         if (id && !Number.isInteger(parseInt(id)))
             return res.status(400).json({'error' : 'id is not a valid integer'});
 
@@ -220,9 +206,14 @@ module.exports = {
                 ]
             });
 
-            // Add parent
-
             if (emoji) {
+
+                await Emoji.increment('count', {
+                    where: {
+                        id: emoji.id
+                    }
+                });
+
                 return res.status(200).json(emoji);
             }
             else {
@@ -252,6 +243,62 @@ module.exports = {
             return res.status(200).json({
                 totals : categories.length,
                 results : categories
+            });
+        }
+
+        catch (e) {
+            console.error(e.message)
+            return res.status(500).json({'error' : 'Internal server error'});
+        }
+    },
+
+    popular: async function (req, res) {
+
+        let categories = req.query.categories;
+        let sub_categories = req.query.sub_categories;
+        let limit = req.query.limit;
+
+        // Filter by category OR/AND sub_category
+        let filters = {};
+
+        if (categories) {
+            filters.category_id = {
+                [Op.in]: categories.split(',')
+            }
+        }
+
+        if (sub_categories) {
+            filters.sub_category_id = {
+                [Op.in]: sub_categories.split(',').map(id => parseInt(id))
+            }
+        }
+
+        try {
+            let emojis = await Emoji.findAll({
+                attributes: ['id', 'name', 'emoji', 'unicode', 'count'],
+                where : { parent_id : null, ...filters},
+                limit : parseInt(limit) || 50,
+                include: [
+                    {
+                        model: Category,
+                        attributes:['id', 'name']
+                    },
+                    {
+                        model: SubCategory,
+                        attributes:['id', 'name']
+                    },
+                    {
+                        model: Emoji,
+                        as: 'children',
+                        attributes:['id', 'name', 'emoji', 'unicode']
+                    }
+                ],
+                order: [['count', 'desc']]
+            });
+
+            return res.status(200).json({
+                totals : emojis.length,
+                results : emojis
             });
         }
 

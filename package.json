@@ -11,12 +11,12 @@
   "dependencies": {
     "axios": "^0.21.2",
     "bcrypt": "^5.0.0",
-    "cli-progress": "^3.9.0",
+    "cli-progress": "^3.9.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.4.0",
     "moment": "^2.29.1",
-    "mysql2": "^2.2.5",
+    "mysql2": "^2.3.2",
     "path": "^0.12.7",
     "sequelize": "^6.5.1"
   }

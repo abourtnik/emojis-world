@@ -43,6 +43,12 @@ const Emoji = sequelize.define('emojis', {
             model: SubCategory,
             key: "sub_category_id"
         }
+    },
+    count: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+
     }
 }, {
     timestamps: false
