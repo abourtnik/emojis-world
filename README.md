@@ -39,6 +39,7 @@
   <a href="#api-index">Index</a> •
   <a href="#search-emojis">Search emojis </a> •
   <a href="#random-emojis">Random emojis </a> •
+  <a href="#popular-emojis">Popular emojis </a> •
   <a href="#all-categories-and-sub-categories">Categories</a> •
   <a href="#emoji-by-specific-id ">Search by id</a>
 </p>
@@ -201,6 +202,68 @@ GET https://api.emojisworld.fr/v1/random?&categories=1,2,3&sub_categories=1,2,3&
 }
 ```
 
+### Popular emojis
+```http
+GET https://api.emojisworld.fr/v1/popular
+```
+
+#### Query String Options
+
+| Query Strings  	| Type             	| Description                                         	| Example                	|
+|----------------	|------------------	|-----------------------------------------------------	|------------------------	|
+| limit          	| Integer          	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
+| categories     	| List of Integers 	| Filter the response by categories ids               	| `categories=1,2,3`     	|
+| sub_categories 	| List of Integers 	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` 	|
+
+#### Example
+```http
+GET https://api.emojisworld.fr/v1/popular?categories=1,2,3&sub_categories=1,2,3&limit=2
+```
+
+#### Sample Response
+```json
+{
+  "totals": 2,
+  "results": [
+    {
+      "id": 3,
+      "name": "face with tears of joy",
+      "emoji": "😂",
+      "unicode": "1F602",
+      "count": 13,
+      "category": {
+        "id": 1,
+        "name": "Smileys & People"
+      },
+      "sub_category": {
+        "id": 1,
+        "name": "face-positive"
+      },
+      "children": [
+        
+      ]
+    },
+    {
+      "id": 2,
+      "name": "beaming face with smiling eyes",
+      "emoji": "😁",
+      "unicode": "1F601",
+      "count": 9,
+      "category": {
+        "id": 1,
+        "name": "Smileys & People"
+      },
+      "sub_category": {
+        "id": 1,
+        "name": "face-positive"
+      },
+      "children": [
+
+      ]
+    }
+  ]
+}
+```
 
 ### All categories and sub categories 
 ```http
