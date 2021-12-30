@@ -114,6 +114,9 @@ module.exports = {
         if (sub_categories && !sub_categories.split(',').every(id => Number.isInteger(parseInt(id))))
             return res.status(400).json({'error' : 'sub_categories is not valid'});
 
+        if (parseInt(limit) > 50)
+            req.query.limit = 50
+
         return next();
     }
 }
