@@ -103,15 +103,15 @@ module.exports = {
         let sub_categories = req.query.sub_categories;
 
         // limit is not int
-        if (limit && !Number.isInteger(parseInt(limit)))
+        if (limit && isNaN(limit))
             return res.status(400).json({'error' : 'limit must be a valid integer'});
 
         // categories not valid
-        if (categories && !categories.split(',').every(id => Number.isInteger(parseInt(id))))
+        if (categories && !categories.split(',').every(id => !isNaN(id)))
             return res.status(400).json({'error' : 'categories is not valid'});
 
         // sub_categories not valid
-        if (sub_categories && !sub_categories.split(',').every(id => Number.isInteger(parseInt(id))))
+        if (sub_categories && !sub_categories.split(',').every(id => !isNaN(id)))
             return res.status(400).json({'error' : 'sub_categories is not valid'});
 
         if (parseInt(limit) > 50)
