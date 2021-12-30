@@ -59,7 +59,12 @@ module.exports = {
         try {
             const methods = await Log.findAll({
                 group: ['method'],
-                attributes: ['method', [Sequelize.fn('COUNT', 'method'), 'count']],
+                attributes: [
+                    'method',
+                    [Sequelize.fn('COUNT', 'method'), 'count'],
+                    [Sequelize.literal('(COUNT(*) / (SELECT COUNT(*) FROM logs) * 100)'), 'percentage'],
+                ],
+                order: [[Sequelize.literal('count'), 'DESC']],
             });
 
             const urls = await Log.findAll({
@@ -72,7 +77,12 @@ module.exports = {
 
             const response_status = await Log.findAll({
                 group: ['response_status'],
-                attributes: ['response_status', [Sequelize.fn('COUNT', 'response_status'), 'count']],
+                attributes: [
+                    'response_status',
+                    [Sequelize.fn('COUNT', 'response_status'), 'count'],
+                    [Sequelize.literal('(COUNT(*) / (SELECT COUNT(*) FROM logs) * 100)'), 'percentage'],
+                ],
+                order: [[Sequelize.literal('count'), 'DESC']],
             });
 
             const response_time = await Log.findAll({
