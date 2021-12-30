@@ -175,7 +175,7 @@ module.exports = {
         let id = req.params.id;
 
         // id is not int
-        if (id && !Number.isInteger(parseInt(id)))
+        if (id && isNaN(id))
             return res.status(400).json({'error' : 'id is not a valid integer'});
 
         try {
