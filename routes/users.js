@@ -66,18 +66,50 @@ module.exports = {
                 group: ['url'],
                 attributes: ['url', [Sequelize.fn('COUNT', 'url'), 'count']],
                 having : Sequelize.literal('count >= 10'),
-                order: [[Sequelize.literal('count'), 'DESC']]
+                order: [[Sequelize.literal('count'), 'DESC']],
+                limit: 15
             });
 
-            const days = await Log.findAll({
+            const response_status = await Log.findAll({
+                group: ['response_status'],
+                attributes: ['response_status', [Sequelize.fn('COUNT', 'response_status'), 'count']],
+            });
+
+            const response_time = await Log.findAll({
+                attributes: [[Sequelize.fn('AVG', Sequelize.col('response_time')), 'avg']],
+                plain: true,
+                raw: true
+            });
+
+            const longest_response_time = await Log.findAll({
+                order: [[Sequelize.literal('response_time'), 'DESC']],
+                limit: 20
+            });
+
+            const most_count_days = await Log.findAll({
                 attributes: [[Sequelize.literal('DATE_FORMAT(ANY_VALUE(date), \'%d-%m-%Y\')'), 'date'] , [Sequelize.fn('COUNT', 'date'), 'count']],
                 group: [Sequelize.literal('DATE_FORMAT(date, \'%d-%m-%Y\')')],
+                order: [[Sequelize.literal('count'), 'DESC']],
+                limit: 15
+            });
+
+            const most_count_ip = await Log.findAll({
+                group: ['ip'],
+                attributes: ['ip', [Sequelize.fn('COUNT', 'ip'), 'count']],
+                order: [[Sequelize.literal('count'), 'DESC']],
+                limit: 15
             });
 
             return res.status(200).json({
                 'methods' : methods,
-                'popular_url' : urls,
-                'days' : days
+                'populars_urls' : urls,
+                'response_status' : response_status,
+                'response_time' : {
+                    'avg' : response_time.avg,
+                    'longest_response_time' : longest_response_time,
+                },
+                'most_count_days' : most_count_days,
+                'most_count_ip' : most_count_ip,
             });
         }
         catch (e) {
