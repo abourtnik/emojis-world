@@ -343,6 +343,10 @@ API Rate Limiting : **500 REQUESTS / DAY / IP**.
 
 ## Contributing
 
+**I search contributors for help me to complete and correct keywords for each emoji. This will allow for a better and more relevant search.**
+
+**You can find the complete list of emojis and associated keywords in [emojis.json](https://github.com/abourtnik/emojis-world/blob/master/scripts/emojis.json) file.**
+
 We encourage you to contribute to Emojis World !! Please check out the [Contributing to Emojis World guide](https://github.com/abourtnik/emojis-world/blob/master/contributing.md) for guidelines about how to proceed. Join us!
 
 Trying to report a possible security vulnerability in Emojis World ? Consider using email : 

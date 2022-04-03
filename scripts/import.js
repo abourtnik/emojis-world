@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const cliProgress = require('cli-progress');
 
 const Emoji = require('../models/Emoji');
@@ -35,8 +36,7 @@ update_count = async (array, model) => {
 
 (async function(){
 
-    let data = fs.readFileSync('./emojis.json');
-    let emojis = JSON.parse(data);
+    let emojis = JSON.parse(fs.readFileSync(path.join( __dirname , '/emojis.json'), 'utf-8'));
 
     let categories_count = [];
     let sub_categories_count = [];
@@ -53,15 +53,17 @@ update_count = async (array, model) => {
             {'name': 'sub_category', 'type': 'int32'},
             {'name': 'category_name', 'type': 'string'},
             {'name': 'sub_category_name', 'type': 'string'},
+            {'name': 'keywords', 'type': 'string[]'}
         ],
-        'default_sorting_field': 'category'
+        'default_sorting_field': 'category',
+        'token_separators': ['-']
     }).catch(e => console.log(e.response.data.message || e.response.code));
 
     const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
     bar.start(emojis.length, 0);
 
-    for (let i = 0 ; i < emojis.length ; i ++) {
+    for (let i = 0; i < emojis.length; i ++) {
 
         let emoji = emojis[i];
 
@@ -74,7 +76,6 @@ update_count = async (array, model) => {
             },
             raw: true
         });
-
 
         let sub_category = await SubCategory.findOrCreate({
             where : {
@@ -102,7 +103,6 @@ update_count = async (array, model) => {
         });
 
         // Create Typesense document emoji
-
         await typesense.post('collections/emojis/documents' , {
             id: emoji_parent[0]['id'].toString(),
             name: emoji_parent[0]['name'],
@@ -111,17 +111,18 @@ update_count = async (array, model) => {
             category: category[0]['id'],
             sub_category: sub_category[0]['id'],
             category_name: category[0]['name'],
-            sub_category_name: sub_category[0]['name']
+            sub_category_name: sub_category[0]['name'],
+            keywords : emoji['keywords']
         }).catch(e => console.error(e.message));
 
         category_count(categories_count, category[0]['id']);
         category_count(sub_categories_count, sub_category[0]['id']);
 
-        if (emoji['childrens'].length) {
+        if (emoji['children'].length) {
 
-            for (let j = 0; j < emoji['childrens'].length; j++) {
+            for (let j = 0; j < emoji['children'].length; j++) {
 
-                let children = emoji['childrens'][j];
+                let children = emoji['children'][j];
 
                 await Emoji.findOrCreate({
                     where: {
@@ -157,5 +158,3 @@ update_count = async (array, model) => {
     process.exit(0);
 
 })();
-
-

@@ -43,8 +43,8 @@ module.exports = {
             let results = await typesense.get('collections/emojis/documents/search', {
                 params: {
                     q : query,
-                    query_by : 'name,sub_category_name,category_name',
-                    query_by_weights : '600,1,1',
+                    query_by : 'name,category_name,sub_category_name,keywords',
+                    query_by_weights : '20,5,2,7',
                     filter_by : filters,
                     per_page : parseInt(limit) || 50,
                     include_fields : 'id',
