@@ -23,7 +23,7 @@ module.exports = {
                 response_status: res.statusCode,
                 response_time: duration,
                 ip: req.headers['x-real-ip'] || req.ip,
-                user_agent: req.get('User-Agent'),
+                user_agent: req.get('User-Agent').slice(0, 254),
             });
         });
 
