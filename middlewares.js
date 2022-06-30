@@ -103,16 +103,16 @@ module.exports = {
         let sub_categories = req.query.sub_categories;
 
         // limit is not int
-        if (limit && isNaN(limit))
-            return res.status(400).json({'error' : 'limit must be a valid integer'});
+        if (limit && (isNaN(limit) || limit <= 0 || limit > Number.MAX_SAFE_INTEGER ))
+            return res.status(400).json({'error' : 'limit must be an unsigned integer'});
 
         // categories not valid
-        if (categories && !categories.split(',').every(id => !isNaN(id)))
-            return res.status(400).json({'error' : 'categories is not valid'});
+        if (categories && !categories.split(',').every(id => !isNaN(id) && id >= 1 && id <= 8 ))
+            return res.status(400).json({'error' : 'categories must be list of unsigned integers between 1 and 8'});
 
         // sub_categories not valid
-        if (sub_categories && !sub_categories.split(',').every(id => !isNaN(id)))
-            return res.status(400).json({'error' : 'sub_categories is not valid'});
+        if (sub_categories && !sub_categories.split(',').every(id => !isNaN(id) && id >= 1 && id <= 79))
+            return res.status(400).json({'error' : 'sub_categories must be list of unsigned integers between 1 and 79'});
 
         if (parseInt(limit) > 50)
             req.query.limit = 50

@@ -31,6 +31,9 @@ module.exports = {
         if (!query)
             return res.status(400).json({'error' : 'query is not defined'});
 
+        if (query.length > 100)
+            return res.status(400).json({'error' : 'query is too long'});
+
         // Filter by category OR/AND sub_category
         let filters = '';
         let and = (categories) ? ' && ' : '';
