@@ -27,16 +27,16 @@
 
 | ID | Name | Emojis Count
 | ------------- | ----- | ------------- |
-| 1 | Smileys & People |  1277 |
-| 2 | People & Body |  0 |
-| 3 | Component |  0 |
-| 4 | Animals & Nature |  113 |
-| 5 | Food & Drink |  101 |
-| 6 | Travel & Places |  199 |
-| 7 | Activities |  67 |
-| 8 | Objects |  166 |
-| 9 | Symbols |  206 |
-| 10 | Flags |  265 |
+| 1 | Smileys & People |  163|
+| 2 | People & Body |  2155 |
+| 3 | Component |  9 |
+| 4 | Animals & Nature |  144 |
+| 5 | Food & Drink |  132 |
+| 6 | Travel & Places |  218 |
+| 7 | Activities |  86 |
+| 8 | Objects |  255 |
+| 9 | Symbols |  221 |
+| 10 | Flags |  269 |
 </td>
 <td>
 
