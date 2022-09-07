@@ -101,18 +101,25 @@ module.exports = {
         let limit = req.query.limit;
         let categories = req.query.categories;
         let sub_categories = req.query.sub_categories;
+        let versions = req.query.versions;
 
         // limit is not int
         if (limit && (isNaN(limit) || limit <= 0 || limit > Number.MAX_SAFE_INTEGER ))
             return res.status(400).json({'error' : 'limit must be an unsigned integer'});
 
         // categories not valid
-        if (categories && !categories.split(',').every(id => !isNaN(id) && id >= 1 && id <= 8 ))
-            return res.status(400).json({'error' : 'categories must be list of unsigned integers between 1 and 8'});
+        if (categories && !categories.split(',').every(id => !isNaN(id) && id >= 1 && id <= 10 ))
+            return res.status(400).json({'error' : 'categories must be list of unsigned integers between 1 and 10'});
 
         // sub_categories not valid
-        if (sub_categories && !sub_categories.split(',').every(id => !isNaN(id) && id >= 1 && id <= 79))
+        if (sub_categories && !sub_categories.split(',').every(id => !isNaN(id) && id >= 1 && id <= 100))
             return res.status(400).json({'error' : 'sub_categories must be list of unsigned integers between 1 and 79'});
+
+        // versions not valid
+        const valid_versions = ['0.6', '0.7', '1.0', '2.0', '3.0', '4.0', '5.0', '11.0', '12.0', '12.1', '13.0', '13.1', '14.0'];
+
+        if (versions && !versions.split(',').every(version => !isNaN(version) && valid_versions.includes(version)))
+            return res.status(400).json({'error' : 'versions must be list of floats in this list : ' + valid_versions.join(', ')});
 
         if (parseInt(limit) > 50)
             req.query.limit = 50

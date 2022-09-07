@@ -7,10 +7,10 @@
   <br>
 </h1>
 
-<h3 align="center">Open Source REST API for emojis </h3>
+<h3 align="center">Open Source REST API for emojis - **3652** Emojis Availaible  </h3>
 
 <p align="center">
-  <a href="#categories">Categories</a> •
+  <a href="#categories">Categories and Versions</a> •
   <a href="#endpoints">Endpoints</a> •
   <a href="#http-response-codes">HTTP Response Codes</a> •
   <a href="#technical-detail">Technical detail and API Rate Limiting</a> •
@@ -19,19 +19,43 @@
   <a href="#credits">Credits</a>
 </p>
 
-## Categories
+## Categories and Versions
 
+<table border="0">
+<tr>
+<td>
 | ID | Name | Emojis Count
 | ------------- | ----- | ------------- |
 | 1 | Smileys & People |  1277 |
-| 2 | Animals & Nature |  113 |
-| 3 | Food & Drink |  101 |
-| 4 | Travel & Places |  199 |
-| 5 | Activities |  67 |
-| 6 | Objects |  166 |
-| 7 | Symbols |  206 |
-| 8 | Flags |  265 |
-
+| 2 | People & Body |  0 |
+| 3 | Component |  0 |
+| 4 | Animals & Nature |  113 |
+| 5 | Food & Drink |  101 |
+| 6 | Travel & Places |  199 |
+| 7 | Activities |  67 |
+| 8 | Objects |  166 |
+| 9 | Symbols |  206 |
+| 10 | Flags |  265 |
+</td>
+<td>
+| Version | Emojis Count
+| ------------- | ----- |
+| 0.6 | 719 |
+| 0.7 | 139|
+| 1.0 | 490 |
+| 2.0 | 292 |
+| 3.0 | 162 |
+| 4.0 | 611 |
+| 5.0 | 239 |
+| 11.0 | 161 |
+| 12.0 | 230 |
+| 12.1 | 168 |
+| 13 | 117 |
+| 13.1 | 217 |
+| 14 | 107 |
+</td>
+ </tr>
+</table>
 
 ## Endpoints
 
@@ -63,85 +87,97 @@ GET https://api.emojisworld.fr/v1/search
 
 #### Query String Options
 
-| Query Strings  	| Type              	| Description                                         	| Example                	|
-|----------------	|-------------------	|-----------------------------------------------------	|------------------------	|
-| q              	| String - Required 	| A search word (only in english)                     	| `q=happy`              	|
-| limit          	| Integer           	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
-| categories     	| List of Integers  	| Filter the response by categories ids               	| `categories=1,2,3`     	|
-| sub_categories 	| List of Integers  	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` 	|
+| Query Strings  	| Type              	            | Description                                         	| Example                	|
+|----------------	|---------------------------------	|-----------------------------------------------------	|------------------------	|
+| q              	| String - **Required** 	        | A search word (only in english)                     	| `q=happy`              	|
+| limit          	| Integer - *Optional*           	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
+| categories     	| List of Integers - *Optional* 	| Filter response by categories ids               	    | `categories=1,2,3`     	|
+| sub_categories 	| List of Integers - *Optional*  	| Filter response by sub_categories ids           	    | `sub_categories=1,2,3` 	|
+| versions 	        | List of Floats - *Optional*  	    | Filter response by specifics versions          	    | `versions=1.0,13.1` 	    |
 
 #### Example
 ```http
-https://api.emojisworld.fr/v1/search?q=baby&categories=1,2,3&sub_categories=10,33&limit=10
+https://api.emojisworld.fr/v1/search?q=party&categories=7,8,6&sub_categories=61,66,63&versions=0.6,13.0
 ```
 
 #### Sample Response
 ```json
-{  
-   "totals": 2,
-   "results": [  
-      {  
-         "id": 1467,
-         "name": "baby bottle",
-         "emoji": "🍼",
-         "unicode": "1F37C",
-         "category": {  
-            "id": 3,
-            "name": "Food & Drink"
-         },
-         "sub_category" : {  
-            "id": 33,
-            "name": "drink"
-         },
-         "children": []
+{
+  "totals": 4,
+  "results": [
+    {
+      "id": 1691,
+      "name": "party popper",
+      "emoji": "🎉",
+      "unicode": "1F389",
+      "version": "0.6",
+      "category": {
+        "id": 7,
+        "name": "Activities"
       },
-      {  
-         "id": 113,
-         "name": "baby",
-         "emoji": "👶",
-         "unicode": "1F476",
-         "category": {  
-            "id" : 1,
-            "name": "Smileys & People"
-         },
-         "sub_category":{  
-            "id": 10,
-            "name": "person"
-         },
-         "children":[
-           {
-            "id": 114,
-            "name": "baby: light skin tone",
-            "emoji": "👶🏻",
-            "unicode": "1F476 1F3FB"
-           },
-           {
-             "id": 115,
-             "name": "baby: medium-light skin tone",
-             "emoji": "👶🏼",
-             "unicode": "1F476 1F3FC"
-           },
-           {
-             "id": 116,
-             "name": "baby: medium skin tone",
-             "emoji": "👶🏽",
-             "unicode": "1F476 1F3FD"
-           },
-           {
-             "id": 117,
-             "name": "baby: medium-dark skin tone",
-             "emoji": "👶🏾",
-             "unicode": "1F476 1F3FE"
-           },
-           {
-             "id": 118,
-             "name": "baby: dark skin tone",
-             "emoji": "👶🏿",
-             "unicode": "1F476 1F3FF"
-           }
-         ]
-      }
-   ]
+      "sub_category": {
+        "id": 61,
+        "name": "event"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "id": 1248,
+      "name": "dress",
+      "emoji": "👗",
+      "unicode": "1F457",
+      "version": "0.6",
+      "category": {
+        "id": 8,
+        "name": "Objects"
+      },
+      "sub_category": {
+        "id": 66,
+        "name": "clothing"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "id": 1718,
+      "name": "bowling",
+      "emoji": "🎳",
+      "unicode": "1F3B3",
+      "version": "0.6",
+      "category": {
+        "id": 7,
+        "name": "Activities"
+      },
+      "sub_category": {
+        "id": 63,
+        "name": "sport"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "id": 1687,
+      "name": "fireworks",
+      "emoji": "🎆",
+      "unicode": "1F386",
+      "version": "0.6",
+      "category": {
+        "id": 7,
+        "name": "Activities"
+      },
+      "sub_category": {
+        "id": 61,
+        "name": "event"
+      },
+      "children": [
+
+      ]
+    }
+  ]
 }
 ```
 
@@ -152,15 +188,16 @@ GET https://api.emojisworld.fr/v1/random
 
 #### Query String Options
 
-| Query Strings  	| Type             	| Description                                         	| Example                	|
-|----------------	|------------------	|-----------------------------------------------------	|------------------------	|
-| limit          	| Integer          	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
-| categories     	| List of Integers 	| Filter the response by categories ids               	| `categories=1,2,3`     	|
-| sub_categories 	| List of Integers 	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` 	|
+| Query Strings  	| Type             	                | Description                                         	| Example                	|
+|----------------	|-------------------------------	|-----------------------------------------------------	|------------------------	|
+| limit          	| Integer - *Optional*          	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
+| categories     	| List of Integers - *Optional* 	| Filter the response by categories ids               	| `categories=1,2,3`     	|
+| sub_categories 	| List of Integers - *Optional* 	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` 	|
+| versions 	        | List of Floats - *Optional*  	    | Filter response by specifics versions          	    | `versions=1.0,13.1` 	    |
 
 #### Example
 ```http
-GET https://api.emojisworld.fr/v1/random?&categories=1,2,3&sub_categories=1,2,3&limit=2
+GET https://api.emojisworld.fr/v1/random?&categories=7,8,6&sub_categories=61,66,63&versions=0.6,13.0&limit=2
 ```
 
 #### Sample Response
@@ -169,34 +206,40 @@ GET https://api.emojisworld.fr/v1/random?&categories=1,2,3&sub_categories=1,2,3&
   "totals": 2,
   "results": [
     {
-      "id": 8,
-      "name": "grinning squinting face",
-      "emoji": "😆",
-      "unicode": "1F606",
+      "id": 1254,
+      "name": "clutch bag",
+      "emoji": "👝",
+      "unicode": "1F45D",
+      "version": "0.6",
       "category": {
-        "id": 1,
-        "name": "Smileys & People"
+        "id": 8,
+        "name": "Objects"
       },
       "sub_category": {
-        "id": 1,
-        "name": "face-positive"
+        "id": 66,
+        "name": "clothing"
       },
-      "children": []
+      "children": [
+
+      ]
     },
     {
-      "id": 25,
-      "name": "expressionless face",
-      "emoji": "😑",
-      "unicode": "1F611",
+      "id": 3588,
+      "name": "military helmet",
+      "emoji": "🪖",
+      "unicode": "1FA96",
+      "version": "13.0",
       "category": {
-        "id": 1,
-        "name": "Smileys & People"
+        "id": 8,
+        "name": "Objects"
       },
       "sub_category": {
-        "id": 2,
-        "name": "face-neutral"
+        "id": 66,
+        "name": "clothing"
       },
-      "children": []
+      "children": [
+
+      ]
     }
   ]
 }
@@ -209,15 +252,16 @@ GET https://api.emojisworld.fr/v1/popular
 
 #### Query String Options
 
-| Query Strings  	| Type             	| Description                                         	| Example                	|
-|----------------	|------------------	|-----------------------------------------------------	|------------------------	|
-| limit          	| Integer          	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
-| categories     	| List of Integers 	| Filter the response by categories ids               	| `categories=1,2,3`     	|
-| sub_categories 	| List of Integers 	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` 	|
+| Query Strings  	| Type             	                | Description                                         	| Example                	|
+|----------------	|--------------------------------   |-----------------------------------------------------	|------------------------	|
+| limit          	| Integer - *Optional*          	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
+| categories     	| List of Integers - *Optional* 	| Filter the response by categories ids               	| `categories=1,2,3`     	|
+| sub_categories 	| List of Integers - *Optional* 	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` 	|
+| versions 	        | List of Floats - *Optional*  	    | Filter response by specifics versions          	    | `versions=1.0,13.1` 	    |
 
 #### Example
 ```http
-GET https://api.emojisworld.fr/v1/popular?categories=1,2,3&sub_categories=1,2,3&limit=2
+GET https://api.emojisworld.fr/v1/popular?&categories=7,8,6&sub_categories=61,66,63&versions=0.6,13.0&limit=2
 ```
 
 #### Sample Response
@@ -226,36 +270,38 @@ GET https://api.emojisworld.fr/v1/popular?categories=1,2,3&sub_categories=1,2,3&
   "totals": 2,
   "results": [
     {
-      "id": 3,
-      "name": "face with tears of joy",
-      "emoji": "😂",
-      "unicode": "1F602",
-      "count": 13,
+      "id": 1253,
+      "name": "handbag",
+      "emoji": "👜",
+      "unicode": "1F45C",
+      "version": "0.6",
+      "count": 46,
       "category": {
-        "id": 1,
-        "name": "Smileys & People"
+        "id": 8,
+        "name": "Objects"
       },
       "sub_category": {
-        "id": 1,
-        "name": "face-positive"
+        "id": 66,
+        "name": "clothing"
       },
       "children": [
-        
+
       ]
     },
     {
-      "id": 2,
-      "name": "beaming face with smiling eyes",
-      "emoji": "😁",
-      "unicode": "1F601",
-      "count": 9,
+      "id": 1252,
+      "name": "purse",
+      "emoji": "👛",
+      "unicode": "1F45B",
+      "version": "0.6",
+      "count": 45,
       "category": {
-        "id": 1,
-        "name": "Smileys & People"
+        "id": 8,
+        "name": "Objects"
       },
       "sub_category": {
-        "id": 1,
-        "name": "face-positive"
+        "id": 66,
+        "name": "clothing"
       },
       "children": [
 
@@ -273,18 +319,23 @@ GET https://api.emojisworld.fr/v1/categories
 #### Sample Response
 ```json
 {  
-   "totals":8,
+   "totals":10,
    "results":[  
       {  
          "id":1,
-         "name":"Smileys & People",
-         "emojis_count":1277,
-         "sub_categories":[  
-            {  
-               "id":1,
-               "name":"face-positive",
-               "emojis_count":21
-            }
+         "name":"Smileys & Emotion",
+         "emojis_count":163,
+         "sub_categories":[
+           {
+             "id": 1,
+             "name": "face-smiling",
+             "emojis_count": 14
+           },
+           {
+             "id": 2,
+             "name": "face-affection",
+             "emojis_count": 9
+           }
          ]
       }
    ]
@@ -298,17 +349,18 @@ GET https://api.emojisworld.fr/v1/emojis/{id}
 #### Sample Response
 ```json
 {
-  "id": 3,
-  "name": "face with tears of joy",
-  "emoji": "😂",
-  "unicode": "1F602",
+  "id": 1,
+  "name": "grinning face",
+  "emoji": "😀",
+  "unicode": "1F600",
+  "version": "1.0",
   "category": {
     "id": 1,
-    "name": "Smileys & People"
+    "name": "Smileys & Emotion"
   },
   "sub_category": {
     "id": 1,
-    "name": "face-positive"
+    "name": "face-smiling"
   },
   "children": [
 
