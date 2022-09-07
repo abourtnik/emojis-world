@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-<h3 align="center">Open Source REST API for emojis - **3652** Emojis Availaible  </h3>
+<h3 align="center">Open Source REST API for emojis - 3652 Emojis Availaible  </h3>
 
 <p align="center">
   <a href="#categories">Categories and Versions</a> •
@@ -24,6 +24,7 @@
 <table border="0">
 <tr>
 <td>
+
 | ID | Name | Emojis Count
 | ------------- | ----- | ------------- |
 | 1 | Smileys & People |  1277 |
@@ -38,6 +39,7 @@
 | 10 | Flags |  265 |
 </td>
 <td>
+
 | Version | Emojis Count
 | ------------- | ----- |
 | 0.6 | 719 |
