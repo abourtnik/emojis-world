@@ -27,6 +27,7 @@ module.exports = {
         let categories = req.query.categories;
         let sub_categories = req.query.sub_categories;
         let limit = req.query.limit;
+        let versions = req.query.versions;
 
         if (!query)
             return res.status(400).json({'error' : 'query is not defined'});
@@ -40,6 +41,7 @@ module.exports = {
 
         (categories) ? filters = 'category:=[' + categories + ']' : '';
         (sub_categories) ? filters += and + 'sub_category:=[' + sub_categories + ']' : '';
+        (versions) ? filters += and + 'version:=[' + versions + ']' : '';
 
         try {
 
@@ -62,7 +64,7 @@ module.exports = {
 
             if (ids.length) {
                 let emojis = await Emoji.findAll({
-                    attributes: ['id', 'name', 'emoji', 'unicode'],
+                    attributes: ['id', 'name', 'emoji', 'unicode', 'version'],
                     where : {
                         id : {
                             [Op.in]: ids,
@@ -122,6 +124,7 @@ module.exports = {
         let categories = req.query.categories;
         let sub_categories = req.query.sub_categories;
         let limit = req.query.limit;
+        let versions = req.query.versions;
 
         // Filter by category OR/AND sub_category
         let filters = {};
@@ -138,10 +141,19 @@ module.exports = {
             }
         }
 
+        if (versions) {
+            filters.version = {
+                [Op.in]: versions.split(',').map(id => parseFloat(id))
+            }
+        }
+
         try {
             let emojis = await Emoji.findAll({
-                attributes: ['id', 'name', 'emoji', 'unicode'],
-                where : { parent_id : null, ...filters},
+                attributes: ['id', 'name', 'emoji', 'unicode', 'version'],
+                where : {
+                    parent_id : null,
+                    ...filters
+                },
                 limit : parseInt(limit) || 50,
                 include: [
                     {
@@ -183,7 +195,7 @@ module.exports = {
 
         try {
             let emoji = await Emoji.findOne({
-                attributes: ['id', 'name', 'emoji', 'unicode'],
+                attributes: ['id', 'name', 'emoji', 'unicode', 'version'],
                 where : {
                     id : parseInt(id)
                 },
@@ -260,8 +272,9 @@ module.exports = {
         let categories = req.query.categories;
         let sub_categories = req.query.sub_categories;
         let limit = req.query.limit;
+        let versions = req.query.versions;
 
-        // Filter by category OR/AND sub_category
+        // Filter by category OR/AND sub_category OR/AND versions
         let filters = {};
 
         if (categories) {
@@ -276,10 +289,19 @@ module.exports = {
             }
         }
 
+        if (versions) {
+            filters.version = {
+                [Op.in]: versions.split(',').map(id => parseFloat(id))
+            }
+        }
+
         try {
             let emojis = await Emoji.findAll({
-                attributes: ['id', 'name', 'emoji', 'unicode', 'count'],
-                where : { parent_id : null, ...filters},
+                attributes: ['id', 'name', 'emoji', 'unicode', 'count', 'version'],
+                where : {
+                    parent_id : null,
+                    ...filters
+                },
                 limit : parseInt(limit) || 50,
                 include: [
                     {

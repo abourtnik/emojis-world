@@ -53,7 +53,8 @@ update_count = async (array, model) => {
             {'name': 'sub_category', 'type': 'int32'},
             {'name': 'category_name', 'type': 'string'},
             {'name': 'sub_category_name', 'type': 'string'},
-            {'name': 'keywords', 'type': 'string[]'}
+            {'name': 'keywords', 'type': 'string[]'},
+            {'name': 'version', 'type': 'float'},
         ],
         'default_sorting_field': 'category',
         'token_separators': ['-']
@@ -97,7 +98,8 @@ update_count = async (array, model) => {
                 emoji: emoji['emoji'],
                 unicode: emoji['unicode'],
                 category_id: category[0]['id'],
-                sub_category_id: sub_category[0]['id']
+                sub_category_id: sub_category[0]['id'],
+                version: emoji['version']
             },
             raw: true
         });
@@ -112,7 +114,8 @@ update_count = async (array, model) => {
             sub_category: sub_category[0]['id'],
             category_name: category[0]['name'],
             sub_category_name: sub_category[0]['name'],
-            keywords : emoji['keywords']
+            keywords : emoji['keywords'],
+            version : parseFloat(emoji['version']),
         }).catch(e => console.error(e.message));
 
         category_count(categories_count, category[0]['id']);
@@ -134,7 +137,8 @@ update_count = async (array, model) => {
                         unicode: children['unicode'],
                         category_id: category[0]['id'],
                         sub_category_id: sub_category[0]['id'],
-                        parent_id: emoji_parent[0]['id']
+                        parent_id: emoji_parent[0]['id'],
+                        version: children['version'],
                     },
                     raw: true
                 });

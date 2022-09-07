@@ -11,22 +11,34 @@ const Emoji = sequelize.define('emojis', {
         primaryKey: true,
         autoIncrement: true,
         unique: true,
-        allowNull: false
+        allowNull: false,
+        get() {
+            return this.getDataValue('id')
+        }
     },
     name: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false
+        allowNull: false,
+        get() {
+            return this.getDataValue('name')
+        }
     },
-    emoji : {
+    emoji: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false
+        allowNull: false,
+        get() {
+            return this.getDataValue('emoji')
+        }
     },
-    unicode : {
+    unicode: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false
+        allowNull: false,
+        get() {
+            return this.getDataValue('unicode')
+        }
     },
     category_id: {
         type: DataTypes.INTEGER,
@@ -48,6 +60,14 @@ const Emoji = sequelize.define('emojis', {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0
+
+    },
+    version: {
+        type: DataTypes.DOUBLE,
+        allowNull: false,
+        get() {
+            return this.getDataValue('version').toFixed(1)
+        }
 
     }
 }, {
