@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-<h3 align="center">Open Source REST API for emojis - 3652 Emojis Availaible  </h3>
+<h3 align="center">Open Source REST API for emojis - 3677 Emojis Availaible  </h3>
 
 <p align="center">
   <a href="#categories">Categories and Versions</a> •
@@ -16,7 +16,8 @@
   <a href="#technical-detail">Technical detail and API Rate Limiting</a> •
   <a href="#contributing">Contributing</a> •
   <a href="#license">License</a> •
-  <a href="#credits">Credits</a>
+  <a href="#credits">Credits</a> •
+  <a href="#support-project">Support Project</a>
 </p>
 
 ## Categories and Versions
@@ -25,36 +26,37 @@
 <tr>
 <td>
 
-| ID | Name | Emojis Count
-| ------------- | ----- | ------------- |
-| 1 | Smileys & People |  163|
-| 2 | People & Body |  2155 |
-| 3 | Component |  9 |
-| 4 | Animals & Nature |  144 |
-| 5 | Food & Drink |  132 |
-| 6 | Travel & Places |  218 |
-| 7 | Activities |  86 |
-| 8 | Objects |  255 |
-| 9 | Symbols |  221 |
-| 10 | Flags |  269 |
+| ID | Name | Emojis Count 
+| ------------- | ----- |--------------|
+| 1 | Smileys & People | 168          |
+| 2 | People & Body | 2167         |
+| 3 | Component | 10           |
+| 4 | Animals & Nature | 150          |
+| 5 | Food & Drink | 135          |
+| 6 | Travel & Places | 218          |
+| 7 | Activities | 85           |
+| 8 | Objects | 258          |
+| 9 | Symbols | 223          |
+| 10 | Flags | 269          |
 </td>
 <td>
 
-| Version | Emojis Count
-| ------------- | ----- |
-| 0.6 | 719 |
-| 0.7 | 139|
-| 1.0 | 490 |
-| 2.0 | 292 |
-| 3.0 | 162 |
-| 4.0 | 611 |
-| 5.0 | 239 |
-| 11.0 | 161 |
-| 12.0 | 230 |
-| 12.1 | 168 |
-| 13.0 | 117 |
-| 13.1 | 217 |
-| 14.0 | 107 |
+| Version | Emojis Count 
+|---------|--------------|
+| 0.6     | 719          |
+| 0.7     | 139          |
+| 1.0     | 490          |
+| 2.0     | 292          |
+| 3.0     | 162          |
+| 4.0     | 611          |
+| 5.0     | 239          |
+| 11.0    | 161          |
+| 12.0    | 230          |
+| 12.1    | 168          |
+| 13.0    | 117          |
+| 13.1    | 217          |
+| 14.0    | 107          |
+| 15.0    | 30           |
 </td>
  </tr>
 </table>
@@ -411,3 +413,6 @@ Emojis World is made available under the [MIT License](http://www.opensource.org
 
 ## Credits
 Emojis World is created and maintained by [Anton Bourtnik](https://github.com/abourtnik)
+
+## Support Project
+[Make a PayPal Donation](https://www.paypal.com/donate/?hosted_button_id=J4ZPUYZ5EGGS8)
