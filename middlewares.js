@@ -116,7 +116,7 @@ module.exports = {
             return res.status(400).json({'error' : 'sub_categories must be list of unsigned integers between 1 and 79'});
 
         // versions not valid
-        const valid_versions = ['0.6', '0.7', '1.0', '2.0', '3.0', '4.0', '5.0', '11.0', '12.0', '12.1', '13.0', '13.1', '14.0'];
+        const valid_versions = ['0.6', '0.7', '1.0', '2.0', '3.0', '4.0', '5.0', '11.0', '12.0', '12.1', '13.0', '13.1', '14.0', '15.0'];
 
         if (versions && !versions.split(',').every(version => !isNaN(version) && valid_versions.includes(version)))
             return res.status(400).json({'error' : 'versions must be list of floats in this list : ' + valid_versions.join(', ')});
