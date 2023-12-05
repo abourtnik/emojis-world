@@ -35,13 +35,23 @@ module.exports = {
         if (query.length > 100)
             return res.status(400).json({'error' : 'query is too long'});
 
-        // Filter by category OR/AND sub_category
-        let filters = '';
-        let and = (categories) ? ' && ' : '';
+        if (Array.isArray(query))
+            query = query[0]
 
-        (categories) ? filters = 'category:=[' + categories + ']' : '';
-        (sub_categories) ? filters += and + 'sub_category:=[' + sub_categories + ']' : '';
-        (versions) ? filters += and + 'version:=[' + versions + ']' : '';
+
+        let queryFilters = {
+            'category' : categories,
+            'sub_category' : sub_categories,
+            'version' : versions,
+        };
+
+        const filters = [];
+
+        for(const [key, value] of Object.entries(queryFilters)){
+            if (value) {
+                filters.push(`${key}:[${value}]`)
+            }
+        }
 
         try {
 
@@ -50,7 +60,7 @@ module.exports = {
                     q : query,
                     query_by : 'name,category_name,sub_category_name,keywords',
                     query_by_weights : '20,5,2,7',
-                    filter_by : filters,
+                    filter_by : filters.join('&&'),
                     per_page : parseInt(limit) || 50,
                     include_fields : 'id',
                     num_typos: 2,
