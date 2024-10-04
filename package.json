@@ -13,7 +13,7 @@
     "bcrypt": "^5.0.0",
     "cli-progress": "^3.10.0",
     "cors": "^2.8.5",
-    "express": "^4.17.3",
+    "express": "^4.19.2",
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
     "mysql2": "^2.3.2",
