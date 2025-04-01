@@ -6,6 +6,7 @@ use App\Models\Ip;
 use App\Models\Log;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 class Logger
@@ -36,7 +37,7 @@ class Logger
                 'response_time' => intval((microtime(true) - LARAVEL_START) * 1000),
                 'date' => now(),
                 'ip' => $request->getClientIp(),
-                'user_agent' => $request->userAgent(),
+                'user_agent' => Str::limit($request->userAgent(), 255, null),
             ]);
 
         return $response;

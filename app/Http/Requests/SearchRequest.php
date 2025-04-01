@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class SearchRequest extends FormRequest
 {
@@ -107,5 +109,12 @@ class SearchRequest extends FormRequest
             'sub_categories.*' => 'sub_categories must be list of unsigned integers between 1 and 10',
             'versions.*' => 'versions must be list of floats in this list : ' . implode(', ', self::AVAILABLE_VERSIONS),
         ];
+    }
+
+    protected function failedValidation(Validator $validator): void
+    {
+        throw new ValidationException($validator, response()->json([
+            'message' => $validator->errors()->first(),
+        ], 422));
     }
 }
