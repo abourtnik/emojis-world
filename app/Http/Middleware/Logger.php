@@ -37,7 +37,7 @@ class Logger
                 'response_time' => intval((microtime(true) - LARAVEL_START) * 1000),
                 'date' => now(),
                 'ip' => $request->getClientIp(),
-                'user_agent' => Str::limit($request->userAgent(), 255, null),
+                'user_agent' => Str::limit($request->userAgent(), 255, ''),
             ]);
 
         return $response;
