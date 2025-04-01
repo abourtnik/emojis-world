@@ -1,3 +1,26 @@
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage
+/vendor
+.env
+.env.backup
+
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
+
+# Local data
+docker/data
+database/dumps/*
+
 # Folder view configuration files
 .DS_Store
 Desktop.ini
@@ -16,21 +39,6 @@ Thumbs.db
 # Compiled C++ files
 *.out
 
-# Application specific files
-venv
-node_modules
-.sass-cache
-npm-debug.log
-
-# PhpStorm
-.idea
-
-# Configuration
-config.js
-
-# Process
-process.json
-
-# Local data
-typesense_data
-mysql_data
+# IDE Helper
+.phpstorm.meta.php
+_ide_helper.php
