@@ -2,7 +2,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   test:
     name: Run Test and PHP Stan
