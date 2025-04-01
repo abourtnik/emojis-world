@@ -12,7 +12,6 @@
 <p align="center">
   <a href="#categories">Categories and Versions</a> •
   <a href="#endpoints">Endpoints</a> •
-  <a href="#http-response-codes">HTTP Response Codes</a> •
   <a href="#technical-detail">Technical detail and API Rate Limiting</a> •
   <a href="#contributing">Contributing</a> •
   <a href="#license">License</a> •
@@ -373,35 +372,22 @@ GET https://api.emojisworld.fr/v1/emojis/{id}
 }
 ```
 
-## HTTP Response Codes
-| Code  | Description |
-| ------------- | ------------- |
-| 200  | Success |
-| 400  | Bad Request |
-| 401  | Unauthorized |
-| 403  | Access Forbidden |
-| 404  | Not Found |
-| 429  | Too Many Requests |
-| 500  | Internal Server Error	 |
-
 ## Technical detail
 
 API Rate Limiting : **500 REQUESTS / DAY / IP**.
 
-| Header | Description | Example |
-| ------------- | ------------- | ------------- |
-| X-Rate-Limit-Limit  | The maximum number of request you-re permitted to make per period of 1 day | 500 |
-| X-Rate-Limit-Remaining | Your current number of request | 100 |
-| X-Rate-Limit-Reset  | The time at which the rate limit resets | Tue Aug 17 2021 17:43:28 GMT+0200 |
+| Header                | Description                                                                | Example |
+|-----------------------|----------------------------------------------------------------------------| ------------- |
+| X-Ratelimit-Limit     | The maximum number of request you-re permitted to make per period of 1 day | 500 |
+| X-Ratelimit-Remaining | Your current number of request                                             | 100 |
+| X-Ratelimit-Reset     | Date in timestamp at which the rate limit resets                           | 1743518607 |
 
-* API is using Node.js with the Express.js framework
+* API is using PHP with Laravel 12 framework
 * All emojis data are stored in a MySQL and Typesense databases
 
 ## Contributing
 
 **I search contributors for help me to complete and correct keywords for each emoji. This will allow for a better and more relevant search.**
-
-**You can find the complete list of emojis and associated keywords in [emojis.json](https://github.com/abourtnik/emojis-world/blob/master/scripts/emojis.json) file.**
 
 We encourage you to contribute to Emojis World !! Please check out the [Contributing to Emojis World guide](https://github.com/abourtnik/emojis-world/blob/master/contributing.md) for guidelines about how to proceed. Join us!
 
