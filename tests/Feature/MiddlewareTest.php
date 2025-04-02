@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Api;
+namespace Tests\Feature;
 
 use App\Models\Ip;
 use Illuminate\Foundation\Testing\RefreshDatabase;

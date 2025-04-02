@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Api;
+namespace Tests\Feature\Api;
 
 use App\Models\Emoji;
 use Illuminate\Foundation\Testing\RefreshDatabase;
