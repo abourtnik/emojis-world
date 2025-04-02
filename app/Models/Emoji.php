@@ -114,8 +114,6 @@ class Emoji extends Model
      */
     protected function makeAllSearchableUsing(Builder $query): Builder
     {
-        return $query
-            ->withoutChildren()
-            ->with(['category', 'subCategory']);
+        return $query->scopes('withoutChildren')->with(['category', 'subCategory']);
     }
 }
