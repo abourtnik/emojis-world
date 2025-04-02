@@ -67,6 +67,17 @@ class Emoji extends Model
     }
 
     /**
+     * -------------------- SCOPES --------------------
+     */
+
+
+    protected function scopeWithoutChildren(Builder $query): void
+    {
+        $query->whereNull('parent_id');
+    }
+
+
+    /**
      * -------------------- LARAVEL SCOUT --------------------
      */
 
@@ -103,6 +114,8 @@ class Emoji extends Model
      */
     protected function makeAllSearchableUsing(Builder $query): Builder
     {
-        return $query->with(['category', 'subCategory']);
+        return $query
+            ->withoutChildren()
+            ->with(['category', 'subCategory']);
     }
 }

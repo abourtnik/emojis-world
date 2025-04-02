@@ -35,7 +35,7 @@ class EmojiResource extends JsonResource
                 'id' => $this->subCategory->id,
                 'name' => $this->subCategory->name,
             ],
-            'children' => EmojiResource::collection($this->children),
+            'children' => EmojiChildrenResource::collection($this->children),
         ];
     }
 }

@@ -45,7 +45,7 @@ namespace App\Models{
  * @property int $sub_category_id
  * @property int|null $parent_id
  * @property int $count
- * @property float|null $version
+ * @property numeric|null $version
  * @property mixed|null $keywords
  * @property-read \App\Models\Category $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Emoji> $children
@@ -67,6 +67,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereSubCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereUnicode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereVersion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji withoutChildren()
  * @mixin \Eloquent
  */
 	#[\AllowDynamicProperties]

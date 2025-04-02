@@ -49,23 +49,12 @@ class EmojiController extends Controller
 
     public function random(SearchRequest $request): EmojiCollection
     {
-
-        //dd(Emoji::find(77)->version);
-
         return new EmojiCollection(
             Emoji::query()
                 ->select('id', 'name', 'emoji', 'unicode', 'version', 'category_id', 'sub_category_id')
-                ->where('parent_id', null)
+                ->withoutChildren()
                 ->filter($request->validated())
-                ->with([
-                    'category:id,name',
-                    'subCategory:id,name',
-                    'children' => [
-                        'category:id,name',
-                        'subCategory:id,name',
-                        'children'
-                    ]
-                ])
+                ->with(['category:id,name', 'subCategory:id,name', 'children'])
                 ->inRandomOrder()
                 ->get()
         );
@@ -76,17 +65,9 @@ class EmojiController extends Controller
         return new EmojiCollection(
             Emoji::query()
                 ->select('id', 'name', 'emoji', 'unicode', 'version', 'category_id', 'sub_category_id')
-                ->where('parent_id', null)
+                ->withoutChildren()
                 ->filter($request->validated())
-                ->with([
-                    'category:id,name',
-                    'subCategory:id,name',
-                    'children' => [
-                        'category:id,name',
-                        'subCategory:id,name',
-                        'children'
-                    ]
-                ])
+                ->with(['category:id,name', 'subCategory:id,name', 'children'])
                 ->orderBy('count', 'desc')
                 ->get()
         );
@@ -95,13 +76,7 @@ class EmojiController extends Controller
     public function emoji(Emoji $emoji): EmojiResource
     {
         return new EmojiResource(
-            $emoji->load([
-                'children' => [
-                    'category:id,name',
-                    'subCategory:id,name',
-                    'children'
-                ]
-            ])
+            $emoji->load('children')
         );
     }
 }
