@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Api;
+namespace Tests\Feature;
 
 use App\Models\Emoji;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -29,5 +29,25 @@ class SearchTest extends TestCase
                 ->has('results', 1)
                 ->has('total')
             );
+    }
+
+    public function test_bad_query_search(): void
+    {
+        $queries = [
+            '' ,
+            '?q=apple&categories=bad',
+            '?q=apple&sub_categories=bad',
+            '?q=apple&versions=bad',
+            '?q=apple&limit=bad'
+        ];
+
+        foreach ($queries as $query) {
+            $this->get('/v1/search'.$query)
+                ->assertStatus(422)
+                ->assertJson(fn (AssertableJson $json) =>
+                $json->whereType('message', 'string')
+                );
+        }
+
     }
 }
