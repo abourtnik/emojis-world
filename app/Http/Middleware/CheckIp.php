@@ -2,11 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Ip;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsBannedIp
+class CheckIp
 {
     /**
      * Handle an incoming request.
@@ -15,10 +16,8 @@ class IsBannedIp
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->get('ip')?->banned) {
-            return response()->json(['message' => 'You IP is banned'], 403);
-        }
+        $ip = Ip::query()->where('ip', $request->getClientIp())->first();
 
-        return $next($request);
+        return $next($request->merge(['ip' => $ip]));
     }
 }

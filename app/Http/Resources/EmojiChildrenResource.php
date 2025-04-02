@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @mixin Emoji
  */
-class EmojiResource extends JsonResource
+class EmojiChildrenResource extends JsonResource
 {
 
     public static $wrap = null;
@@ -26,16 +26,6 @@ class EmojiResource extends JsonResource
             'name' => $this->name,
             'emoji' => $this->emoji,
             'unicode' => $this->unicode,
-            'version' => $this->version,
-            'category' => [
-                'id' => $this->category->id,
-                'name' => $this->category->name,
-            ],
-            'sub_category' => [
-                'id' => $this->subCategory->id,
-                'name' => $this->subCategory->name,
-            ],
-            'children' => EmojiChildrenResource::collection($this->children),
         ];
     }
 }
