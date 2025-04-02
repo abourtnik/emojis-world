@@ -23,9 +23,14 @@ class RateLimitServiceProvider extends ServiceProvider
     public function boot(): void
     {
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(config('limit.value'))->by($request->ip())->response(function (Request $request, array $headers) {
-                return response()->json(['message' => 'Too many requests'], 429, $headers);
-            });
+
+            if (config('limit.enabled')) {
+                return Limit::perDay(config('limit.value'))->by($request->ip())->response(function (Request $request, array $headers) {
+                    return response()->json(['message' => 'Too many requests'], 429, $headers);
+                });
+            }
+
+            return Limit::none();
         });
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'value' => env('RATE_LIMIT', 10),
+    'enabled' => env('RATE_LIMIT_ENABLED', false),
+    'value' => env('RATE_LIMIT', 100),
 ];

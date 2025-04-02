@@ -57,6 +57,6 @@ class MiddlewareTest extends TestCase
 
        $this->get('/v1')
            ->assertStatus(429)
-           ->assertHeader('Retry-After', 60);
+           ->assertHeader('Retry-After', 60 * 60 * 24);
     }
 }
