@@ -1,9 +1,13 @@
+<a href="https://github.com/abourtnik/clip-zone/actions">
+<img src="https://github.com/abourtnik/clip-zone/actions/workflows/CI-CD.yml/badge.svg" alt="Build Status">
+</a>
+
 <h1 align="center">
   <a href="https://www.emojisworld.fr">
-    <img src="https://www.emojisworld.fr/img/logo.png" alt="Emoji World logo" height="200">
+    <img src="https://www.emojisworld.fr/images/logo.png" alt="Emoji World logo" height="200">
   </a>
   <br>
-  Emojis World REST API
+  Emojis World
   <br>
 </h1>
 
