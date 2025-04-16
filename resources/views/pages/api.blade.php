@@ -15,7 +15,7 @@
             </svg>
         </a>
     </header>
-    <section class="bg-black h-100 flex items-center">
+    <section class="bg-gray-700 h-100 flex items-center">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl text-white">Open Source REST API For Emojis</h1>
             <h2 class="mb-8 text-lg font-normal lg:text-xl sm:px-16 text-white">A free emoji sourced directly from unicode.org - {{$emojis_count}} emojis available</h2>
@@ -103,11 +103,11 @@
                         </div>
                         <div class="border rounded-lg border-gray-300 w-full ">
                             <div class="bg-gray-100 p-3 border-b border-gray-300">
-                                <div class="flex justify-between items-center mb-2">
-                                    <div class="text-black">Response</div>
+                                <div class="flex justify-between items-center mb-3">
+                                    <div class="text-black font-bold">Response</div>
                                     <code class="text-black">application/json</code>
                                 </div>
-                                <div class="text-gray-500 break-all">{{config('app.api_url') .'/v'.config('app.api_version'). $endpoint['example']}}</div>
+                                <div class="text-gray-500 break-all text-sm">{{config('app.api_url') .'/v'.config('app.api_version'). $endpoint['example']}}</div>
                             </div>
                             <div class="h-100 bg-gray-200 px-3 py-2 overflow-y-auto"><pre><code class="whitespace-pre">{{json_encode($endpoint['response'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)}}</code></pre>
                             </div>
@@ -117,8 +117,4 @@
             @endforeach
         </section>
     </section>
-    <footer class="h-12 bg-white flex items-center justify-between p-3 border-t border-gray-300">
-        <p class="text-xs text-gray-500">Made with ❤️ by <a class="text-blue-500" href="https://github.com/abourtnik">Anton Bourtnik</a> </p>
-        <p class="text-xs text-gray-500">Copyright © {{date('Y')}} EmojisWorld - All Rights Reserved</p>
-    </footer>
 @endsection
