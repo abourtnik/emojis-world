@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api;
+namespace Tests\Feature;
 
 use App\Models\Emoji;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,7 +14,7 @@ class ApiTest extends TestCase
 
     public function test_index_endpoint(): void
     {
-        $this->get('/v1')
+        $this->get(route('emojis.index'))
             ->assertStatus(200)
             ->assertJson(fn (AssertableJson $json) => $json->whereType('message', 'string'));;
     }
@@ -25,7 +25,7 @@ class ApiTest extends TestCase
 
         $this->assertDatabaseCount('emojis', 10);
 
-        $this->get('/v1/random')
+        $this->get(route('emojis.random'))
             ->assertStatus(200)
             ->assertJsonPath('total', 10)
             ->assertJson(fn (AssertableJson $json) =>
@@ -41,7 +41,7 @@ class ApiTest extends TestCase
 
         $this->assertDatabaseCount('emojis', 10);
 
-        $this->get('/v1/popular')
+        $this->get(route('emojis.popular'))
             ->assertStatus(200)
             ->assertJsonPath('total', 10)
             ->assertJson(fn (AssertableJson $json) =>
@@ -57,7 +57,7 @@ class ApiTest extends TestCase
 
         $this->assertDatabaseCount('emojis', 1);
 
-        $this->get('/v1/emojis/'.$emoji->id)
+        $this->get(route('emojis.emoji', $emoji))
             ->assertStatus(200);
     }
 

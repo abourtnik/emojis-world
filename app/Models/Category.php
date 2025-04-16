@@ -20,4 +20,8 @@ class Category extends Model
     public function subCategories() : HasMany {
         return $this->hasMany(SubCategory::class);
     }
+
+    public function emojis() : HasMany {
+        return $this->hasMany(Emoji::class);
+    }
 }

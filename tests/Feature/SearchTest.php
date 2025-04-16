@@ -21,7 +21,7 @@ class SearchTest extends TestCase
             ->count(1)
             ->create(['name' => 'green apple']);
 
-        $this->get('/v1/search?q=apple')
+        $this->get(route('emojis.search', ['q' => 'apple']))
             ->assertStatus(200)
             ->assertJsonPath('total', 1)
             ->assertJson(fn (AssertableJson $json) =>
@@ -42,7 +42,7 @@ class SearchTest extends TestCase
         ];
 
         foreach ($queries as $query) {
-            $this->get('/v1/search'.$query)
+            $this->get(route('emojis.search').$query)
                 ->assertStatus(422)
                 ->assertJson(fn (AssertableJson $json) =>
                 $json->whereType('message', 'string')
