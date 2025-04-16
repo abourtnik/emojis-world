@@ -4,3 +4,5 @@
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
+
+[x-cloak] { display: none !important; }
