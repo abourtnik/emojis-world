@@ -66,6 +66,7 @@
                                     'bg-white border border-gray-300 flex gap-1.5 absolute top-0 left-0 w-max p-1 shadow-lg text-center',
                                     'flex-col gap-2' => $emoji->children_count > 5
                                 ])
+                                x-cloak
                                 x-show.important="open"
                                 role="tooltip"
                                 x-ref="tooltip"
@@ -107,6 +108,7 @@
                                     role="tooltip"
                                     class="bg-black text-white font-bold p-1 text-xs absolute top-0 left-0 w-full selection:bg-transparent"
                                     x-show.important="copied"
+                                    x-cloak
                                 >
                                     Copied !
                                 </div>
@@ -119,6 +121,7 @@
                                 <div
                                     role="tooltip"
                                     class="bg-black text-white font-bold p-1 text-xs absolute top-0 left-0 w-full selection:bg-transparent"
+                                    x-cloak
                                     x-show.important="copied"
                                 >
                                     Copied !
