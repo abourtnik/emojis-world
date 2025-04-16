@@ -139,8 +139,4 @@
             </div>
         @endforelse
     </section>
-    <footer class="h-12 bg-white flex items-center justify-between p-3 border-t border-gray-300 w-full">
-        <p class="text-xs text-gray-500">Made with ❤️ by <a class="text-blue-500" href="https://github.com/abourtnik">Anton Bourtnik</a> </p>
-        <p class="text-xs text-gray-500">Copyright © {{date('Y')}} EmojisWorld - All Rights Reserved</p>
-    </footer>
 @endsection

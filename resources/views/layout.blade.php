@@ -32,5 +32,9 @@
 </head>
 <body class="bg-gray-200 min-h-screen flex flex-col">
     @yield('content')
+    <footer class="h-16 sm:h-12 bg-white flex flex-col sm:flex-row gap-2 items-center justify-center sm:justify-between p-3 border-t border-gray-300">
+        <p class="text-xs text-gray-500">Made with ❤️ by <a class="text-blue-500" href="https://github.com/abourtnik">Anton Bourtnik</a> </p>
+        <p class="text-xs text-gray-500">Copyright © {{date('Y')}} EmojisWorld - All Rights Reserved</p>
+    </footer>
 </body>
 </html>

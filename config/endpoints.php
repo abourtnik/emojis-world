@@ -122,7 +122,7 @@ return [
                 'description' => 'Filter response by specifics versions	'
             ],
         ],
-        'example' => '/random?&categories=7,8,6&sub_categories=61,66,63&versions=0.6,13.0&limit=2',
+        'example' => '/random?&categories=7,8,6&sub_categories=61,66,63&versions=13.0&limit=2',
         'response' => [
             'total' => 2,
             'results' => [
@@ -191,7 +191,7 @@ return [
                 'description' => 'Filter response by specifics versions	'
             ],
         ],
-        'example' => '/popular?&categories=7,8,6&sub_categories=61,66,63&versions=0.6,13.0&limit=2',
+        'example' => '/popular?&categories=7,8,6&sub_categories=61,63&versions=0.6,13.0&limit=2',
         'response' => [
             'total' => 2,
             'results' => [
