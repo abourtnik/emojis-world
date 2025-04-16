@@ -2,8 +2,8 @@
 
 @extends('layout')
 
-@section('title', '✂️ Copy and 📋 Paste Emoji')
-@section('title', 'Emojis World is a Open Source REST API allows developers to simply integrate all of the best emojis into their applications. More than 2400 are available.')
+@section('title', 'Copy & Paste All Emojis Keyboard')
+@section('description', 'Quickly copy and paste emojis with search system and categories - 3702 emojis available')
 
 @section('content')
     <header class="h-16 bg-white flex items-center justify-between p-3 border-b border-gray-300">
@@ -11,7 +11,7 @@
             <img src="{{asset('images/logo.png')}}" class="h-8" alt="{{config('app.name')}} Logo">
             <span class="self-center text-xl sm:text-2xl font-semibold whitespace-nowrap text-yellow-500">{{config('app.name')}}</span>
         </a>
-        <h1 class="text-xl sm:text-2xl text-center hidden sm:block">✂️ Copy and 📋 Paste Emoji</h1>
+        <h1 class="text-xl sm:text-2xl text-center hidden sm:block">✂️ Copy and 📋 Paste Emoji Keyboard</h1>
         <a class="text-white bg-black hover:bg-black/90 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-2 text-center" href={{route('pages.api')}}>
             Try our API
         </a>
@@ -55,7 +55,7 @@
             </form>
         </div>
         @forelse($categories as $category)
-            <h2 class="text-xl my-3 font-bold" id="{{Str::slug($category->name)}}">{{$category->name}}</h2>
+            <h2 class="text-xl my-3 font-bold ps-3 sm:ps-0" id="{{Str::slug($category->name)}}">{{$category->name}}</h2>
             <div class="grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-17 xl:grid-cols-20 gap-1">
                 @foreach($category->emojis as $emoji)
                     <div class="bg-white" x-data="emoji">
