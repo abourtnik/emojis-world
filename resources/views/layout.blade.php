@@ -20,7 +20,6 @@
     <meta property="og:image" content={{asset('images/logo.png')}}>
     <meta property="og:language" content="{{ str_replace('_', '-', app()->getLocale()) }}" />
 
-    <meta name="google-site-verification" content="QvvYRETEgZ3Rwiv1CcJVSA4azGqIwWgWvWpE1fU7WJE">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @if (config('app.statistics_enabled'))

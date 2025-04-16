@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title', 'Open Source REST API for Emojis')
-@section('title', 'Emojis World is a Open Source REST API allows developers to simply integrate all of the best emojis into their applications. More than 2400 are available.')
+@section('description', "Emojis World is a Open Source REST API allows developers to simply integrate all of the best emojis into their applications. More than $emojis_count are available.")
 
 @section('content')
     <header class="h-16 bg-white flex items-center justify-between p-3 border-b border-gray-300">
