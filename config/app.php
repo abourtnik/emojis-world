@@ -123,6 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'version' => env('APP_VERSION', 1),
-
+    'api_version' => env('API_VERSION', 1),
+    'api_url' => env('APP_URL_API', null),
+    'statistics_enabled' => env('STATISTICS_ENABLED', false),
 ];

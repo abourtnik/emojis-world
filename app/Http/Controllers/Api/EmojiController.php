@@ -65,7 +65,6 @@ class EmojiController extends Controller
         return new EmojiCollection(
             Emoji::query()
                 ->select('id', 'name', 'emoji', 'unicode', 'version', 'category_id', 'sub_category_id')
-                ->withoutChildren()
                 ->filter($request->validated())
                 ->with(['category:id,name', 'subCategory:id,name', 'children'])
                 ->orderBy('count', 'desc')

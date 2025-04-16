@@ -8,9 +8,12 @@ use App\Http\Middleware\IsBannedIp;
 use App\Http\Middleware\Logger;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v'.config('app.version'))
+Route::domain(config('app.api_url'))
+    ->prefix('v'.config('app.api_version'))
     ->middleware([ApiResponse::class, 'throttle:api', CheckIp::class, IsBannedIp::class, Logger::class])
     ->group(function () {
+
+        // EMOJIS
         Route::controller(EmojiController::class)
             ->name('emojis.')
             ->group(function () {

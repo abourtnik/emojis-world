@@ -23,6 +23,10 @@ class Logger
             return $response;
         }
 
+        if ($request->routeIs('pages.index') && $request->missing('search')) {
+            return $response;
+        }
+
         Log::create([
             'method' => $request->method(),
             'url' => $request->fullUrl(),

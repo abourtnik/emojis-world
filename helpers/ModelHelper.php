@@ -18,6 +18,8 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property int $count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Emoji> $emojis
+ * @property-read int|null $emojis_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SubCategory> $subCategories
  * @property-read int|null $sub_categories_count
  * @method static \Database\Factories\CategoryFactory factory($count = null, $state = [])
