@@ -3,6 +3,7 @@
 use App\Http\Middleware\Logger;
 use App\Http\Middleware\StripEmptyParams;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\EmojiController;
@@ -17,7 +18,7 @@ Route::domain(config('app.url'))
 
 // Global 404 Page
 Route::fallback(function () {
-    if (request()->fullUrlIs(config('app.api_url'))) {
+    if (Str::startsWith(request()->fullUrl(), config('app.api_url'))) {
         return response()->json(['message' => 'Resource not found'], 404);
     }
     abort(404);
