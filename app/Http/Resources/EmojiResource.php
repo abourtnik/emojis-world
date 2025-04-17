@@ -36,6 +36,11 @@ class EmojiResource extends JsonResource
                 'name' => $this->subCategory->name,
             ],
             'children' => EmojiChildrenResource::collection($this->children),
+            $this->mergeWhen(!is_null($this->parent), function () {
+                return [
+                    'parent' => EmojiParentResource::make($this->parent),
+                ];
+            })
         ];
     }
 }
