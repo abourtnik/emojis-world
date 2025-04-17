@@ -8,6 +8,7 @@ use App\Http\Resources\EmojiCollection;
 use App\Http\Resources\EmojiResource;
 use App\Models\Emoji;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\Builder;
 
 class EmojiController extends Controller
 {
@@ -25,6 +26,7 @@ class EmojiController extends Controller
 
         return new EmojiCollection(
             Emoji::search($q)
+                ->query(fn (Builder $query) => $query->with(['category:id,name', 'subCategory:id,name', 'children']))
                 ->options([
                     'query_by' => 'name,category_name,sub_category_name,keywords',
                     'query_by_weights' => '20,5,2,7',
@@ -64,9 +66,9 @@ class EmojiController extends Controller
     {
         return new EmojiCollection(
             Emoji::query()
-                ->select('id', 'name', 'emoji', 'unicode', 'version', 'category_id', 'sub_category_id')
+                ->select('id', 'name', 'emoji', 'unicode', 'version', 'category_id', 'sub_category_id', 'parent_id')
                 ->filter($request->validated())
-                ->with(['category:id,name', 'subCategory:id,name', 'children'])
+                ->with(['category:id,name', 'subCategory:id,name', 'children', 'parent'])
                 ->orderBy('count', 'desc')
                 ->get()
         );
@@ -75,7 +77,7 @@ class EmojiController extends Controller
     public function emoji(Emoji $emoji): EmojiResource
     {
         return new EmojiResource(
-            $emoji->load('children')
+            $emoji->load(['children', 'parent'])
         );
     }
 }

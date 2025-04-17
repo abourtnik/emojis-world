@@ -1,5 +1,3 @@
-@use(Illuminate\Support\Str)
-
 @extends('layout')
 
 @section('title', 'Copy & Paste All Emojis Keyboard')
@@ -20,8 +18,8 @@
         <div class="px-3 sm:px-0">
             <div class="flex gap-3 w-full overflow-x-auto scrollbar-hide">
                 @foreach($allCategories as $category)
-                    <a href="#{{Str::slug($category->name)}}" class="bg-white font-medium border rounded-lg text-sm border-gray-300 cursor-pointer px-5 py-2.5 hover:bg-gray-100 text-nowrap flex gap-2">
-                        <span>{{$category->emojis->first()?->emoji}}</span>
+                    <a href="#{{$category->slug}}" class="bg-white font-medium border rounded-lg text-sm border-gray-300 cursor-pointer px-5 py-2.5 hover:bg-gray-100 text-nowrap flex gap-2">
+                        <span>{{$category->emoji}}</span>
                         <span>{{$category->name}}</span>
                     </a>
                 @endforeach
@@ -55,7 +53,7 @@
             </form>
         </div>
         @forelse($categories as $category)
-            <h2 class="text-xl my-3 font-bold ps-3 sm:ps-0" id="{{Str::slug($category->name)}}">{{$category->name}}</h2>
+            <h2 class="text-xl my-3 font-bold ps-3 sm:ps-0" id="{{$category->slug}}">{{$category->name}}</h2>
             <div class="grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-17 xl:grid-cols-20 gap-1">
                 @foreach($category->emojis as $emoji)
                     <div class="bg-white" x-data="emoji">
@@ -71,7 +69,14 @@
                                 role="tooltip"
                                 x-ref="tooltip"
                             >
-                                <span class="text-4xl">{{$emoji->emoji}}</span>
+                                <button
+                                    id="{{'emojis-'.$emoji->id}}"
+                                    class="text-4xl cursor-pointer"
+                                    data-clipboard-target="{{'#emojis-'.$emoji->id}}"
+                                    @click="copy({{$emoji->id}})"
+                                >
+                                    {{$emoji->emoji}}
+                                </button>
                                 @if($emoji->children_count <= 5)
                                     <span class="border-r border-gray-300"></span>
                                     @foreach($emoji->children as $child)

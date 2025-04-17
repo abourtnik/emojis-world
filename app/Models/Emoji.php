@@ -52,7 +52,7 @@ class Emoji extends Model
     }
 
     public function parent () : HasOne  {
-        return $this->hasOne(Emoji::class, 'parent_id', 'id');
+        return $this->hasOne(Emoji::class, 'id', 'parent_id');
     }
 
     /**
