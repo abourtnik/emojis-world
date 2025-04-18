@@ -32,12 +32,14 @@ class PageController extends Controller
             'categories' => Category::query()
                 ->withWhereHas(
                     'emojis', function ($query) use ($emojis) {
-                        $query->when($emojis, function ($query) use ($emojis) {
-                            $query->whereIn('id', $emojis->pluck('id')->toArray());
-                         })
-                            ->scopes('withoutChildren')
-                            ->withCount('children')
-                            ->with('children');
+                            $query
+                                ->when($emojis, function ($query) use ($emojis) {
+                                    $query->whereIn('id', $emojis->pluck('id')->toArray());
+                                })
+                                ->scopes('withoutChildren')
+                                ->withCount('children')
+                                ->with('children')
+                                ->orderBy('sub_category_id');
                         }
                 )
                 ->get(),
