@@ -25,8 +25,8 @@
     <link rel="icon" href="{{asset('favicon.ico')}}" sizes="any">
     <link rel="apple-touch-icon" href="{{asset('icons/apple-touch-icon.png')}}">
 
-    @if (config('app.statistics_enabled'))
-        <script defer src="https://stats.antonbourtnik.fr/script.js" data-website-id="42ab7417-1920-4a14-a7e8-59d54df89726"></script>
+    @if (config('app.statistics_enabled') && !in_array(request()->ip(), config('app.ignore_ips'))))
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="b72c51a9-871d-4dd2-a951-ade554a3be31"></script>
     @endif
 
    {{-- @viteReactRefresh--}}

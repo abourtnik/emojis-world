@@ -1,17 +1,23 @@
-<a href="https://github.com/abourtnik/clip-zone/actions">
-<img src="https://github.com/abourtnik/clip-zone/actions/workflows/CI-CD.yml/badge.svg" alt="Build Status">
+<div align="center">
+
+<img src="https://www.emojisworld.fr/images/logo.png" alt="Emoji World logo" height="100">
+
+# 🌍 Emojis World 🌍
+
+**Open Source REST API for emojis - 3677 Emojis Available**
+
+[![Laravel Version](https://img.shields.io/badge/Laravel-12.0+-FF2D20?style=flat&logo=laravel)](https://laravel.com)
+![GitHub License](https://img.shields.io/github/license/abourtnik/emojis-world)
+<a href="https://github.com/abourtnik/emojis-world/actions">
+<img src="https://github.com/abourtnik/emojis-world/actions/workflows/CI-CD.yml/badge.svg" alt="Build Status">
+</a>
+<a href="https://www.paypal.com/donate/?hosted_button_id=P4KH8VMKM6XMJ">
+<img src="https://img.shields.io/badge/Donate-blue?logo=paypal" alt="Donate Paypal">
 </a>
 
-<h1 align="center">
-  <a href="https://www.emojisworld.fr">
-    <img src="https://www.emojisworld.fr/images/logo.png" alt="Emoji World logo" height="200">
-  </a>
-  <br>
-  Emojis World
-  <br>
-</h1>
+*Emojis World is a Open Source REST API allows developers to simply integrate all of the best emojis into their applications.*
 
-<h3 align="center">Open Source REST API for emojis - 3677 Emojis Availaible  </h3>
+</div>
 
 <p align="center">
   <a href="#categories">Categories and Versions</a> •
@@ -19,8 +25,7 @@
   <a href="#technical-detail">Technical detail and API Rate Limiting</a> •
   <a href="#contributing">Contributing</a> •
   <a href="#license">License</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#support-project">Support Project</a>
+  <a href="#license">Security</a> •
 </p>
 
 ## Categories and Versions
@@ -376,7 +381,7 @@ GET https://api.emojisworld.fr/v1/emojis/{id}
 }
 ```
 
-## Technical detail
+## 🔧 Technical detail
 
 API Rate Limiting : **500 REQUESTS / DAY / IP**.
 
@@ -389,20 +394,28 @@ API Rate Limiting : **500 REQUESTS / DAY / IP**.
 * API is using PHP with Laravel 12 framework
 * All emojis data are stored in a MySQL and Typesense databases
 
-## Contributing
+---
 
-**I search contributors for help me to complete and correct keywords for each emoji. This will allow for a better and more relevant search.**
+## 🤝 Contributing
 
-We encourage you to contribute to Emojis World !! Please check out the [Contributing to Emojis World guide](https://github.com/abourtnik/emojis-world/blob/master/contributing.md) for guidelines about how to proceed. Join us!
+We encourage you to contribute to Emojis World !!
 
-Trying to report a possible security vulnerability in Emojis World ? Consider using email : 
-**contact@antonbourtnik.fr** with clear description of security vulnerability.
+---
 
-## License
+## 📜 License
 Emojis World is made available under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
 
-## Credits
-Emojis World is created and maintained by [Anton Bourtnik](https://github.com/abourtnik)
+---
 
-## Support Project
-[Make a PayPal Donation](https://www.paypal.com/donate/?hosted_button_id=J4ZPUYZ5EGGS8)
+## 🔒 Security
+
+If you discover security vulnerabilities, please email **contact@antonbourtnik.fr** instead of using the issue tracker.
+
+---
+
+<div align="center">
+
+**Made with ❤️ by [Anton Bourtnik](https://github.com/abourtnik)**
+
+[Website](https://www.antonbourtnik.fr) • [Support](mailto:contact@antonbourtnik.fr)
+</div>
