@@ -39,7 +39,7 @@
             <hr class="text-gray-300">
             @foreach($endpoints as $index => $endpoint)
                 <section class="my-4">
-                    <h4 class="text-xl my-3 font-bold">{{$endpoint['name']}}</h4>
+                    <h4 class="text-xl my-3 font-bold">{{$endpoint->name}}</h4>
                     <div class="flex items-start gap-4 flex-wrap lg:flex-nowrap">
                         <div class="w-full">
                             <div class="flex items-center gap-3 mb-3">
@@ -49,7 +49,7 @@
                                         id="{{'endpoint-'. $index}}"
                                         type="text"
                                         class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg block w-full px-2.5 py-4"
-                                        value="{{config('app.api_url') .'/v'.config('app.api_version'). $endpoint['path']}}"
+                                        value="{{config('app.api_url') .'/v'.config('app.api_version'). $endpoint->path}}"
                                         readonly
                                     >
                                     <button
@@ -77,29 +77,29 @@
                                     </button>
                                 </div>
                             </div>
-                            <p class="text-black">{{$endpoint['description']}}</p>
-                            @isset($endpoint['params'])
+                            <p class="text-black">{{$endpoint->description}}</p>
+                            @if($endpoint->params)
                                 <div class="mt-8 mb-3">
                                     <h4 class="text-lg font-bold">Search parameters</h4>
-                                    @foreach($endpoint['params'] as $param)
+                                    @foreach($endpoint->params as $param)
                                         <div class="my-5">
                                             <div class="flex items-center gap-4 mb-2">
-                                                <span class="bg-gray-50 border border-gray-300 px-2 rounded">{{$param['name']}}</span>
+                                                <span class="bg-gray-50 border border-gray-300 px-2 rounded">{{$param->name}}</span>
                                                 <div class="flex gap-1">
-                                                    @if($param['required'])
+                                                    @if($param->required)
                                                         <span class="font-bold text-gray-500">required</span>
                                                     @else
                                                         <span class="text-gray-500">optional</span>
                                                     @endif
                                                     <span class="text-gray-500">-</span>
-                                                    <code class="text-gray-500">{{$param['type']}}</code>
+                                                    <code class="text-gray-500">{{$param->type}}</code>
                                                 </div>
                                             </div>
-                                            <p class="text-sm text-black">{{$param['description']}}</p>
+                                            <p class="text-sm text-black">{{$param->description}}</p>
                                         </div>
                                     @endforeach
                                 </div>
-                            @endisset
+                            @endif
                         </div>
                         <div class="border rounded-lg border-gray-300 w-full ">
                             <div class="bg-gray-100 p-3 border-b border-gray-300">
@@ -107,9 +107,9 @@
                                     <div class="text-black font-bold">Response</div>
                                     <code class="text-black">application/json</code>
                                 </div>
-                                <div class="text-gray-500 break-all text-sm">{{config('app.api_url') .'/v'.config('app.api_version'). $endpoint['example']}}</div>
+                                <div class="text-gray-500 break-all text-sm">{{config('app.api_url') .'/v'.config('app.api_version'). $endpoint->example}}</div>
                             </div>
-                            <div class="h-100 bg-gray-200 px-3 py-2 overflow-y-auto"><pre><code class="whitespace-pre">{{json_encode($endpoint['response'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)}}</code></pre>
+                            <div class="h-100 bg-gray-200 px-3 py-2 overflow-y-auto"><pre><code class="whitespace-pre">{{json_encode($endpoint->response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)}}</code></pre>
                             </div>
                         </div>
                     </div>

@@ -18,6 +18,8 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property int $count
+ * @property string|null $slug
+ * @property string|null $emoji
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Emoji> $emojis
  * @property-read int|null $emojis_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SubCategory> $subCategories
@@ -27,8 +29,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereEmoji($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereSlug($value)
  * @mixin \Eloquent
  */
 	#[\AllowDynamicProperties]
