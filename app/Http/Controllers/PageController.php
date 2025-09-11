@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Category;
 use App\Models\Emoji;
+use App\Facades\Endpoint;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -49,7 +51,7 @@ class PageController extends Controller
     public function api(): View
     {
         return view('pages.api', [
-            'endpoints' => config('endpoints'),
+            'endpoints' => Endpoint::getAll(),
             'emojis_count' => Emoji::count(),
         ]);
     }
