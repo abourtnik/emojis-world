@@ -28,8 +28,8 @@ class EmojiController extends Controller
             Emoji::search($q)
                 ->query(fn (Builder $query) => $query->with(['category:id,name', 'subCategory:id,name', 'children']))
                 ->options([
-                    'query_by' => 'name,category_name,sub_category_name,keywords',
-                    'query_by_weights' => '20,5,2,7',
+                    'query_by' => 'name,emoji,category_name,sub_category_name,keywords',
+                    'query_by_weights' => '20,1,5,2,7',
                     'per_page' => $request->validated('limit'),
                     'num_typos'=> 2,
                     'drop_tokens_threshold' => 0,

@@ -6,6 +6,7 @@ use App\Models\Log;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use Symfony\Component\HttpFoundation\Response;
 
 class Logger
@@ -24,6 +25,12 @@ class Logger
         }
 
         if ($request->routeIs('pages.index') && $request->missing('search')) {
+            return $response;
+        }
+
+        $crawlerDetect = new CrawlerDetect();
+
+        if ($crawlerDetect->isCrawler($request->userAgent())) {
             return $response;
         }
 

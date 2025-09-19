@@ -25,7 +25,7 @@ services:
           - php
       restart: unless-stopped
   typesense:
-    image: typesense/typesense:28.0
+    image: typesense/typesense:29.0
     container_name: typesense_container
     volumes:
       - ./docker/data/typesense:/data

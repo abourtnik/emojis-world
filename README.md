@@ -4,7 +4,7 @@
 
 # 🌍 Emojis World 🌍
 
-**Open Source REST API for emojis - 3677 Emojis Available**
+**Open Source REST API for emojis - 3809 Emojis Available**
 
 [![Laravel Version](https://img.shields.io/badge/Laravel-12.0+-FF2D20?style=flat&logo=laravel)](https://laravel.com)
 ![GitHub License](https://img.shields.io/github/license/abourtnik/emojis-world)
@@ -30,44 +30,36 @@
 
 ## Categories and Versions
 
-<table border="0">
-<tr>
-<td>
+| <div style="width:100px">ID</div> | <div style="width:200px">Name</div> | <div style="width:100px">Emojis Count</div> 
+|-----------------------------------|-------------------------------------|---------------------------------------------|
+| 1                                 | Smileys & People                    | 143                                         |
+| 2                                 | People & Body                       | 2284                                        |
+| 3                                 | Animals & Nature                    | 152                                         |
+| 4                                 | Food & Drink                        | 137                                         |
+| 5                                 | Travel & Places                     | 218                                         |
+| 6                                 | Activities                          | 86                                          |
+| 7                                 | Objects                             | 262                                         |
+| 8                                 | Symbols                             | 257                                         |
+| 9                                 | Flags                               | 270                                         |
 
-| ID | Name | Emojis Count 
-| ------------- | ----- |--------------|
-| 1 | Smileys & People | 168          |
-| 2 | People & Body | 2167         |
-| 3 | Component | 10           |
-| 4 | Animals & Nature | 150          |
-| 5 | Food & Drink | 135          |
-| 6 | Travel & Places | 218          |
-| 7 | Activities | 85           |
-| 8 | Objects | 258          |
-| 9 | Symbols | 223          |
-| 10 | Flags | 269          |
-</td>
-<td>
-
-| Version | Emojis Count 
-|---------|--------------|
-| 0.6     | 719          |
-| 0.7     | 139          |
-| 1.0     | 490          |
-| 2.0     | 292          |
-| 3.0     | 162          |
-| 4.0     | 611          |
-| 5.0     | 239          |
-| 11.0    | 161          |
-| 12.0    | 230          |
-| 12.1    | 168          |
-| 13.0    | 117          |
-| 13.1    | 217          |
-| 14.0    | 107          |
-| 15.0    | 30           |
-</td>
- </tr>
-</table>
+| <div style="width:200px">Version</div> | <div style="width:200px">Emojis Count</div> 
+|----------------------------------------|---------------------------------------------|
+| 0.6                                    | 719                                         |
+| 0.7                                    | 139                                         |
+| 1.0                                    | 490                                         |
+| 2.0                                    | 292                                         |
+| 3.0                                    | 162                                         |
+| 4.0                                    | 611                                         |
+| 5.0                                    | 239                                         |
+| 11.0                                   | 161                                         |
+| 12.0                                   | 230                                         |
+| 12.1                                   | 168                                         |
+| 13.0                                   | 117                                         |
+| 13.1                                   | 217                                         |
+| 14.0                                   | 107                                         |
+| 15.0                                   | 30                                          |
+| 15.1                                   | 118                                         |
+| 16.0                                   | 8                                           |
 
 ## Endpoints
 
@@ -99,13 +91,13 @@ GET https://api.emojisworld.fr/v1/search
 
 #### Query String Options
 
-| Query Strings  	| Type              	            | Description                                         	| Example                	|
-|----------------	|---------------------------------	|-----------------------------------------------------	|------------------------	|
-| q              	| String - **Required** 	        | A search word (only in english)                     	| `q=happy`              	|
-| limit          	| Integer - *Optional*           	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
-| categories     	| List of Integers - *Optional* 	| Filter response by categories ids               	    | `categories=1,2,3`     	|
-| sub_categories 	| List of Integers - *Optional*  	| Filter response by sub_categories ids           	    | `sub_categories=1,2,3` 	|
-| versions 	        | List of Floats - *Optional*  	    | Filter response by specifics versions          	    | `versions=1.0,13.1` 	    |
+| Query Strings  	| Type              	            | Description                                         	| Example                	  |
+|----------------	|---------------------------------	|-----------------------------------------------------	|---------------------------|
+| q              	| String - **Required** 	        | A search word (only in english)                     	| `q=happy`              	  |
+| limit          	| Integer - *Optional*           	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	  |
+| categories     	| List of Integers - *Optional* 	| Filter response by categories ids               	    | `categories=1,2,3`     	  |
+| sub_categories 	| List of Integers - *Optional*  	| Filter response by sub_categories ids           	    | `sub_categories=1,2,3` 	  |
+| versions 	    | List of Floats - *Optional*  	    | Filter response by specifics versions          	    | `versions=1.0,13.1` 	     |
 
 #### Example
 ```http
@@ -205,7 +197,7 @@ GET https://api.emojisworld.fr/v1/random
 | limit          	| Integer - *Optional*          	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
 | categories     	| List of Integers - *Optional* 	| Filter the response by categories ids               	| `categories=1,2,3`     	|
 | sub_categories 	| List of Integers - *Optional* 	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` 	|
-| versions 	        | List of Floats - *Optional*  	    | Filter response by specifics versions          	    | `versions=1.0,13.1` 	    |
+| versions 	    | List of Floats - *Optional*  	    | Filter response by specifics versions          	    | `versions=1.0,13.1` 	    |
 
 #### Example
 ```http
@@ -264,12 +256,12 @@ GET https://api.emojisworld.fr/v1/popular
 
 #### Query String Options
 
-| Query Strings  	| Type             	                | Description                                         	| Example                	|
-|----------------	|--------------------------------   |-----------------------------------------------------	|------------------------	|
-| limit          	| Integer - *Optional*          	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             	|
-| categories     	| List of Integers - *Optional* 	| Filter the response by categories ids               	| `categories=1,2,3`     	|
-| sub_categories 	| List of Integers - *Optional* 	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` 	|
-| versions 	        | List of Floats - *Optional*  	    | Filter response by specifics versions          	    | `versions=1.0,13.1` 	    |
+| Query Strings  	| Type             	                | Description                                         	| Example                |
+|----------------	|--------------------------------   |-----------------------------------------------------	|------------------------|
+| limit          	| Integer - *Optional*          	| Fetch up to a specified number of results (max: 50) 	| `limit=25`             |
+| categories     	| List of Integers - *Optional* 	| Filter the response by categories ids               	| `categories=1,2,3`     |
+| sub_categories 	| List of Integers - *Optional* 	| Filter the response by sub categories ids           	| `sub_categories=1,2,3` |
+| versions 	    | List of Floats - *Optional*  	    | Filter response by specifics versions          	    | `versions=1.0,13.1`    |
 
 #### Example
 ```http
@@ -385,10 +377,10 @@ GET https://api.emojisworld.fr/v1/emojis/{id}
 
 API Rate Limiting : **500 REQUESTS / DAY / IP**.
 
-| Header                | Description                                                                | Example |
-|-----------------------|----------------------------------------------------------------------------| ------------- |
-| X-Ratelimit-Limit     | The maximum number of request you-re permitted to make per period of 1 day | 500 |
-| X-Ratelimit-Remaining | Your current number of request                                             | 100 |
+| Header                | Description                                                                | Example    |
+|-----------------------|----------------------------------------------------------------------------|------------|
+| X-Ratelimit-Limit     | The maximum number of request you-re permitted to make per period of 1 day | 500        |
+| X-Ratelimit-Remaining | Your current number of request                                             | 100        |
 | X-Ratelimit-Reset     | Date in timestamp at which the rate limit resets                           | 1743518607 |
 
 * API is using PHP with Laravel 12 framework

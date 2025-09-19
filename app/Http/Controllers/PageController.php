@@ -19,8 +19,8 @@ class PageController extends Controller
         if ($search) {
             $emojis = Emoji::search($search)
                 ->options([
-                    'query_by' => 'name,category_name,sub_category_name,keywords',
-                    'query_by_weights' => '20,5,2,7',
+                    'query_by' => 'name,emoji,category_name,sub_category_name,keywords',
+                    'query_by_weights' => '20,1,5,2,7',
                     'num_typos'=> 2,
                     'drop_tokens_threshold' => 0,
                     'typo_tokens_threshold' => 1,
@@ -41,7 +41,9 @@ class PageController extends Controller
                                 ->scopes('withoutChildren')
                                 ->withCount('children')
                                 ->with('children')
-                                ->orderBy('sub_category_id');
+                                ->orderBy('sub_category_id')
+                                ->orderBy('version')
+                                ->orderBy('unicode');
                         }
                 )
                 ->get(),
