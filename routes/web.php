@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Middleware\Logger;
 use App\Http\Middleware\StripEmptyParams;
 use App\Http\Middleware\CheckIp;
@@ -15,7 +16,9 @@ Route::domain(config('app.url'))
         Route::get('/', [PageController::class, 'index'])->middleware([StripEmptyParams::class, CheckIp::class, Logger::class])->name('index');
         Route::get('/api', [PageController::class, 'api'])->name('api');
         Route::post('emojis/{emoji:id}/increment', [EmojiController::class, 'increment'])->name('increment');
-});
+        Route::get('events/{event:slug}', [EventController::class, 'show'])->name('event');
+    }
+);
 
 // Global 404 Page
 Route::fallback(function () {

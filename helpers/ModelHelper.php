@@ -13,8 +13,6 @@
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property int $count
@@ -41,8 +39,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string $emoji
@@ -82,8 +78,37 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property string $image
+ * @property string $slug
+ * @property string|null $start_date
+ * @property string|null $end_date
+ * @property int $is_permanent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Emoji> $emojis
+ * @property-read int|null $emojis_count
+ * @property-read mixed $image_url
+ * @property-read mixed $route
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereIsPermanent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereStartDate($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperEvent {}
+}
+
+namespace App\Models{
+/**
  * @property int $id
  * @property string $ip
  * @property bool $banned
@@ -104,8 +129,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $method
  * @property string $url
@@ -133,8 +156,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property int $category_id

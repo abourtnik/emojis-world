@@ -1,7 +1,8 @@
 @extends('layout')
 
-@section('title', 'Copy & Paste All Emojis Keyboard')
+@section('title', '✂️ Copy & Paste All Emojis 📋')
 @section('description', 'Quickly copy and paste emojis with search system and categories - 3702 emojis available')
+@section('image', asset('images/logo.png'))
 
 @section('content')
     <header class="h-16 bg-white flex items-center justify-between p-3 border-b border-gray-300">
@@ -9,21 +10,39 @@
             <img src="{{asset('images/logo.png')}}" class="h-8" alt="{{config('app.name')}} Logo">
             <span class="self-center text-xl sm:text-2xl font-semibold whitespace-nowrap text-yellow-500">{{config('app.name')}}</span>
         </a>
-        <h1 class="text-xl sm:text-2xl text-center hidden sm:block">✂️ Copy and 📋 Paste Emoji Keyboard</h1>
+        <h1 class="text-xl sm:text-2xl text-center hidden sm:block">✂️ Copy and Paste Emojis 📋</h1>
         <a class="text-white bg-black hover:bg-black/90 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-2 text-center" href={{route('pages.api')}}>
             Try our API
         </a>
     </header>
-    <section class="container mx-auto py-3 flex-1">
+    <main class="container mx-auto py-3 flex-1">
         <div class="px-3 sm:px-0">
-            <div class="flex gap-3 w-full overflow-x-auto scrollbar-hide">
+            <section class="flex gap-3 w-full overflow-x-auto scrollbar-hide mb-4">
+                @forelse ($events as $event)
+                    <article class="border rounded-lg flex-shrink-0 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/4 xl:basis-1/5">
+                        <a href="{{$event->route}}">
+                            <div class="w-full h-full relative">
+                                <span class="absolute top-0 left-0 w-full h-full bg-black/35 rounded-lg"></span>
+                                <img src="{{$event->imageUrl}}" alt="image {{$event->name}}" class="w-full h-auto object-cover rounded-lg">
+                                <h2 class="absolute w-full top-1/2 -translate-y-1/2 text-white z-1 text-2xl font-bold text-center">{{$event->name}}</h2>
+                            </div>
+                        </a>
+                    </article>
+                @empty
+                @endforelse
+            </section>
+            <aside class="w-full overflow-x-auto scrollbar-hide">
+                <ul class="flex gap-3">
                 @foreach($allCategories as $category)
-                    <a href="#{{$category->slug}}" class="bg-white font-medium border rounded-lg text-sm border-gray-300 cursor-pointer px-5 py-2.5 hover:bg-gray-100 text-nowrap flex gap-2">
-                        <span>{{$category->emoji}}</span>
-                        <span>{{$category->name}}</span>
-                    </a>
+                    <li>
+                        <a href="#{{$category->slug}}" class="bg-white font-medium border rounded-lg text-sm border-gray-300 cursor-pointer px-5 py-2.5 hover:bg-gray-100 text-nowrap flex gap-2">
+                            <span>{{$category->emoji}}</span>
+                            <span>{{$category->name}}</span>
+                        </a>
+                    </li>
                 @endforeach
-            </div>
+                </ul>
+            </aside>
             <form method="get" action="/" class="my-4">
                 <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                 <div class="relative">
@@ -54,98 +73,9 @@
         </div>
         @forelse($categories as $category)
             <h2 class="text-xl my-3 font-bold ps-3 sm:ps-0" id="{{$category->slug}}">{{$category->name}}</h2>
-            <div class="grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-17 xl:grid-cols-20 gap-1">
-                @foreach($category->emojis as $emoji)
-                    <div class="bg-white" x-data="emoji">
-                        @if($emoji->children_count > 0)
-                            <div
-                                id="children-{{$emoji->id}}"
-                                @class([
-                                    'bg-white border border-gray-400 flex absolute top-0 left-0 w-max shadow-xl text-center',
-                                    'flex-col gap-2' => $emoji->children_count > 5
-                                ])
-                                x-cloak
-                                x-show.important="open"
-                                role="tooltip"
-                                x-ref="tooltip"
-                            >
-                                <button
-                                    id="{{'emojis-'.$emoji->id}}"
-                                    class="text-4xl cursor-pointer hover:bg-gray-200 selection:bg-transparent p-1.5"
-                                    data-clipboard-target="{{'#emojis-'.$emoji->id}}"
-                                    @click="copy({{$emoji->id}})"
-                                    title="{{$emoji->name}}"
-                                >
-                                    {{$emoji->emoji}}
-                                </button>
-                                @if($emoji->children_count <= 5)
-                                    <span class="border-r border-gray-300"></span>
-                                    @foreach($emoji->children as $child)
-                                        <button
-                                            data-clipboard-target="{{'#emojis-'.$child->id}}"
-                                            id="{{'emojis-'.$child->id}}"
-                                            class="text-4xl cursor-pointer hover:bg-gray-200 selection:bg-transparent p-1"
-                                            @click="copy({{$child->id}})"
-                                            title="{{$child->name}}"
-                                        >
-                                            {{$child->emoji}}
-                                        </button>
-                                    @endforeach
-                                @else
-                                    <span class="border-b border-gray-300 h-1 w-24 mx-auto"></span>
-                                    <div class="grid grid-cols-5">
-                                        @foreach($emoji->children as $child)
-                                            <button
-                                                data-clipboard-target="{{'#emojis-'.$child->id}}"
-                                                id="{{'emojis-'.$child->id}}"
-                                                class="text-4xl cursor-pointer hover:bg-gray-200 selection:bg-transparent p-1.5"
-                                                @click="copy({{$child->id}})"
-                                                title="{{$child->name}}"
-                                            >
-                                                {{$child->emoji}}
-                                            </button>
-                                        @endforeach
-                                    </div>
-                                @endif
-                            </div>
-                            <button
-                                class="relative w-full parent"
-                                id="parent-{{$emoji->id}}"
-                                aria-describedby="tooltip"
-                                @click="toggle()"
-                                @click.away="open = false" x-ref="button"
-                                title="{{$emoji->name}}"
-                            >
-                                <div class="border border-gray-300 cursor-pointer text-center py-1 hover:bg-gray-200 selection:bg-transparent">
-                                    <span class="text-5xl">{{$emoji->emoji}}</span>
-                                </div>
-                                <div
-                                    role="tooltip"
-                                    class="bg-black text-white font-bold p-1 text-xs absolute top-0 left-0 w-full selection:bg-transparent"
-                                    x-show.important="copied"
-                                    x-cloak
-                                >
-                                    Copied !
-                                </div>
-                            </button>
-                        @else
-                            <button class="relative w-full" @click="copy({{$emoji->id}})" title="{{$emoji->name}}">
-                                <div data-clipboard-target="{{'#emojis-'.$emoji->id}}" class="border border-gray-300 cursor-pointer text-center py-1 hover:bg-gray-200 selection:bg-transparent">
-                                    <span id="{{'emojis-'.$emoji->id}}" class="text-5xl">{{$emoji->emoji}}</span>
-                                </div>
-                                <div
-                                    role="tooltip"
-                                    class="bg-black text-white font-bold p-1 text-xs absolute top-0 left-0 w-full selection:bg-transparent"
-                                    x-cloak
-                                    x-show.important="copied"
-                                >
-                                    Copied !
-                                </div>
-                            </button>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
+            <section class="grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-17 xl:grid-cols-20 gap-1">
+                @each('emojis.emoji', $category->emojis, 'emoji')
+            </section>
         @empty
             <div class="flex flex-col items-center bg-white px-3 py-8 border border-gray-300 justify-center">
                 <h2 class="text-3xl my-3 font-bold">🤔 No emojis found</h2>
@@ -153,5 +83,5 @@
                 <a href="{{route('pages.index')}}" class="mt-8 text-white bg-black hover:bg-black/90 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-2 text-center">Clear Search</a>
             </div>
         @endforelse
-    </section>
+    </main>
 @endsection

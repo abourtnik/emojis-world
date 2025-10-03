@@ -2,52 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Emoji;
 use App\Facades\Endpoint;
+use App\ViewModels\IndexViewModel;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request, IndexViewModel $viewModel): View
     {
-        $search = $request->query('search');
-
-        $emojis = false;
-
-        if ($search) {
-            $emojis = Emoji::search($search)
-                ->options([
-                    'query_by' => 'name,emoji,category_name,sub_category_name,keywords',
-                    'query_by_weights' => '20,1,5,2,7',
-                    'num_typos'=> 2,
-                    'drop_tokens_threshold' => 0,
-                    'typo_tokens_threshold' => 1,
-                    'prefix' => true
-                ])
-                ->get();
-        }
-
-        return view('pages.index', [
-            'allCategories' => Category::query()->orderBy('id')->get(),
-            'categories' => Category::query()
-                ->withWhereHas(
-                    'emojis', function ($query) use ($emojis) {
-                            $query
-                                ->when($emojis, function ($query) use ($emojis) {
-                                    $query->whereIn('id', $emojis->pluck('id')->toArray());
-                                })
-                                ->scopes('withoutChildren')
-                                ->withCount('children')
-                                ->with('children')
-                                ->orderBy('sub_category_id')
-                                ->orderBy('version')
-                                ->orderBy('unicode');
-                        }
-                )
-                ->get(),
-        ]);
+        return view('pages.index', $viewModel->fromRequest($request));
     }
 
     public function api(): View

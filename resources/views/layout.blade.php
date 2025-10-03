@@ -17,7 +17,7 @@
     <meta property="og:url" content="{{url()->full()}}" />
     <meta property="og:title" content="@yield('title') - {{config('app.name')}}" />
     <meta property="og:description" content="@yield('description')" />
-    <meta property="og:image" content={{asset('images/logo.png')}}>
+    <meta property="og:image" content="@yield('image')">
     <meta property="og:language" content="{{ str_replace('_', '-', app()->getLocale()) }}" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -29,7 +29,7 @@
     <script defer src="https://cloud.umami.is/script.js" data-website-id="b72c51a9-871d-4dd2-a951-ade554a3be31"></script>
     @endif
 
-   {{-- @viteReactRefresh--}}
+    {{-- @viteReactRefresh--}}
     @vite(['resources/js/app.ts'])
 </head>
 <body class="bg-gray-200 min-h-screen flex flex-col">
