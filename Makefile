@@ -1,4 +1,4 @@
-.PHONY: help, connect, bun, reset, start, stop, optimize, install, init, deploy, test, logs, analyse, helpers
+.PHONY: help, connect, bun, reset, start, stop, optimize, update, install, deploy, test, logs, analyse, helpers
 .DEFAULT_GOAL=help
 
 help: ## Show help options
@@ -22,7 +22,7 @@ stop: ## Stop dev server
 optimize: ## Clear application cache
 	docker exec -it php_container php artisan optimize
 
-install: ## Install application
+update: ## Update application
 	composer install --optimize-autoloader --no-dev
 	php artisan migrate --force
 	/home/anton/.bun/bin/bun install
@@ -30,16 +30,19 @@ install: ## Install application
 	php artisan optimize
 	php artisan cache:clear
 
-init: ## Init application
-	cp .env.example .env
+install: ## Install application
+	#cp .env.example .env
 	docker compose up -d
 	docker exec -it php_container composer install
 	docker exec -it php_container php artisan key:generate
 	docker exec -it php_container php artisan storage:link
 	docker exec -it php_container php artisan db:create
 	docker exec -it php_container php artisan migrate
+	docker exec -it php_container php artisan db:seed
+	docker exec -it php_container php artisan scout:sync-index-settings
 	docker exec -it php_container php artisan optimize
 	docker exec -it php_container php artisan cache:clear
+	make helpers
 
 deploy: ## Deploy application
 	git pull origin main
@@ -47,7 +50,7 @@ deploy: ## Deploy application
 
 test: ## Run test
 	docker exec -it php_container php artisan config:clear
-	docker exec -it php_container php artisan test --env=testing --stop-on-failure
+	docker exec -it php_container php artisan test --env=testing --stop-on-failure $(if $(FILTER),--filter $(FILTER))
 
 logs: ## See last logs
 	docker exec -it php_container tail -f storage/logs/laravel.log
