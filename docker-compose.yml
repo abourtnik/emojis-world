@@ -73,7 +73,7 @@ services:
         - CHOKIDAR_USEPOLLING=true
         - CHOKIDAR_IGNORE_INITIAL=true
     #command: tail -f /dev/null
-    command: bun run dev
+    command: /bin/bash -c "if [ ! -d /var/www/node_modules ]; then bun install; fi && bun run dev"
     networks:
         - application
 networks:
