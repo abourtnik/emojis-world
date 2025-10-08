@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Category;
 use App\Models\Emoji;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class UpdateCategoriesCount extends Command
 {
@@ -43,6 +44,8 @@ class UpdateCategoriesCount extends Command
             }
 
         }
+
+        Cache::forget('api_categories');
 
         return Command::SUCCESS;
     }

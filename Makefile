@@ -31,7 +31,7 @@ update: ## Update application
 	php artisan cache:clear
 
 install: ## Install application
-	#cp .env.example .env
+	cp .env.example .env
 	docker compose up -d
 	docker exec -it php_container composer install
 	docker exec -it php_container php artisan key:generate

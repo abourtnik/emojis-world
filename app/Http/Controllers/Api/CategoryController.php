@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index(): ResourceCollection
     {
-        return Cache::rememberForever('categories', function () {
+        return Cache::rememberForever('api_categories', function () {
             return new CategoryCollection(
                 Category::query()
                     ->select('id', 'name', 'count')

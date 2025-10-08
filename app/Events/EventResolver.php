@@ -5,6 +5,7 @@ namespace App\Events;
 use App\Models\Emoji;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use BadMethodCallException;
 
@@ -34,15 +35,17 @@ class EventResolver
 
     private function default() : Collection
     {
-        return $this->event
-            ->emojis()
-            ->scopes('withoutChildren')
-            ->withCount('children')
-            ->with('children')
-            ->orderBy('sub_category_id')
-            ->orderBy('version')
-            ->orderBy('unicode')
-            ->get();
+        return Cache::rememberForever('event-' .$this->event->id. '-emojis', function () {
+            return $this->event
+                ->emojis()
+                ->scopes('withoutChildren')
+                ->withCount('children')
+                ->with('children')
+                ->orderBy('sub_category_id')
+                ->orderBy('version')
+                ->orderBy('unicode')
+                ->get();
+        });
     }
 
     private function top100(): Collection
