@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Support\Facades\Cache;
 
 class IndexViewModel
 {
@@ -73,25 +74,29 @@ class IndexViewModel
 
     private function allCategories(): Collection
     {
-        return Category::query()
-            ->orderBy('id')
-            ->get();
+        return Cache::rememberForever('all_categories', function () {
+            return Category::query()
+                ->orderBy('id')
+                ->get();
+        });
     }
 
     private function categories(Collection $emojis): Collection
     {
-        return Category::query()
-            ->withWhereHas('emojis', function ($query) use ($emojis) {
-                $query
-                    ->when(request()->has('search'), function (EloquentBuilder $query) use ($emojis) {
-                        $query->whereIn('id', $emojis->pluck('id')->toArray());
-                    })
-                    ->scopes('withoutChildren')
-                    ->withCount('children')
-                    ->with('children')
-                    ->orderBy('sub_category_id')
-                    ->orderBy('version')
-                    ->orderBy('unicode');
-            })->get();
+        return Cache::rememberForever('categories', function () use ($emojis) {
+            return Category::query()
+                ->withWhereHas('emojis', function ($query) use ($emojis) {
+                    $query
+                        ->when(request()->has('search'), function (EloquentBuilder $query) use ($emojis) {
+                            $query->whereIn('id', $emojis->pluck('id')->toArray());
+                        })
+                        ->scopes('withoutChildren')
+                        ->withCount('children')
+                        ->with('children')
+                        ->orderBy('sub_category_id')
+                        ->orderBy('version')
+                        ->orderBy('unicode');
+                })->get();
+        });
     }
 }
