@@ -71,6 +71,18 @@
                 </div>
             </form>
         </div>
+        @if($history->isNotEmpty())
+            <div class="flex items-center gap-4">
+                <h2 class="text-xl my-3 font-bold ps-3 sm:ps-0">Recently copied</h2>
+                <form method="POST" action="{{route('history.clear')}}" onsubmit="return confirm('Are you sure you want to clear all recently copied emojis ?')">
+                    @csrf()
+                    <button class="text-sm text-blue-500 cursor-pointer" type="submit">Clear</button>
+                </form>
+            </div>
+            <section class="grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-17 xl:grid-cols-20 gap-1">
+                @each('emojis.emoji', $history, 'emoji')
+            </section>
+        @endif
         @forelse($categories as $category)
             <h2 class="text-xl my-3 font-bold ps-3 sm:ps-0" id="{{$category->slug}}">{{$category->name}}</h2>
             <section class="grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-17 xl:grid-cols-20 gap-1">
