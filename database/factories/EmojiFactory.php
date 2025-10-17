@@ -23,11 +23,11 @@ class EmojiFactory extends Factory
         return [
             'name' => fake()->word(),
             'emoji' => fake()->emoji(),
-            'unicode' => fake()->numerify('1F###'),
+            'unicode' => fake()->unique()->numerify('1F###'),
             'category_id' => Category::factory()->create()->id,
             'sub_category_id' => SubCategory::factory()->create()->id,
             'parent_id' => null,
-            'count' => fake()->numberBetween(1, 1000),
+            'count' => 0,
             'version' => fake()->randomElement(SearchRequest::AVAILABLE_VERSIONS),
             'keywords' => fake()->words()
         ];
