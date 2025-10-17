@@ -46,7 +46,7 @@ install: ## Install application
 
 deploy: ## Deploy application
 	git pull origin main
-	make install
+	make update
 
 test: ## Run test
 	docker exec -it php_container php artisan config:clear
