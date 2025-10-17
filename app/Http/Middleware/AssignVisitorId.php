@@ -22,6 +22,7 @@ class AssignVisitorId
 
         $visitorId = (string) Str::uuid();
 
+        /** @var \Illuminate\Http\Response $response */
         $response = $next($request);
 
         return $response->cookie('visitor_id', $visitorId, 60 * 24 * 365 * 20); // 20 years
