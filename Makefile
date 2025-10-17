@@ -4,10 +4,10 @@
 help: ## Show help options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-connect: ## Enter in docker container
+connect: ## Enter in php container
 	docker exec -it php_container /bin/bash
 
-bun: ## Enter in docker container
+bun: ## Enter in bun container
 	docker exec -it bun_container /bin/sh
 
 reset: ## Reset database and run seeders
