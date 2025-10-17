@@ -80,7 +80,6 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string $name
- * @property string $description
  * @property string $image
  * @property string $slug
  * @property string|null $start_date
@@ -90,10 +89,10 @@ namespace App\Models{
  * @property-read int|null $emojis_count
  * @property-read mixed $image_url
  * @property-read mixed $route
+ * @method static \Database\Factories\EventFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Event newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Event newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Event query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereEndDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Event whereImage($value)
@@ -105,6 +104,26 @@ namespace App\Models{
  */
 	#[\AllowDynamicProperties]
 	class IdeHelperEvent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property string $visitor_id
+ * @property int $emoji_id
+ * @property \Illuminate\Support\Carbon $date
+ * @property-read \App\Models\Emoji $emoji
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|History newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|History newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|History query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|History whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|History whereEmojiId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|History whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|History whereVisitorId($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperHistory {}
 }
 
 namespace App\Models{
