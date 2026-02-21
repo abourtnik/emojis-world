@@ -15,6 +15,9 @@ reset: ## Reset database and run seeders
 
 start: ## Start dev server
 	docker compose -p emojisworld up -d
+	@echo "\nDevelopment servers launched !\n"
+	@echo "🌏  Web: http://emojisworld.local"
+	@echo "🛠️  API: http://api.emojisworld.local/v1"
 
 stop: ## Stop dev server
 	docker compose -p emojisworld down
@@ -32,14 +35,15 @@ update: ## Update application
 
 install: ## Install application
 	cp .env.example .env
-	docker compose up -d
+	docker compose -p emojisworld up -d
 	docker exec -it php_container composer install
 	docker exec -it php_container php artisan key:generate
 	docker exec -it php_container php artisan storage:link
 	docker exec -it php_container php artisan db:create
+	docker exec -it php_container php artisan db:create emojisworld_test
 	docker exec -it php_container php artisan migrate
 	docker exec -it php_container php artisan db:seed
-	docker exec -it php_container php artisan scout:sync-index-settings
+	docker exec -it php_container php artisan scout:import "App\Models\Emoji"
 	docker exec -it php_container php artisan optimize
 	docker exec -it php_container php artisan cache:clear
 	make helpers

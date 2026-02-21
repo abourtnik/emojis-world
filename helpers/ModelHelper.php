@@ -151,8 +151,8 @@ namespace App\Models{
  * @property int $id
  * @property string $method
  * @property string $url
- * @property int $response_status in milliseconds
- * @property int $response_time
+ * @property int $response_status
+ * @property int $response_time in milliseconds
  * @property \Illuminate\Support\Carbon $date
  * @property string $ip
  * @property string $user_agent
