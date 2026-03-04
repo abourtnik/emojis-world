@@ -18,7 +18,7 @@
     <main class="flex-1">
         <div class="relative">
             <img class="w-full h-96 object-cover" src="{{$event->image_url}}" alt="event {{$event->name}}">
-            <h1 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-1 text-2xl font-bold">{{$event->name}}</h1>
+            <h1 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-1 text-2xl font-bold w-80 text-center">{{$event->name}}</h1>
             <span class="absolute top-0 left-0 w-full h-full bg-black/40"></span>
             <div class="absolute bottom-0 end-0 text-white p-2 font-bold">{{$emojis->count()}} emojis</div>
         </div>
