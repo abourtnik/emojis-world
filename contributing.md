@@ -2,7 +2,7 @@
 
 ### **Did you find a bug ?**
 
-* **Do not open up a GitHub issue if the bug is a security vulnerability in Emojis World. Prefer to send an email to contact@antonbourtnik.fr with clear description of security vulnerability.**
+* **Do not open up a GitHub issue if the bug is a security vulnerability in Emojis World. Prefer to send an email to support@antonbourtnik.fr with clear description of security vulnerability.**
 
 * **Ensure the bug was not already reported** by searching on GitHub under Issues.
 
@@ -20,7 +20,7 @@ This changes will generally be accepted.
 
 ### **Do you have questions about the source code ?**
 
-* Ask any question about how to use Emojis World to send email at **contact@antonbourtnik.fr**.
+* Ask any question about how to use Emojis World to send email at **support@antonbourtnik.fr**.
 
 Emojis World is volunteer effort. We encourage you to pitch in and join our team !
 
