@@ -401,7 +401,7 @@ Emojis World is made available under the [MIT License](http://www.opensource.org
 
 ## 🔒 Security
 
-If you discover security vulnerabilities, please email **contact@antonbourtnik.fr** instead of using the issue tracker.
+If you discover security vulnerabilities, please email **support@antonbourtnik.fr** instead of using the issue tracker.
 
 ---
 
@@ -409,5 +409,5 @@ If you discover security vulnerabilities, please email **contact@antonbourtnik.f
 
 **Made with ❤️ by [Anton Bourtnik](https://github.com/abourtnik)**
 
-[Website](https://www.antonbourtnik.fr) • [Support](mailto:contact@antonbourtnik.fr)
+[Website](https://www.antonbourtnik.fr) • [Support](mailto:support@antonbourtnik.fr)
 </div>
