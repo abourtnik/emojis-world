@@ -18,7 +18,7 @@ class SearchRequest extends FormRequest
      */
     protected $stopOnFirstFailure = true;
 
-    const array AVAILABLE_VERSIONS = ['0.6', '0.7', '1.0', '2.0', '3.0', '4.0', '5.0', '11.0', '12.0', '12.1', '13.0', '13.1', '14.0', '15.0'];
+    const array AVAILABLE_VERSIONS = ['0.6', '0.7', '1.0', '2.0', '3.0', '4.0', '5.0', '11.0', '12.0', '12.1', '13.0', '13.1', '14.0', '15.0', '16.0', '17.0'];
 
     /**
      * Determine if the user is authorized to make this request.
