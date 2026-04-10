@@ -4,7 +4,7 @@
 
 # 🌍 Emojis World 🌍
 
-**Open Source REST API for emojis - 3809 Emojis Available**
+**Open Source REST API for emojis - 3816 Emojis Available**
 
 [![Laravel Version](https://img.shields.io/badge/Laravel-12.0+-FF2D20?style=flat&logo=laravel)](https://laravel.com)
 ![GitHub License](https://img.shields.io/github/license/abourtnik/emojis-world)
@@ -32,13 +32,13 @@
 
 | <div style="width:100px">ID</div> | <div style="width:200px">Name</div> | <div style="width:100px">Emojis Count</div> 
 |-----------------------------------|-------------------------------------|---------------------------------------------|
-| 1                                 | Smileys & People                    | 143                                         |
-| 2                                 | People & Body                       | 2284                                        |
-| 3                                 | Animals & Nature                    | 152                                         |
+| 1                                 | Smileys & People                    | 145                                         |
+| 2                                 | People & Body                       | 2285                                        |
+| 3                                 | Animals & Nature                    | 153                                         |
 | 4                                 | Food & Drink                        | 137                                         |
-| 5                                 | Travel & Places                     | 218                                         |
+| 5                                 | Travel & Places                     | 219                                         |
 | 6                                 | Activities                          | 86                                          |
-| 7                                 | Objects                             | 262                                         |
+| 7                                 | Objects                             | 264                                         |
 | 8                                 | Symbols                             | 257                                         |
 | 9                                 | Flags                               | 270                                         |
 
@@ -60,6 +60,7 @@
 | 15.0                                   | 30                                          |
 | 15.1                                   | 118                                         |
 | 16.0                                   | 8                                           |
+| 17.0                                   | 7                                           |
 
 ## Endpoints
 
