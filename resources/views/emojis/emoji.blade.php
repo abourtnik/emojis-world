@@ -13,7 +13,7 @@
         >
             <button
                 id="{{'emojis-'.$emoji->id}}"
-                class="text-4xl cursor-pointer hover:bg-gray-200 selection:bg-transparent p-1.5"
+                class="text-4xl cursor-pointer hover:bg-gray-200 selection:bg-transparent p-1.5 z-10"
                 data-clipboard-target="{{'#emojis-'.$emoji->id}}"
                 @click="copy({{$emoji->id}})"
                 title="{{$emoji->name}}"

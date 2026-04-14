@@ -4,7 +4,7 @@
 
 # 🌍 Emojis World 🌍
 
-**Open Source REST API for emojis - 3816 Emojis Available**
+**Open Source REST API for emojis - 3972 Emojis Available**
 
 [![Laravel Version](https://img.shields.io/badge/Laravel-12.0+-FF2D20?style=flat&logo=laravel)](https://laravel.com)
 ![GitHub License](https://img.shields.io/github/license/abourtnik/emojis-world)
