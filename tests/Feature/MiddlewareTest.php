@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Emoji;
 use App\Models\Ip;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -9,6 +10,8 @@ use Tests\TestCase;
 class MiddlewareTest extends TestCase
 {
     use RefreshDatabase;
+
+    const string BOT_USER_AGENT = 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/100.0.4896.127 Safari/537.36';
 
     public function test_banned_ip(): void
     {
@@ -63,10 +66,20 @@ class MiddlewareTest extends TestCase
     public function test_crawler(): void
     {
         $this
-            ->withHeaders(['User-Agent' => 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/100.0.4896.127 Safari/537.36',])
+            ->withHeaders(['User-Agent' => self::BOT_USER_AGENT])
             ->get(route('emojis.index'))
             ->assertStatus(200);
 
         $this->assertDatabaseCount('logs', 0);
+    }
+
+    public function test_crawler_increment(): void
+    {
+        $emoji = Emoji::factory()->create();
+
+        $this
+            ->withHeaders(['User-Agent' => self::BOT_USER_AGENT])
+            ->post(route('emojis.increment', $emoji))
+            ->assertForbidden();
     }
 }
