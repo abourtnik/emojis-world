@@ -32,5 +32,11 @@ class RateLimitServiceProvider extends ServiceProvider
 
             return Limit::none();
         });
+
+        RateLimiter::for('increment', function (Request $request) {
+            return Limit::perMinute(60)->by($request->ip())->response(function (Request $request, array $headers) {
+                return response()->json(['message' => 'Too many requests'], 429, $headers);
+            });
+        });
     }
 }
