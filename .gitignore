@@ -42,3 +42,5 @@ Thumbs.db
 # IDE Helper
 .phpstorm.meta.php
 _ide_helper.php
+
+public/ads.txt
