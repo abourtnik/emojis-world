@@ -19,11 +19,9 @@
         @if(config('app.ads_enabled'))
             <div class="bg-gray-300 border border-gray-500 mb-3 w-full h-[100px] overflow-hidden mx-3 sm:mx-0">
                 <ins class="adsbygoogle"
-                     style="display:block"
+                     style="display:block; width:100%; height:100%;"
                      data-ad-client="ca-pub-3386885268137177"
-                     data-ad-slot="9976332725"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                     data-ad-slot="9976332725"></ins>
             </div>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
