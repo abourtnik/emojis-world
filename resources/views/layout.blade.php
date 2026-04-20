@@ -29,6 +29,10 @@
     <script defer src="https://cloud.umami.is/script.js" data-website-id="b72c51a9-871d-4dd2-a951-ade554a3be31"></script>
     @endif
 
+    @if (config('app.ads_enabled'))
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3386885268137177" crossorigin="anonymous"></script>
+    @endif
+
     {{-- @viteReactRefresh--}}
     @vite(['resources/js/app.ts'])
 </head>
