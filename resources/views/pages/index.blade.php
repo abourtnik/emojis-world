@@ -16,6 +16,20 @@
         </a>
     </header>
     <main class="container mx-auto py-3 flex-1">
+        @if(config('app.ads_enabled'))
+            <div class="bg-gray-300 border border-gray-500 mb-3 w-full h-[100px]">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3386885268137177"
+                     data-ad-slot="9976332725"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        @endif
+
         <div class="px-3 sm:px-0">
             <section class="flex gap-3 w-full overflow-x-auto scrollbar-hide mb-4">
                 @forelse ($events as $event)
