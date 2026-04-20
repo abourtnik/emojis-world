@@ -17,7 +17,7 @@
     </header>
     <main class="container mx-auto py-3 flex-1">
         @if(config('app.ads_enabled'))
-            <div class="bg-gray-300 border border-gray-500 mb-3 w-full h-[100px] overflow-hidden mx-3 sm:mx-0">
+            <div class="bg-gray-300 border border-gray-500 mb-3 h-[100px] overflow-hidden mx-3 sm:mx-0">
                 <ins class="adsbygoogle"
                      style="display:block; width:100%; height:100%;"
                      data-ad-client="ca-pub-3386885268137177"
