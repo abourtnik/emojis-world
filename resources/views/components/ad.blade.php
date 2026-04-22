@@ -9,9 +9,7 @@
                 <ins class="adsbygoogle"
                      style="display:block; width:100%; min-height:100px; max-height:200px; height: 100%"
                      data-ad-client="ca-pub-3386885268137177"
-                     data-ad-slot="9976332725"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                     data-ad-slot="9976332725"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
