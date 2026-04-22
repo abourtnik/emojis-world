@@ -4,7 +4,7 @@
             <span class="text-black text-sm">Ad</span>
             <button @click="show = !show" class="text-black cursor-pointer text-sm">Close</button>
         </div>
-        <div class="bg-gray-300 border border-gray-500 min-h-[100px] max-h-[200px] overflow-hidden">
+        <div class="bg-gray-300 border border-gray-500 h-[200px] overflow-hidden">
             @if(app()->isProduction())
                 <ins class="adsbygoogle"
                      style="display:block; width:100%; min-height:100px; max-height:200px; height: 100%"
