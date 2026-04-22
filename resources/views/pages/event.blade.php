@@ -22,6 +22,9 @@
             <span class="absolute top-0 left-0 w-full h-full bg-black/40"></span>
             <div class="absolute bottom-0 end-0 text-white p-2 font-bold">{{$emojis->count()}} emojis</div>
         </div>
+        <section class="container mx-auto mt-3">
+            <x-ad/>
+        </section>
         <section class="grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-17 xl:grid-cols-20 gap-1 container mx-auto py-3">
             @each('emojis.emoji', $emojis, 'emoji')
         </section>
