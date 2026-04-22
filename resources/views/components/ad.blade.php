@@ -7,9 +7,10 @@
         <div class="bg-gray-300 border border-gray-500 h-[200px] overflow-hidden">
             @if(app()->isProduction())
                 <ins class="adsbygoogle"
-                     style="display:block; width:100%; min-height:100px; max-height:200px; height: 100%"
+                     style="display:block; width:100%; height: 100%"
                      data-ad-client="ca-pub-3386885268137177"
-                     data-ad-slot="9976332725"></ins>
+                     data-ad-slot="9976332725"
+                     data-full-width-responsive="true"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
