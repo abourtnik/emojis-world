@@ -7,7 +7,6 @@
         <div class="bg-gray-300 border border-gray-500 min-h-[100px] max-h-[150px] sm:max-h-[200px] md:max-h-[250px] overflow-hidden">
             <div>
                 @if(app()->isProduction())
-
                     <ins class="adsbygoogle"
                          style="display:block; width:100%;"
                          data-ad-client="ca-pub-3386885268137177"
