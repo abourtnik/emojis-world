@@ -10,7 +10,7 @@
                      style="display:block; width:100%; height: 100%"
                      data-ad-client="ca-pub-3386885268137177"
                      data-ad-slot="9976332725"
-                     data-full-width-responsive="true"></ins>
+                     data-ad-format="auto"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
