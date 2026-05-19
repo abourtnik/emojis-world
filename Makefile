@@ -28,8 +28,6 @@ optimize: ## Clear application cache
 update: ## Update application
 	composer install --optimize-autoloader --no-dev
 	php artisan migrate --force
-	/home/anton/.bun/bin/bun install
-	/home/anton/.bun/bin/bun run build
 	php artisan optimize
 	php artisan cache:clear
 
