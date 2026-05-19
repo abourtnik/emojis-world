@@ -57,7 +57,7 @@ test: ## Run test
 logs: ## See last logs
 	docker exec -it php_container tail -f storage/logs/laravel.log
 
-analyse: ## Execute Larastan
+lint: ## Execute Larastan
 	docker exec -it php_container ./vendor/bin/phpstan analyse --memory-limit=2G
 
 helpers: ## Generate Helpers

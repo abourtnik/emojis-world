@@ -11,6 +11,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
+use SortDirection;
 
 class IndexViewModel
 {
@@ -68,9 +69,9 @@ class IndexViewModel
                      ")
                     ->from('events');
             }, 't')
-            ->orderBy('is_permanent', 'DESC')
-            ->orderBy('is_active', 'DESC')
-            ->orderBy('next_start_date', 'ASC')
+            ->orderBy('is_permanent', SortDirection::Descending)
+            ->orderBy('is_active', SortDirection::Descending)
+            ->orderBy('next_start_date')
             ->get();
     }
 
