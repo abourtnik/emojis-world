@@ -21,7 +21,6 @@ jobs:
       mariadb:
         image: mariadb:11.6.2
         env:
-          MARIADB_ROOT_PASSWORD: "root"
           MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "yes"
           MARIADB_DATABASE: emojisworld_test
         options: >-
