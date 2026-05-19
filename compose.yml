@@ -12,18 +12,18 @@ services:
         - mariadb
     restart: unless-stopped
   nginx:
-      image: nginx:1.22.0-alpine
-      container_name: nginx_container
-      networks:
-          - application
-      ports:
-          - "80:80"
-      volumes:
-          - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
-          - ./:/var/www/html
-      links:
-          - php
-      restart: unless-stopped
+    image: nginx:1.22.0-alpine
+    container_name: nginx_container
+    networks:
+        - application
+    ports:
+        - "80:80"
+    volumes:
+        - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./:/var/www/html
+    depends_on:
+        - php
+    restart: unless-stopped
   typesense:
     image: typesense/typesense:29.0
     container_name: typesense_container
@@ -48,19 +48,6 @@ services:
       - ./database/dumps:/dumps
     networks:
       - application
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin_container
-    environment:
-      PMA_ARBITRARY: 1
-      PMA_HOST: mariadb
-      PMA_USER: root
-    links:
-      - mariadb
-    ports:
-      - "8091:80"
-    networks:
-      - application
   bun:
     image: oven/bun:1.2.0
     container_name: bun_container
@@ -73,7 +60,7 @@ services:
         - CHOKIDAR_USEPOLLING=true
         - CHOKIDAR_IGNORE_INITIAL=true
     #command: tail -f /dev/null
-    command: /bin/bash -c "if [ ! -d /var/www/node_modules ]; then bun install; fi && bun run dev"
+    command: /bin/bash -c "if [ ! -d node_modules ]; then bun install; fi && bun run dev"
     networks:
         - application
 networks:
