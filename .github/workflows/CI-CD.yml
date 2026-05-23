@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     container: abourtnik/laravel
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: 📦 Install dependencies
         run: composer install --no-interaction --prefer-dist
       - name: ⚙️ Run PHPStan
@@ -29,7 +29,7 @@ jobs:
           --health-timeout=5s
           --health-retries=5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: 📦 Install dependencies
         run: composer install --no-interaction --prefer-dist
       - name: ⚙️ Run tests
@@ -38,13 +38,13 @@ jobs:
     runs-on: ubuntu-latest
     container: oven/bun
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: 📦 Install dependencies
         run: bun install
       - name: ⚙️ Build assets
         run: bun run build
       - name: ⬆️ Upload build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: public-build
           path: public/build/
@@ -55,7 +55,7 @@ jobs:
     environment: Production
     steps:
       - name: ⬇️ Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: public-build
           path: public/build/
