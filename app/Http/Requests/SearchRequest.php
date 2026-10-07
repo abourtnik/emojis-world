@@ -36,8 +36,16 @@ class SearchRequest extends FormRequest
         $filters = ['categories', 'sub_categories', 'versions'];
 
         foreach ($filters as $filter){
-            if ($this->has($filter)) {
-                $this->merge([$filter => explode(',' ,$this->input($filter))]);
+
+            $value = $this->input($filter);
+
+            if ($this->has($filter) && is_string($value)) {
+                $this->merge([
+                    $filter => array_values(array_filter(
+                        array_map('trim', explode(',', $value)),
+                        fn ($v) => $v !== ''
+                    )),
+                ]);
             }
         }
 
@@ -55,21 +63,22 @@ class SearchRequest extends FormRequest
     {
         $rules = [
             'limit' => [
-                'nullable',
+                'sometimes',
                 'integer',
                 'min:1',
                 'max:50'
             ],
             'categories' => [
-                'nullable',
-                'array'
+                'sometimes',
+                'array',
+                'min:1'
             ],
             'categories.*' => [
                 'integer',
                 'between:1,10'
             ],
             'sub_categories' => [
-                'nullable',
+                'sometimes',
                 'array'
             ],
             'sub_categories.*' => [
@@ -77,7 +86,7 @@ class SearchRequest extends FormRequest
                 'between:1,100'
             ],
             'versions' => [
-                'nullable',
+                'sometimes',
                 'array'
             ],
             'versions.*' => [

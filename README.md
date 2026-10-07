@@ -6,7 +6,7 @@
 
 **Open Source REST API for emojis - 3972 Emojis Available**
 
-[![Laravel Version](https://img.shields.io/badge/Laravel-12.0+-FF2D20?style=flat&logo=laravel)](https://laravel.com)
+[![Laravel Version](https://img.shields.io/badge/Laravel-13.0+-FF2D20?style=flat&logo=laravel)](https://laravel.com)
 ![GitHub License](https://img.shields.io/github/license/abourtnik/emojis-world)
 <a href="https://github.com/abourtnik/emojis-world/actions">
 <img src="https://github.com/abourtnik/emojis-world/actions/workflows/CI-CD.yml/badge.svg" alt="Build Status">

@@ -38,14 +38,19 @@ class SearchTest extends TestCase
             '?q=apple&categories=bad',
             '?q=apple&sub_categories=bad',
             '?q=apple&versions=bad',
-            '?q=apple&limit=bad'
+            '?q=apple&limit=bad',
+            '?q=apple&limit=',
+            '?q=apple&limit=%20',
+            '?q=apple&categories=',
+            '?q=apple&categories=,',
+            '?q=apple&categories=%20',
         ];
 
         foreach ($queries as $query) {
             $this->get(route('emojis.search').$query)
                 ->assertStatus(422)
                 ->assertJson(fn (AssertableJson $json) =>
-                $json->whereType('message', 'string')
+                    $json->whereType('message', 'string')
                 );
         }
 
