@@ -26,6 +26,5 @@ class AssignVisitorId
         $response = $next($request);
 
         return $response->cookie('visitor_id', $visitorId, 60 * 24 * 365 * 20); // 20 years
-
     }
 }

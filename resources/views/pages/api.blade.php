@@ -43,13 +43,13 @@
                     <div class="flex items-start gap-4 flex-wrap lg:flex-nowrap">
                         <div class="w-full">
                             <div class="flex items-center gap-3 mb-3">
-                                <div class="border border-blue-300 py-0.5 px-2 bg-blue-100 text-blue-500 rounded-3xl">GET</div>
+                                <div class="hidden xs:inline-block border border-blue-300 py-0.5 px-2 bg-blue-100 text-blue-500 rounded-3xl">GET</div>
                                 <div class="relative w-full">
                                     <input
                                         id="{{'endpoint-'. $index}}"
                                         type="text"
                                         class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg block w-full px-2.5 py-4"
-                                        value="{{config('app.api_url') .'/v'.config('app.api_version'). $endpoint->path}}"
+                                        value="{{$endpoint->getUrl($endpoint->path)}}"
                                         readonly
                                     >
                                     <button
@@ -83,7 +83,7 @@
                                     <h4 class="text-lg font-bold">Search parameters</h4>
                                     @foreach($endpoint->params as $param)
                                         <div class="my-5">
-                                            <div class="flex items-center gap-4 mb-2">
+                                            <div class="flex flex-wrap items-center gap-3 mb-2">
                                                 <span class="bg-gray-50 border border-gray-300 px-2 rounded">{{$param->name}}</span>
                                                 <div class="flex gap-1">
                                                     @if($param->required)
@@ -107,9 +107,9 @@
                                     <div class="text-black font-bold">Response</div>
                                     <code class="text-black">application/json</code>
                                 </div>
-                                <div class="text-gray-500 break-all text-sm">{{config('app.api_url') .'/v'.config('app.api_version'). $endpoint->example}}</div>
+                                <div class="text-gray-500 break-all text-sm">{{$endpoint->getUrl($endpoint->example)}}</div>
                             </div>
-                            <div class="h-100 bg-gray-200 px-3 py-2 overflow-y-auto"><pre><code class="whitespace-pre">{{json_encode($endpoint->response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)}}</code></pre>
+                            <div class="h-100 bg-gray-200 px-3 py-2 overflow-y-auto"><pre><code class="whitespace-pre">{{$endpoint->getJsonExample()}}</code></pre>
                             </div>
                         </div>
                     </div>

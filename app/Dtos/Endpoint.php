@@ -27,4 +27,16 @@ class Endpoint
         $this->example = $example;
         $this->response = $response;
     }
+
+    public function getUrl(string $path = ''): string
+    {
+        $protocol = request()->secure() ? 'https://' : 'http://';
+
+        return $protocol .config('app.api_url') .'/v'.config('app.api_version'). $path;
+    }
+
+    public function getJsonExample(): false|string
+    {
+        return json_encode($this->response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
 }

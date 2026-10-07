@@ -4,7 +4,7 @@ return [
     [
         'name' => 'Search emojis',
         'description' => 'Search for emojis by keyword',
-        'path' => '/search?q=party',
+        'path' => '/search',
         'params' => [
             [
                 'name' => 'q',

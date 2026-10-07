@@ -1,5 +1,11 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+
 @source "../views";
+@source "../js";
+
+@theme {
+    --breakpoint-xs: 450px;
+}
 
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
