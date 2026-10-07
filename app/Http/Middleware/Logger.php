@@ -20,7 +20,7 @@ class Logger
     {
         $response = $next($request);
 
-        if ($request->get('ip')?->ignored) {
+        if ($request->input('ip')?->ignored) {
             return $response;
         }
 
