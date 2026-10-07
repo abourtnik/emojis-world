@@ -26,10 +26,9 @@ optimize: ## Clear application cache
 	docker exec -it php_container php artisan optimize
 
 update: ## Update application
-	composer install --optimize-autoloader --no-dev
+	composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 	php artisan migrate --force
 	php artisan optimize
-	php artisan cache:clear
 
 install: ## Install application
 	cp .env.example .env

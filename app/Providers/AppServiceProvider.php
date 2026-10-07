@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Services\EndpointService;
 use Illuminate\Support\ServiceProvider;
+use App\View\Composers\TrackingComposer;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,5 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(EndpointService::class, function () {
             return new EndpointService();
         });
+
+        View::composer('layout', TrackingComposer::class);
     }
 }

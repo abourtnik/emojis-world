@@ -37,7 +37,7 @@ class SearchRequest extends FormRequest
 
         foreach ($filters as $filter){
             if ($this->has($filter)) {
-                $this->merge([$filter => explode(',' ,$this->get($filter))]);
+                $this->merge([$filter => explode(',' ,$this->input($filter))]);
             }
         }
 
