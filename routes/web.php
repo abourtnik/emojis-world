@@ -6,7 +6,6 @@ use App\Http\Middleware\CheckIp;
 use App\Http\Middleware\AssignVisitorId;
 use App\Http\Middleware\BlockBot;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\EmojiController;
@@ -23,16 +22,8 @@ Route::domain(config('app.url'))
             Route::get('events/{event:slug}', [EventController::class, 'show'])->name('event');
         });
         Route::post('emojis/{emoji:id}/increment', [EmojiController::class, 'increment'])
-            ->middleware([BlockBot::class, 'throttle:increment'])
+            ->middleware([AssignVisitorId::class, BlockBot::class, 'throttle:increment'])
             ->name('emojis.increment');
         Route::post('history/clear', [HistoryController::class, 'clear'])->name('history.clear');
     }
 );
-
-// Global 404 Page
-Route::fallback(function () {
-    if (Str::startsWith(request()->fullUrl(), config('app.api_url'))) {
-        return response()->json(['message' => 'Resource not found'], 404);
-    }
-    abort(404);
-});

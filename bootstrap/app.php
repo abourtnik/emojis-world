@@ -1,11 +1,9 @@
 <?php
 
+use App\Exceptions\NotFoundHttpHandler;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -19,16 +17,14 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
-            if (Str::startsWith($request->fullUrl(), config('app.api_url'))) {
+        // GLOBAL
+        $exceptions->context(fn () => [
+            'url'        => request()->fullUrl(),
+            'method'     => request()->method(),
+            'ip'         => request()->ip(),
+            'user_agent' => request()->userAgent(),
+            'input'      => request()->except(['current_password', 'password', 'password_confirmation', 'token']),
+        ]);
 
-                $model = Str::afterLast($e->getPrevious()->getModel(), '\\');
-
-                return response()->json([
-                    'message' => $model. ' not found.'
-                ], 404);
-            }
-
-            return false;
-        });
+        NotFoundHttpHandler::register($exceptions);
     })->create();
