@@ -28,6 +28,7 @@ optimize: ## Clear application cache
 update: ## Update application
 	composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 	php artisan migrate --force
+	php artisan patch --force
 	php artisan optimize
 
 install: ## Install application

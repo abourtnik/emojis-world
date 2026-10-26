@@ -22,12 +22,14 @@ class EmojiFactory extends Factory
     {
         return [
             'name' => fake()->word(),
+            'slug' => fake()->slug(),
             'emoji' => fake()->emoji(),
             'unicode' => fake()->unique()->numerify('1F###'),
             'category_id' => Category::factory()->create()->id,
             'sub_category_id' => SubCategory::factory()->create()->id,
             'parent_id' => null,
             'count' => 0,
+            'description' => fake()->sentence(),
             'version' => fake()->randomElement(SearchRequest::AVAILABLE_VERSIONS),
             'keywords' => fake()->words()
         ];

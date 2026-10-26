@@ -189,6 +189,7 @@ return [
                         ['name' => 'id', 'type' => 'string'],
                         ['name' => 'name', 'type' => 'string', 'locale' => 'en', 'stem' => true],
                         ['name' => 'emoji', 'type' => 'string'],
+                        ['name' => 'description', 'type' => 'string', 'locale' => 'en', 'stem' => true, 'optional' => true],
                         ['name' => 'category_id', 'type' => 'int32'],
                         ['name' => 'sub_category_id', 'type' => 'int32'],
                         ['name' => 'category_name', 'type' => 'string', 'locale' => 'en', 'stem' => true],
