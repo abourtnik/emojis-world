@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Casts\StringArray;
+use App\Enums\Direction;
+use App\Enums\Gender;
+use App\Enums\SkinTone;
 use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,8 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\HtmlString;
 
 
 /**
@@ -31,7 +36,11 @@ class Emoji extends Model
     {
         return [
             'keywords' => StringArray::class,
-            'version' => 'decimal:2'
+            'version' => 'decimal:2',
+            'skin_tone' => SkinTone::class,
+            'skin_tone-2' => SkinTone::class,
+            'gender' => Gender::class,
+            'direction' => Direction::class,
         ];
     }
 
@@ -39,20 +48,29 @@ class Emoji extends Model
      * -------------------- RELATIONS --------------------
      */
 
-    public function category (): BelongsTo {
+    public function category (): BelongsTo
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function subCategory (): BelongsTo {
+    public function subCategory (): BelongsTo
+    {
         return $this->belongsTo(SubCategory::class);
     }
 
-    public function children () : HasMany  {
-        return $this->hasMany(Emoji::class, 'parent_id', 'id');
+    public function children (): HasMany
+    {
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
-    public function parent () : HasOne  {
-        return $this->hasOne(Emoji::class, 'id', 'parent_id');
+    public function parent (): HasOne
+    {
+        return $this->hasOne(self::class, 'id', 'parent_id');
+    }
+
+    public function group(): HasMany
+    {
+        return $this->hasMany(self::class, 'group_id', 'group_id');
     }
 
     /**
@@ -64,6 +82,47 @@ class Emoji extends Model
         return Attribute::make(
             get: fn (float $value) => (float) number_format($value, 1),
         );
+    }
+
+    protected function description(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->attributes['description'] ?: $this->parent?->description,
+        );
+    }
+
+    protected function route(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => route('pages.emoji', ['emoji' => $this->slug]),
+        );
+    }
+
+    protected function keywordsAsString(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => implode(', ' , $this->keywords)
+        );
+    }
+
+    protected function codepoint(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Str::of($this->unicode)->explode(' ')->map(fn($code) => 'U+' . $code)->join(' ')
+        );
+    }
+
+    protected function descriptionHtml(): Attribute
+    {
+        return Attribute::get(function () {
+            $html = collect(preg_split('/\n{2,}/', $this->description))
+                ->map(fn (string $p) => trim($p))
+                ->filter()
+                ->map(fn (string $p) => '<p>' . e($p) . '</p>')
+                ->implode("\n");
+
+            return new HtmlString($html);
+        });
     }
 
     /**
@@ -100,6 +159,7 @@ class Emoji extends Model
             'id' => (string) $this->id,
             'name' => $this->name,
             'emoji' => $this->emoji,
+            'description' => $this->description,
             'category_id' => $this->category->id,
             'sub_category_id' => $this->subCategory->id,
             'category_name' => $this->category->name,
