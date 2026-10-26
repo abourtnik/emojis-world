@@ -47,6 +47,6 @@ class UpdateCategoriesCount extends Command
 
         Cache::forget('api_categories');
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 }

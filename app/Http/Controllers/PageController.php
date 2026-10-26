@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\ShowIndexPage;
+use App\Http\Requests\SearchRequest;
 use App\Models\Emoji;
 use App\Facades\Endpoint;
-use App\ViewModels\IndexViewModel;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function index(Request $request, IndexViewModel $viewModel): View
+    public function index(SearchRequest $request, ShowIndexPage $showIndexPage): View
     {
-        return view('pages.index', $viewModel->fromRequest($request));
+        return view('pages.index', $showIndexPage->fromRequest($request));
     }
 
     public function api(): View

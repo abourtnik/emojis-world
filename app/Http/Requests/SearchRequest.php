@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\ValidationException;
 
 class SearchRequest extends FormRequest
 {
@@ -103,6 +103,14 @@ class SearchRequest extends FormRequest
             ];
         }
 
+        if ($this->routeIs('pages.index')) {
+            $rules['search'] = [
+                'sometimes',
+                'string',
+                'max:100'
+            ];
+        }
+
         return $rules;
     }
 
@@ -122,8 +130,12 @@ class SearchRequest extends FormRequest
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new ValidationException($validator, response()->json([
-            'message' => $validator->errors()->first(),
-        ], 422));
+        if ($this->expectsJson()) {
+            throw new HttpResponseException(response()->json([
+                'message' => $validator->errors()->first(),
+            ], 422));
+        }
+
+        parent::failedValidation($validator);
     }
 }

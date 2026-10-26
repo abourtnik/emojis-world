@@ -36,7 +36,7 @@ class Logger
 
         Log::create([
             'method' => $request->method(),
-            'url' => $request->fullUrl(),
+            'url' => Str::limit($request->fullUrl(), 255, ''),
             'response_status' => $response->getStatusCode(),
             'response_time' => intval((microtime(true) - LARAVEL_START) * 1000),
             'date' => now(),

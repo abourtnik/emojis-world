@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Emoji;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
@@ -44,6 +45,7 @@ class SearchTest extends TestCase
             '?q=apple&categories=',
             '?q=apple&categories=,',
             '?q=apple&categories=%20',
+            '?q='.Str::random(256),
         ];
 
         foreach ($queries as $query) {

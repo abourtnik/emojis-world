@@ -1,10 +1,9 @@
 @if(config('app.ads_enabled'))
-    <div class="mb-3 mx-3 sm:mx-0" x-data="{show: true}" x-show="show">
+    <div class="h-full flex flex-col min-h-[300px]">
         <div class="flex justify-between mb-1">
             <span class="text-black text-sm">Ad</span>
-            <button @click="show = !show" class="text-black cursor-pointer text-sm">Close</button>
         </div>
-        <div class="flex items-center justify-center bg-gray-300 border border-gray-500 h-[250px] overflow-hidden">
+        <div class="flex items-center justify-center bg-gray-300 border border-gray-500 flex-1 overflow-hidden">
             @if(app()->isProduction())
                 <ins class="adsbygoogle"
                      style="display:block; width:100%; height: 100%"
@@ -16,7 +15,7 @@
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             @else
-                <span>Ads here</span>
+                <span class="font-bold">Ad here</span>
             @endif
        </div>
     </div>

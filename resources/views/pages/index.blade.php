@@ -5,18 +5,11 @@
 @section('image', asset('images/logo.png'))
 
 @section('content')
-    <header class="h-16 bg-white flex items-center justify-between p-3 border-b border-gray-300">
-        <a href="{{route('pages.index')}}" class="flex items-center space-x-3">
-            <img src="{{asset('images/logo.png')}}" class="h-8" alt="{{config('app.name')}} Logo">
-            <span class="self-center text-xl sm:text-2xl font-semibold whitespace-nowrap text-yellow-500">{{config('app.name')}}</span>
-        </a>
-        <h1 class="text-xl sm:text-2xl text-center hidden sm:block">✂️ Copy and Paste Emojis 📋</h1>
-        <a class="text-white bg-black hover:bg-black/90 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-2 text-center" href={{route('pages.api')}}>
-            Try our API
-        </a>
-    </header>
+    @include('pages.partials.header')
     <main class="container mx-auto py-3 flex-1">
-        <x-ad/>
+        <div class="mb-3 mx-3 sm:mx-0">
+            <x-ad/>
+        </div>
         <div class="px-3 sm:px-0">
             <section class="flex gap-3 w-full overflow-x-auto scrollbar-hide mb-4">
                 @forelse ($events as $event)
@@ -54,7 +47,8 @@
                         placeholder="Search emoji"
                         name="search"
                         autofocus
-                        value="{{request('search', '')}}"
+                        value="{{old('search', request('search', ''))}}"
+                        maxlength="100"
                         required
                     />
                     @if(request('search', ''))
@@ -70,6 +64,9 @@
                         </svg>
                     </button>
                 </div>
+                @error('search')
+                    <div class="text-red-600 text-sm mt-1">{{$message}}</div>
+                @enderror
             </form>
         </div>
         @if($history->isNotEmpty())
