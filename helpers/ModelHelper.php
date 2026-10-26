@@ -43,16 +43,30 @@ namespace App\Models{
  * @property string $name
  * @property string $emoji
  * @property string $unicode
+ * @property string|null $slug
+ * @property string|null $description
+ * @property int|null $group_id
+ * @property \App\Enums\SkinTone $skin_tone
+ * @property int|null $skin_tone_2
+ * @property \App\Enums\Gender $gender
+ * @property \App\Enums\Direction $direction
  * @property int $category_id
  * @property int $sub_category_id
  * @property int|null $parent_id
  * @property int $count
  * @property numeric|null $version
  * @property mixed|null $keywords
+ * @property \App\Enums\SkinTone $skin_tone-2
  * @property-read \App\Models\Category $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Emoji> $children
  * @property-read int|null $children_count
+ * @property-read mixed $codepoint
+ * @property-read mixed $description_html
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Emoji> $group
+ * @property-read int|null $group_count
+ * @property-read mixed $keywords_as_string
  * @property-read Emoji|null $parent
+ * @property-read mixed $route
  * @property-read \App\Models\SubCategory $subCategory
  * @method static \Database\Factories\EmojiFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji filter(array $filters = [])
@@ -61,11 +75,18 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereDirection($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereEmoji($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereGroupId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereKeywords($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereSkinTone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereSkinTone2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereSubCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereUnicode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Emoji whereVersion($value)
