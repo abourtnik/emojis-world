@@ -51,7 +51,7 @@ class EventResolver
     private function top100(): Collection
     {
         return Emoji::query()
-            ->select('id', 'name', 'emoji', 'unicode', 'version', 'category_id', 'sub_category_id', 'parent_id')
+            ->select('id', 'slug', 'name', 'emoji', 'unicode', 'version', 'category_id', 'sub_category_id', 'parent_id')
             ->with(['category:id,name', 'subCategory:id,name', 'children', 'parent'])
             ->withCount('children')
             ->with('children')
