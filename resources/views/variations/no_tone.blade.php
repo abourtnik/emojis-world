@@ -13,13 +13,13 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($variations as $gender => $emojis)
             <tr>
+            @foreach($variations as $gender => $emojis)
                 @foreach($emojis as $variationEmoji)
                     @include('emojis.variation_emoji', ['variationEmoji' => $variationEmoji, 'currentEmoji' => $emoji])
                 @endforeach
+            @endforeach
             </tr>
-        @endforeach
         </tbody>
     </table>
 </div>

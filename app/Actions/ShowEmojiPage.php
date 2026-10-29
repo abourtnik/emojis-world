@@ -51,8 +51,8 @@ final class ShowEmojiPage
     {
         return match (true) {
             $this->group->contains('gender', Gender::Mix)                 => VariationType::TwoPeople,
-            $this->group->every('skin_tone', SkinTone::None)              => VariationType::NoTone,
-            $this->group->whereNotNull('skin_tone_2')->isNotEmpty()       => VariationType::TwoTones,
+            $this->group->every('skin_tone', SkinTone::None) => VariationType::NoTone,
+            $this->group->whereNotNull('skin_tone_2')->isNotEmpty()  => VariationType::TwoTones,
             default                                                       => VariationType::OneTone,
         };
     }
