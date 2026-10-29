@@ -38,7 +38,7 @@ class Emoji extends Model
             'keywords' => StringArray::class,
             'version' => 'decimal:2',
             'skin_tone' => SkinTone::class,
-            'skin_tone-2' => SkinTone::class,
+            'skin_tone_2' => SkinTone::class,
             'gender' => Gender::class,
             'direction' => Direction::class,
         ];
@@ -175,5 +175,41 @@ class Emoji extends Model
     protected function makeAllSearchableUsing(Builder $query): Builder
     {
         return $query->scopes('withoutChildren')->with(['category', 'subCategory']);
+    }
+
+    /**
+     * -------------------- METHODS --------------------
+     */
+
+    public function genderSlug(Gender $gender): string
+    {
+        return Str::replaceFirst(
+            Str::lower($this->gender->pluralLabel()),
+            Str::lower($gender->pluralLabel()),
+            $this->slug
+        );
+    }
+
+    public function genderSlugMultiple(Gender $gender): string
+    {
+        return Str::replaceFirst(
+            Str::lower($this->gender->coupleLabel()),
+            Str::lower($gender->coupleLabel()),
+            $this->slug
+        );
+    }
+
+    public function directionSlug(Direction $direction): string
+    {
+        if ($direction === Direction::Default) {
+            return Str::replaceFirst('-facing-right', '', $this->slug);
+        }
+
+        return preg_replace(
+            '/(?=-(?:medium-light|medium-dark|light|medium|dark)-skin-tone)|$/',
+            '-facing-right',
+            $this->slug,
+            1
+        );
     }
 }

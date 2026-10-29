@@ -11,6 +11,7 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('emoji', () => ({
         open: false,
         copied : false,
+        hovered: false,
         toggle() {
             this.open = !this.open;
             if (this.open) {
@@ -29,7 +30,8 @@ document.addEventListener('alpine:init', () => {
         },
         copy (id: number) {
             this.copied = true;
-            setInterval(() => this.copied = false, 1500)
+            this.hovered = false;
+            setTimeout(() => this.copied = false, 2000)
             fetch(`/emojis/${id}/increment`, {
                 method: 'POST',
                 headers: {
