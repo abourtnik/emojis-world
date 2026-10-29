@@ -32,10 +32,10 @@ enum Gender: int
     public function coupleLabel(): string
     {
         return match ($this) {
-            self::Neutral => 'person-person',
-            self::Male    => 'man-man',
-            self::Female  => 'woman-woman',
-            self::Mix  => 'woman-man',
+            self::Neutral => 'people',
+            self::Male    => 'men',
+            self::Female  => 'women',
+            self::Mix  => 'woman-and-man',
         };
     }
 
