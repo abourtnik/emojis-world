@@ -47,7 +47,7 @@ namespace App\Models{
  * @property string|null $description
  * @property int|null $group_id
  * @property \App\Enums\SkinTone $skin_tone
- * @property int|null $skin_tone_2
+ * @property \App\Enums\SkinTone|null $skin_tone_2
  * @property \App\Enums\Gender $gender
  * @property \App\Enums\Direction $direction
  * @property int $category_id
@@ -56,7 +56,6 @@ namespace App\Models{
  * @property int $count
  * @property numeric|null $version
  * @property mixed|null $keywords
- * @property \App\Enums\SkinTone $skin_tone-2
  * @property-read \App\Models\Category $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Emoji> $children
  * @property-read int|null $children_count

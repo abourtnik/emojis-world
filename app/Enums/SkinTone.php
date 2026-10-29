@@ -35,8 +35,15 @@ enum SkinTone: int
         };
     }
 
-    public static function casesWithoutNone(): array
+    public function color(): string
     {
-        return array_filter(self::cases(), fn(self $case) => $case !== self::None);
+        return match ($this) {
+            self::Light       => '#F6D5BE',
+            self::MediumLight => '#DDB48C',
+            self::Medium      => '#B98A62',
+            self::MediumDark  => '#8D5A38',
+            self::Dark        => '#4F3A2E',
+            default           => 'transparent',
+        };
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Emoji;
 use App\Models\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -25,5 +26,12 @@ class PageTest extends TestCase
         $event = Event::factory()->create();
 
         $this->get(route('pages.event', $event))->assertStatus(200);
+    }
+
+    public function test_emoji_page(): void
+    {
+        $emoji = Emoji::factory()->create();
+
+        $this->get($emoji->route)->assertStatus(200);
     }
 }
