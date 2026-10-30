@@ -11,6 +11,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\EmojiController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\SitemapController;
 
 Route::domain(config('app.url'))
     ->group(function () {
@@ -26,5 +27,15 @@ Route::domain(config('app.url'))
             ->middleware([AssignVisitorId::class, BlockBot::class, 'throttle:increment'])
             ->name('emojis.increment');
         Route::post('history/clear', [HistoryController::class, 'clear'])->name('history.clear');
+
+        // SITEMAPS
+        Route::controller(SitemapController::class)
+            ->name('sitemap.')
+            ->prefix('sitemaps')
+            ->group(function () {
+                Route::get('/emojis.xml', 'emojis')->name('emojis');
+                Route::get('/events.xml', 'events')->name('events');
+            });
+
     }
 );

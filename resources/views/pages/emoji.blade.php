@@ -2,7 +2,7 @@
 
 @extends('layout')
 
-@section('title', sprintf('%s %s Emoji | Meaning & Usage | Copy And Paste', $emoji->emoji, Str::title($emoji->name)))
+@section('title', sprintf('%s %s Emoji Meaning & Copy', $emoji->emoji, Str::title($emoji->name)))
 @section('description', $emoji->description)
 
 @section('content')

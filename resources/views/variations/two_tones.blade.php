@@ -7,7 +7,7 @@
         @foreach(Gender::withoutMix() as $gender)
             <a
                 href="{{route('pages.emoji', $emoji->genderSlug($gender))}}"
-                @class(["font-medium text-sm px-2 py-1 rounded cursor-pointer", 'text-white bg-black' => $emoji->gender === $gender, 'border border-black text-black'])
+                @class(["font-medium text-sm px-2 py-1 rounded", 'text-white bg-black' => $emoji->gender === $gender, 'border border-black text-black'])
             >
                 {{$gender->pluralLabel()}}
             </a>
