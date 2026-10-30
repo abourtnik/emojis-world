@@ -31,7 +31,11 @@
             <tr>
                 <th scope="row" class="p-3 bg-gray-50  border-l border-r border-b border-gray-300 font-semibold sticky left-0 z-10">{{$gender}}</th>
                 @foreach($emojis as $variationEmoji)
-                    @include('emojis.variation_emoji', ['variationEmoji' => $variationEmoji, 'currentEmoji' => $emoji])
+                    @if($variationEmoji)
+                        @include('emojis.variation_emoji', ['variationEmoji' => $variationEmoji, 'currentEmoji' => $emoji])
+                    @else
+                        <td class="border text-center border-gray-300"></td>
+                    @endif
                 @endforeach
             </tr>
         @endforeach
