@@ -36,15 +36,21 @@ final class ShowEmojiPage
 
     private function variations(): Collection
     {
+        if ($this->group->isEmpty()) {
+            return collect();
+        }
+
         if (in_array($this->variationType, [VariationType::TwoPeople, VariationType::TwoTones])) {
             return $this->group
                 ->where('gender', $this->emoji->gender)
                 ->groupBy(fn (Emoji $emoji) => $emoji->skin_tone->label());
         }
 
-       return $this->group
-           ->where('direction', $this->emoji->direction)
-           ->groupBy(fn (Emoji $emoji) => $emoji->gender->label());
+        $grouped = $this->group
+            ->where('direction', $this->emoji->direction)
+            ->groupBy(fn (Emoji $e) => $e->gender->label());
+
+       return $this->withDefault($grouped);
     }
 
     private function resolveVariationType(): VariationType
@@ -60,5 +66,16 @@ final class ShowEmojiPage
     private function hasDirectionVariation(): bool
     {
         return $this->group->contains(fn (Emoji $e) => $e->direction === Direction::Right);
+    }
+
+    private function withDefault(Collection $group): Collection
+    {
+        if ($group[Gender::Neutral->label()]->contains((fn (Emoji $e) => $e->skin_tone === SkinTone::None))) {
+            return $group;
+        }
+
+        $group[Gender::Neutral->label()]->prepend(null);
+
+        return  $group;
     }
 }
