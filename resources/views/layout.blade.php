@@ -18,12 +18,13 @@
     <meta property="og:title" content="@yield('title') - {{config('app.name')}}" />
     <meta property="og:description" content="@yield('description')" />
     <meta property="og:image" content="@yield('image')">
-    <meta property="og:language" content="{{ str_replace('_', '-', app()->getLocale()) }}" />
+    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" href="{{asset('favicon.ico')}}" sizes="any">
     <link rel="apple-touch-icon" href="{{asset('icons/apple-touch-icon.png')}}">
+    <link rel="canonical" href="{{ url()->current() }}">
 
     @if ($showStatistics)
     <script defer src="https://cloud.umami.is/script.js" data-website-id="b72c51a9-871d-4dd2-a951-ade554a3be31"></script>

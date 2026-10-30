@@ -17,6 +17,7 @@
                 data-clipboard-target="{{'#emojis-'.$emoji->id}}"
                 @click="copy({{$emoji->id}})"
                 title="{{$emoji->name}}"
+                aria-label="{{$emoji->name}}"
             >
                 {{$emoji->emoji}}
             </button>
@@ -29,6 +30,7 @@
                         class="text-4xl cursor-pointer hover:bg-gray-200 selection:bg-transparent p-1"
                         @click="copy({{$child->id}})"
                         title="{{$child->name}}"
+                        aria-label="{{$child->name}}"
                     >
                         {{$child->emoji}}
                     </button>
@@ -43,6 +45,7 @@
                             class="text-4xl cursor-pointer hover:bg-gray-200 selection:bg-transparent p-1.5"
                             @click="copy({{$child->id}})"
                             title="{{$child->name}}"
+                            aria-label="{{$child->name}}"
                         >
                             {{$child->emoji}}
                         </button>
@@ -58,6 +61,7 @@
             @click.away="open = false"
             x-ref="button"
             title="{{$emoji->name}}"
+            aria-label="{{$emoji->name}}"
             @mouseenter="hovered = true"
             @mouseleave="hovered = false"
         >
@@ -78,6 +82,7 @@
                 x-show.important="hovered"
                 x-cloak
                 title="More info"
+                aria-label="More info"
                 @click.stop
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"  viewBox="0 0 16 16">
@@ -91,6 +96,7 @@
             class="relative w-full"
             @click="copy({{$emoji->id}})"
             title="{{$emoji->name}}"
+            aria-label="{{$emoji->name}}"
             @mouseenter="hovered = true"
             @mouseleave="hovered = false"
          >
