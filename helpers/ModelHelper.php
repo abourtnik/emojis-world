@@ -56,6 +56,7 @@ namespace App\Models{
  * @property int $count
  * @property numeric|null $version
  * @property mixed|null $keywords
+ * @property-read mixed $base_id
  * @property-read \App\Models\Category $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Emoji> $children
  * @property-read int|null $children_count

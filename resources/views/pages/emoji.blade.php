@@ -11,8 +11,8 @@
         <div class="flex flex-col lg:flex-row gap-3">
             <div class="w-full lg:w-5/6">
                 <div class="flex flex-col sm:flex-row gap-2">
-                    <div class="bg-white border border-gray-400 shadow-xl w-full sm:w-1/4 flex flex-col gap-5 aling-center justify-center text-center p-4 sm:p-0">
-                        <span  id="{{'emojis-'.$emoji->id}}" class="text-8xl selection:bg-transparent">{{$emoji->emoji}}</span>
+                    <section class="bg-white border border-gray-400 shadow-xl w-full sm:w-1/4 flex flex-col gap-5 aling-center justify-center text-center p-4 sm:p-0">
+                        <span id="{{'emojis-'.$emoji->id}}" class="text-8xl selection:bg-transparent">{{$emoji->emoji}}</span>
                         <button
                             x-data="emoji"
                             data-clipboard-target="{{'#emojis-'.$emoji->id}}"
@@ -39,8 +39,8 @@
                                 <span>Copied</span>
                             </div>
                         </button>
-                    </div>
-                    <div class="bg-white border border-gray-400 w-full sm:w-3/4 shadow-xl p-3 flex flex-col gap-3">
+                    </section>
+                    <section class="bg-white border border-gray-400 w-full sm:w-3/4 shadow-xl p-3 flex flex-col gap-3">
                         <h1 class="text-2xl">{{Str::title($emoji->name)}}</h1>
                         @if($emoji->description)
                             <div class="gap-2 flex flex-col">
@@ -63,12 +63,30 @@
                                 {{$emoji->keywordsAsString ?: $emoji->parent?->keywordsAsString}}
                             </dd>
                         </dl>
-                    </div>
+                    </section>
                 </div>
                 @if($variations->isNotEmpty())
-                    <div class="bg-white border border-gray-400 shadow-xl text-center p-3 mt-2 w-full flex flex-col gap-4">
+                    <section class="bg-white border border-gray-400 shadow-xl p-3 mt-2 w-full flex flex-col gap-4">
                         @include($variationType->view())
-                    </div>
+                    </section>
+                @endif
+                @if($similarEmojis->isNotEmpty())
+                    <section class="bg-white border border-gray-400 shadow-xl p-3 mt-2 w-full flex flex-col gap-4">
+                        <h2 class="text-lg text-gray-600 font-semibold">Similars ({{$similarEmojis->count()}})</h2>
+                        <ul class="flex flex-wrap gap-0 justify-start">
+                            @foreach($similarEmojis as $similarEmoji)
+                                <li>
+                                    <a href="{{ $similarEmoji->route }}"
+                                       title="{{ $similarEmoji->name }}"
+                                       aria-label="{{ $similarEmoji->name }}"
+                                       class="block p-1.5 text-5xl border border-transparent hover:bg-blue-50 hover:border-blue-300 transition"
+                                    >
+                                        {{ $similarEmoji->emoji }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </section>
                 @endif
             </div>
             <div class="w-full lg:w-1/6">
