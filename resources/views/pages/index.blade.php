@@ -2,7 +2,6 @@
 
 @section('title', '✂️ Copy & Paste All Emojis 📋')
 @section('description', 'Quickly copy and paste emojis with search system and categories - 3702 emojis available')
-@section('image', asset('images/logo.png'))
 
 @section('content')
     @include('pages.partials.header')
