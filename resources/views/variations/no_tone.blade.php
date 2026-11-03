@@ -1,7 +1,7 @@
 @use('App\Enums\Gender')
 
 <div class="flex">
-    <h2 class="text-lg text-gray-600">Variations ({{$variationsCount}})</h2>
+    <h2 class="text-lg text-gray-600 font-semibold">Variations ({{$variationsCount}})</h2>
 </div>
 <div class="overflow-x-auto">
     <table class="min-w-full border-separate text-sm text-left border-spacing-0">

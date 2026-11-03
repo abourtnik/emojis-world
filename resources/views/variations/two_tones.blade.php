@@ -2,7 +2,7 @@
 @use('App\Enums\Gender')
 
 <div class="flex justify-between items-center">
-    <h2 class="text-lg text-gray-600">Variations ({{$variationsCount}})</h2>
+    <h2 class="text-lg text-gray-600 font-semibold">Variations ({{$variationsCount}})</h2>
     <div class="flex justify-end items-center gap-1">
         @foreach(Gender::withoutMix() as $gender)
             <a

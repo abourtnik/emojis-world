@@ -125,6 +125,11 @@ class Emoji extends Model
         });
     }
 
+    protected function baseId(): Attribute
+    {
+        return Attribute::get(fn () => $this->group_id ?? $this->id);
+    }
+
     /**
      * -------------------- SCOPES --------------------
      */
