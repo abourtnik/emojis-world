@@ -17,7 +17,7 @@
     <meta property="og:url" content="{{url()->full()}}" />
     <meta property="og:title" content="@yield('title') - {{config('app.name')}}" />
     <meta property="og:description" content="@yield('description')" />
-    <meta property="og:image" content="@yield('image')">
+    <meta property="og:image" content="@yield('image', asset('images/logo.png'))">
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
