@@ -1,23 +1,29 @@
 @extends('layout')
 
-@section('title', $event->name. ' Emojis')
-@section('description', 'Quickly copy and paste ' .$event->name. ' Emojis')
+@section('title', $event->name. ' Emojis List')
+@section('description', $event->description ?: '')
 @section('image', $event->image_url)
 
 @section('content')
     @include('pages.partials.header')
     <main class="flex-1">
-        <div class="relative">
-            <img class="w-full h-96 object-cover" src="{{$event->image_url}}" alt="event {{$event->name}}" loading="lazy">
-            <h1 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-1 text-2xl font-bold w-80 text-center">{{$event->name}}</h1>
-            <span class="absolute top-0 left-0 w-full h-full bg-black/40"></span>
-            <div class="absolute bottom-0 end-0 text-white p-2 font-bold">{{$emojis->count()}} emojis</div>
+        <section class="bg-white p-12 border-b border-gray-300 flex flex-col-reverse md:flex-row justify-between items-center gap-12">
+            <div class="flex flex-col gap-4 max-w-200 text-center md:text-left">
+                <h1 class="text-black text-5xl font-bold">{{$event->name}} Emojis List</h1>
+                <p class="text-md">{{$event->description}}</p>
+                <div class="font-bold">{{$emojis->count()}} emojis</div>
+            </div>
+            <span class="text-9xl">{{$event->emoji}}</span>
+        </section>
+        <div class="flex flex-col lg:flex-row gap-5 p-3">
+            <section class="w-full lg:w-5/6">
+                <div class="grid grid-cols-4 sm:grid-cols-9 md:grid-cols-11 lg:grid-cols-14 xl:grid-cols-16 gap-1">
+                    @each('emojis.emoji', $emojis, 'emoji')
+                </div>
+            </section>
+            <section class="w-full lg:w-1/6">
+                <x-ad/>
+            </section>
         </div>
-        <section class="container mx-auto mt-3">
-            <x-ad/>
-        </section>
-        <section class="grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-17 xl:grid-cols-20 gap-1 container mx-auto py-3">
-            @each('emojis.emoji', $emojis, 'emoji')
-        </section>
     </main>
 @endsection

@@ -42,8 +42,9 @@ class EventResolver
                 ->withCount('children')
                 ->with('children')
                 ->orderBy('sub_category_id')
-                ->orderBy('version')
-                ->orderBy('unicode')
+                ->orderBy('group_id')
+                ->orderBy('direction')
+                ->orderBy('gender')
                 ->get();
         });
     }
