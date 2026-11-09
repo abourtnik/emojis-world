@@ -206,6 +206,10 @@ class Emoji extends Model
 
     public function directionSlug(Direction $direction): string
     {
+        if ($this->direction === $direction) {
+            return $this->slug;
+        }
+
         if ($direction === Direction::Default) {
             return Str::replaceFirst('-facing-right', '', $this->slug);
         }

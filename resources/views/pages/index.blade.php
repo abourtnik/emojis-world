@@ -16,7 +16,7 @@
                         <a href="{{$event->route}}">
                             <div class="w-full h-full relative">
                                 <span class="absolute top-0 left-0 w-full h-full bg-black/35 rounded-lg"></span>
-                                <img src="{{$event->imageUrl}}" alt="image {{$event->name}}" class="w-full h-auto object-cover rounded-lg">
+                                <img src="{{$event->imageUrl}}" alt="image {{$event->name}}" class="w-full h-auto object-cover rounded-lg" loading="lazy">
                                 <h2 class="absolute w-full top-1/2 -translate-y-1/2 text-white z-1 text-2xl font-bold text-center">{{$event->name}}</h2>
                             </div>
                         </a>
@@ -82,7 +82,7 @@
         @endif
         @forelse($categories as $category)
             <h2 class="text-xl my-3 font-bold ps-3 sm:ps-0" id="{{$category->slug}}">{{$category->name}}</h2>
-            <section class="grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-17 xl:grid-cols-20 gap-1">
+            <section class="grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-17 xl:grid-cols-20 gap-1 [content-visibility:auto] [contain-intrinsic-size:auto_800px]">
                 @each('emojis.emoji', $category->emojis, 'emoji')
             </section>
         @empty
