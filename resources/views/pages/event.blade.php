@@ -7,8 +7,8 @@
 @section('content')
     @include('pages.partials.header')
     <main class="flex-1">
-        <section class="bg-white p-12 border-b border-gray-300 flex flex-col-reverse md:flex-row justify-between items-center gap-12">
-            <div class="flex flex-col gap-4 max-w-200 text-center md:text-left">
+        <section class="bg-white p-6 md:p-12 border-b border-gray-300 flex flex-col-reverse md:flex-row justify-between items-center gap-8">
+            <div class="flex flex-col gap-4 max-w-200 text-left">
                 <h1 class="text-black text-5xl font-bold">{{$event->name}} Emojis List</h1>
                 @if($event->description)
                     <p class="text-md">{{$event->description}}</p>
