@@ -10,7 +10,9 @@
         <section class="bg-white p-12 border-b border-gray-300 flex flex-col-reverse md:flex-row justify-between items-center gap-12">
             <div class="flex flex-col gap-4 max-w-200 text-center md:text-left">
                 <h1 class="text-black text-5xl font-bold">{{$event->name}} Emojis List</h1>
-                <p class="text-md">{{$event->description}}</p>
+                @if($event->description)
+                    <p class="text-md">{{$event->description}}</p>
+                @endif
                 <div class="font-bold">{{$emojis->count()}} emojis</div>
             </div>
             <span class="text-9xl">{{$event->emoji}}</span>
