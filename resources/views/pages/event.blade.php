@@ -17,7 +17,7 @@
             </div>
             <span class="text-9xl">{{$event->emoji}}</span>
         </section>
-        <div class="flex flex-col lg:flex-row gap-5 p-3">
+        <div class="flex flex-col lg:flex-row gap-3 lg:gap-5 p-3">
             <section class="w-full lg:w-5/6">
                 <div class="grid grid-cols-4 sm:grid-cols-9 md:grid-cols-11 lg:grid-cols-14 xl:grid-cols-16 gap-1">
                     @each('emojis.emoji', $emojis, 'emoji')
