@@ -4,14 +4,12 @@ namespace App\Actions;
 
 use App\Models\Category;
 use App\Models\Emoji;
-use App\Models\Event;
+use App\Services\EventService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
-use SortDirection;
 
 class ShowIndexPage
 {
@@ -20,7 +18,7 @@ class ShowIndexPage
         $emojis = $this->searchEmojis($request->query('search'));
 
         return [
-            'events' => $this->events(),
+            'events' => EventService::getEvents(),
             'allCategories' => $this->allCategories(),
             'categories' => $this->categories($emojis),
             'history' => $this->history($emojis)
@@ -42,36 +40,6 @@ class ShowIndexPage
                 'typo_tokens_threshold' => 1,
                 'prefix' => true
             ])
-            ->get();
-    }
-
-    private function events(): Collection
-    {
-        return Event::query()
-            ->select('t.*')
-            ->selectRaw("
-                CASE
-                    WHEN CURDATE() BETWEEN t.actual_start_date AND t.actual_end_date
-                    THEN 1
-                    ELSE 0
-                END AS is_active
-            ")
-            ->fromSub(function (Builder $q) {
-                $q->select('*')
-                    ->selectRaw("STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', start_date), '%Y-%m-%d') AS actual_start_date")
-                    ->selectRaw("STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', end_date), '%Y-%m-%d') AS actual_end_date")
-                    ->selectRaw("
-                        CASE
-                            WHEN STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', start_date), '%Y-%m-%d') >= CURDATE()
-                            THEN STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', start_date), '%Y-%m-%d')
-                            ELSE STR_TO_DATE(CONCAT(YEAR(CURDATE())+1, '-', start_date), '%Y-%m-%d')
-                        END AS next_start_date
-                     ")
-                    ->from('events');
-            }, 't')
-            ->orderBy('is_permanent', SortDirection::Descending)
-            ->orderBy('is_active', SortDirection::Descending)
-            ->orderBy('next_start_date')
             ->get();
     }
 

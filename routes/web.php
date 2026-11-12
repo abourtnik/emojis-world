@@ -20,6 +20,7 @@ Route::domain(config('app.url'))
                 ->middleware([AssignVisitorId::class, StripEmptyParams::class, CheckIp::class, Logger::class])
                 ->name('index');
             Route::get('/api', [PageController::class, 'api'])->name('api');
+            Route::get('/events', [EventController::class, 'index'])->name('events.index');
             Route::get('events/{event:slug}', [EventController::class, 'show'])->name('event');
             Route::get('emojis/{emoji:slug}', [EmojiController::class, 'show'])->name('emoji');
         });
