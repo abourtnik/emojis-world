@@ -8,7 +8,9 @@
 @section('content')
     @include('pages.partials.header')
     <main class="p-3 flex-1">
-        {{ Breadcrumbs::render('emoji', $emoji) }}
+        <div class="mb-3">
+            {{ Breadcrumbs::render('emoji', $emoji) }}
+        </div>
         <div class="flex flex-col lg:flex-row gap-3">
             <div class="w-full lg:w-5/6">
                 <div class="flex flex-col sm:flex-row gap-2">

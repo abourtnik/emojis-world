@@ -1,5 +1,5 @@
 @unless ($breadcrumbs->isEmpty())
-    <nav class="w-full pb-3">
+    <nav class="w-full">
         <ol class="flex flex-wrap text-sm  text-gray-800 items-center">
             @foreach ($breadcrumbs as $breadcrumb)
                 @if ($breadcrumb->url && !$loop->last)
